@@ -5,6 +5,7 @@
 #include <Soprano/Statement>
 
 #include "SkosModel.hpp"
+#include "UrlMap.hpp"
 
 class SkosParser
 {
@@ -22,5 +23,6 @@ private:
   void parseClassDeclaration(const Soprano::Statement &p_statement);
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
+  UrlMap m_urlMap;
 };
 #endif
