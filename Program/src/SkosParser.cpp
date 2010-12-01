@@ -4,11 +4,7 @@
 
 #include <QDebug>
 
-SkosParser::SkosParser()
-{
-}
-
-void SkosParser::parseFileToStatements(QString p_fileName)
+void SkosParser::parseFileToStatements(const QString &p_fileName)
 {
   qDebug() << "SkosParser::parseFileToStatement(p_fileName:" 
            << p_fileName <<")";
@@ -30,7 +26,7 @@ void SkosParser::parseStatements()
   qDebug() << "SkosParser::parseStatements()";
   if (m_statements.empty())
   {
-    qWarning() << "SkosParser::parseStatements() - empty statement list";
+    qWarning() << "SkosParser::parseStatements - empty statement list";
   }
   for (QList<Soprano::Statement>::iterator iter = m_statements.begin();
        iter != m_statements.end(); ++iter)
@@ -39,8 +35,24 @@ void SkosParser::parseStatements()
   }
 }
 
-void SkosParser::parseStatement(Soprano::Statement p_statement)
+void SkosParser::parseStatement(const Soprano::Statement &p_statement)
 {
-  qDebug() << "SkosParser::parseStatement(p_statement: "
+  qDebug() << "SkosParser::parseStatement(p_statement:"
            << p_statement << ")";
+  QString l_predicate = p_statement.predicate().toString();
+  if (l_predicate == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
+  {
+    parseClassDeclaration(p_statement);
+  }
+}
+
+void SkosParser::parseClassDeclaration(const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseClassDeclaration(p_statement:"
+           << p_statement << ")";
+  QString l_object = p_statement.object().toString();
+  if (l_object == "http://www.w3.org/2004/02/skos/core#Concept")
+  {
+    m_model->addConcept(p_statement.subject().uri());
+  }
 }

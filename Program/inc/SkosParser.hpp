@@ -4,19 +4,23 @@
 #include <QList>
 #include <Soprano/Statement>
 
+#include "SkosModel.hpp"
+
 class SkosParser
 {
 public:
-  SkosParser();
+  SkosParser(SkosModel *p_model):m_model(p_model){};
   void parseFile(QString p_fileName)
   {
     parseFileToStatements(p_fileName);
     parseStatements();
   }
 private:
-  void parseFileToStatements(QString p_fileName);
+  void parseFileToStatements(const QString& p_fileName);
   void parseStatements();
-  void parseStatement(Soprano::Statement p_statement);
+  void parseStatement(const Soprano::Statement &p_statement);
+  void parseClassDeclaration(const Soprano::Statement &p_statement);
+  SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
 };
 #endif

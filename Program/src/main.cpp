@@ -1,8 +1,10 @@
 #include "SkosParser.hpp"
+#include "SkosModel.hpp"
 
 int main()
 {
-  SkosParser l_skosParser;
-  l_skosParser.parseFile("example.tur");
+  SkosModel g_skosModel;
+  SkosParser g_skosParser(&g_skosModel);
+  g_skosParser.parseFile("example.tur");
   return 0;
 }
