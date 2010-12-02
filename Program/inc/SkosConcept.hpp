@@ -12,6 +12,7 @@ public:
   QUrl getUrl() const;
   void addPrefLabel(Soprano::Node p_prefLabel);
 private:
+  bool isPrefLabelOk(const Soprano::Node &p_prefLabel) const;
   QUrl m_url;
   QList<Soprano::Node> m_prefLabels;
 };

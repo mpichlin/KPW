@@ -7,6 +7,8 @@ class SkosModel
 {
 public:
   void addConcept(SkosConcept p_concept);
+  void addPrefLabelToConcept(Soprano::Node p_prefLabel,
+                             QUrl p_concept);
 private:
   QList<SkosConcept> m_concepts;
 };

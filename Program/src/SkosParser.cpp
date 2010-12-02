@@ -39,42 +39,51 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
 {
   qDebug() << "SkosParser::parseStatement(p_statement="
            << p_statement << ")";
-//QString l_predicate = p_statement.predicate().toString();
-  ESpecialUrl l_specialUrl = m_urlMap.mapUrl(p_statement.predicate().uri());
+  EUrlPredicate l_specialUrl =
+    m_predicateMap.mapUrl(p_statement.predicate().uri());
   switch (l_specialUrl)
   {
-  case RdfType:
-  {
-    parseClassDeclaration(p_statement);
-    break;
+    case RdfType:
+    {
+      parseClassDeclaration(p_statement);
+      break;
+    }
+    case PrefLabel:
+    {
+      parsePrefLabelDeclaration(p_statement);
+      break;
+    }
+    case GeneralPredicate:
+    {
+      qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
+    }
   }
-  }
-  /*
-  if (l_predicate == "http://www.w3.org/1999/02/22-rdf-syntax-ns#type")
-  {
-    parseClassDeclaration(p_statement);
-  }
-  if (l_predicate ==
-  */
 }
 
 void SkosParser::parseClassDeclaration(const Soprano::Statement &p_statement)
 {
   qDebug() << "SkosParser::parseClassDeclaration(p_statement="
            << p_statement << ")";
-  ESpecialUrl l_specialUrl = m_urlMap.mapUrl(p_statement.object().uri());
+  EUrlObject l_specialUrl = m_objectMap.mapUrl(p_statement.object().uri());
   switch (l_specialUrl)
   {
-  case Concept:
-  {
-    m_model->addConcept(p_statement.subject().uri());
-    break;
+    case Concept:
+    {
+      m_model->addConcept(p_statement.subject().uri());
+      break;
+    }
+    case GeneralObject:
+    {
+      qDebug() << "SkosParser::parseStatement() - GeneralObject";
+    }
   }
-  }
-/*
-    if (l_object == )
-  {
-    m_model->addConcept(p_statement.subject().uri());
-  }
-*/
+}
+
+void SkosParser::parsePrefLabelDeclaration(
+  const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parsePrefLabelDeclaration(p_statement="
+           << p_statement << ")";
+  m_model->addPrefLabelToConcept(p_statement.object(),
+                                 p_statement.subject().uri());
 }
