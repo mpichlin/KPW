@@ -9,6 +9,9 @@ public:
   void addConcept(SkosConcept p_concept);
   void addPrefLabelToConcept(Soprano::Node p_prefLabel,
                              QUrl p_concept);
+  void addAltLabelToConcept(Soprano::Node p_altLabel,
+                             QUrl p_concept);
+  QList<SkosConcept>::iterator findConcept(const QUrl &p_concept);
 private:
   QList<SkosConcept> m_concepts;
 };

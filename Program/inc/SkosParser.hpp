@@ -23,6 +23,7 @@ private:
   void parseStatement(const Soprano::Statement &p_statement);
   void parseClassDeclaration(const Soprano::Statement &p_statement);
   void parsePrefLabelDeclaration(const Soprano::Statement &p_statement);
+  void parseAltLabelDeclaration(const Soprano::Statement &p_statement);
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
   UrlPredicateMap m_predicateMap;
