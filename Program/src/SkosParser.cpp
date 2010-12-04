@@ -58,6 +58,11 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
       parseAltLabelDeclaration(p_statement);
       break;
     }
+    case HiddenLabel:
+    {
+      parseHiddenLabelDeclaration(p_statement);
+      break;
+    }
     case GeneralPredicate:
     {
       qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
@@ -99,5 +104,14 @@ void SkosParser::parseAltLabelDeclaration(
   qDebug() << "SkosParser::parseAltLabelDeclaration(p_statement="
            << p_statement << ")";
   m_model->addAltLabelToConcept(p_statement.object(),
+                                 p_statement.subject().uri());
+}
+
+void SkosParser::parseHiddenLabelDeclaration(
+  const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseHiddenLabelDeclaration(p_statement="
+           << p_statement << ")";
+  m_model->addHiddenLabelToConcept(p_statement.object(),
                                  p_statement.subject().uri());
 }

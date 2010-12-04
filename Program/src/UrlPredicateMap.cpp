@@ -13,6 +13,8 @@ void UrlPredicateMap::initializeMap()
   m_map[QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")] = RdfType;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#prefLabel")] = PrefLabel;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#altLabel")] = AltLabel;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#hiddenLabel")] =
+    HiddenLabel;
 }
 
 EUrlPredicate UrlPredicateMap::mapUrl(const QUrl &p_url)

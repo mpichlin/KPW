@@ -27,6 +27,14 @@ bool SkosConcept::isLabelAlreadyExists(const Soprano::Node &p_label) const
       return true;
     }
   }
+  for (QList<Soprano::Node>::const_iterator l_iter = m_hiddenLabels.begin();
+       l_iter != m_hiddenLabels.end(); ++l_iter)
+  {
+    if (*l_iter == p_label)
+    {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -71,5 +79,18 @@ void SkosConcept::addAltLabel(Soprano::Node p_altLabel)
   }
   {
     m_altLabels.append(p_altLabel);
+  }
+}
+
+void SkosConcept::addHiddenLabel(Soprano::Node p_hiddenLabel)
+{
+  qDebug() << "SkosConcept::addHiddenLabel(p_hiddenLabel="
+           << p_hiddenLabel.toString() << ")";
+  if (isLabelAlreadyExists(p_hiddenLabel))
+  {
+    qDebug() << "SkosConcept::addHiddenLabel() - label already exists";
+  }
+  {
+    m_hiddenLabels.append(p_hiddenLabel);
   }
 }

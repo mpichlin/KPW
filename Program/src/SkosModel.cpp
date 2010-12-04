@@ -5,7 +5,6 @@
 void SkosModel::addConcept(SkosConcept p_concept)
 {
   qDebug() << "SkosModel::addConcept(p_concept =" << p_concept.getUrl() << ")";
-  bool l_ifConceptAlreadyExists = false;
   if (findConcept(p_concept.getUrl()) == m_concepts.end())
   {
     m_concepts.append(p_concept);
@@ -46,7 +45,23 @@ void SkosModel::addAltLabelToConcept(Soprano::Node p_altLabel,
   {
       l_iter->addAltLabel(p_altLabel);
   }
+}
 
+void SkosModel::addHiddenLabelToConcept(Soprano::Node p_hiddenLabel,
+                                        QUrl p_concept)
+{
+  qDebug() << "SkosModel::addHiddenLabelToConcept(p_hiddenLabel=" <<
+    p_hiddenLabel.toString() << ", p_concept=" << p_concept << ")";
+  QList<SkosConcept>::iterator l_iter = findConcept(p_concept);
+  if (l_iter == m_concepts.end())
+  {
+    qDebug() << "SkosModel::addHiddenLabelToConcept()"
+             << "- Concept does not exists";
+  }
+  else
+  {
+      l_iter->addHiddenLabel(p_hiddenLabel);
+  }
 }
 
 QList<SkosConcept>::iterator SkosModel::findConcept(
