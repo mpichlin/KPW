@@ -10,7 +10,8 @@ enum EUrlPredicate
   RdfType          = 1,
   PrefLabel        = 2,
   AltLabel         = 3,
-  HiddenLabel      = 4
+  HiddenLabel      = 4,
+  Broader          = 5
 };
 
 class UrlPredicateMap

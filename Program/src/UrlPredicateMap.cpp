@@ -15,6 +15,7 @@ void UrlPredicateMap::initializeMap()
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#altLabel")] = AltLabel;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#hiddenLabel")] =
     HiddenLabel;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#broader")] = Broader;
 }
 
 EUrlPredicate UrlPredicateMap::mapUrl(const QUrl &p_url)

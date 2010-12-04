@@ -64,6 +64,25 @@ void SkosModel::addHiddenLabelToConcept(Soprano::Node p_hiddenLabel,
   }
 }
 
+void SkosModel::addBroaderConcept(QUrl p_broaderConcept, QUrl p_concept)
+{
+  qDebug() << "SkosModel::addBroaderConcept(p_broaderConcept=" <<
+    p_broaderConcept << ", p_concept=" << p_concept << ")";
+  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_concept);
+  QList<SkosConcept>::iterator l_broaderConceptIter = 
+    findConcept(p_broaderConcept);
+  if ((l_baseConceptIter == m_concepts.end()) ||
+      (l_broaderConceptIter == m_concepts.end()))
+  {
+    qDebug() << "SkosModel::addBroaderConcept()"
+             << "- at least one of concepts does not exists";
+  }
+  else
+  {
+    l_baseConceptIter->addBroaderConcept(&*l_broaderConceptIter);
+  }
+}
+
 QList<SkosConcept>::iterator SkosModel::findConcept(
   const QUrl &p_concept)
 {

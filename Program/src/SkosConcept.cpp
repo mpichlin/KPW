@@ -94,3 +94,30 @@ void SkosConcept::addHiddenLabel(Soprano::Node p_hiddenLabel)
     m_hiddenLabels.append(p_hiddenLabel);
   }
 }
+
+bool SkosConcept::isConceptAlreadyExists(const SkosConcept &p_broaderConcept)
+{
+  for(QList<SkosConcept*>::iterator l_iter = m_broaderConcepts.begin();
+      l_iter != m_broaderConcepts.end(); ++l_iter)
+  {
+    if ((*l_iter)->getUrl() == p_broaderConcept.getUrl())
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+void SkosConcept::addBroaderConcept(SkosConcept *p_broaderConcept)
+{
+  qDebug() << "SkosConcept::addBroaderConcept(p_broaderConcept="
+           << p_broaderConcept->getUrl() << ")";
+  
+  if (isConceptAlreadyExists(*p_broaderConcept))
+  {
+    qDebug() << "SkosConcept::addBroaderConcept() - concept already exists";
+  }
+  {
+    m_broaderConcepts.append(p_broaderConcept);
+  }
+}
