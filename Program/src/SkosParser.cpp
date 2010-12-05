@@ -82,10 +82,12 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
     }
     case HasTopConcept:
     {
+      parseHasTopConcept(p_statement);
       break;
     }
     case IsTopConceptOf:
     {
+      parseIsTopConceptOf(p_statement);
       break;
     }
     case GeneralPredicate:
@@ -174,11 +176,18 @@ void SkosParser::parseRelatedDeclaration(
                              p_statement.subject().uri());
 }
 
-void SkosParser::parseHasTopConcept(const QUrl &p_concept, 
-                                    const QUrl &p_conceptScheme)
+void SkosParser::parseHasTopConcept(const Soprano::Statement &p_statement)
 {
+  qDebug() << "SkosParser::parseHasTopConcept(p_statement="
+           << p_statement << ")";
+  m_model->addTopConceptToScheme(p_statement.object().uri(),
+                                 p_statement.subject().uri());
 }
-void SkosParser::parseIsTopConceptOf(const QUrl &p_conceptScheme,
-                                     const QUrl &p_concept)
+
+void SkosParser::parseIsTopConceptOf(const Soprano::Statement &p_statement)
 {
+  qDebug() << "SkosParser::parseIsTopConceptOf(p_statement="
+           << p_statement << ")";
+  m_model->addTopConceptToScheme(p_statement.subject().uri(),
+                                 p_statement.object().uri());
 }

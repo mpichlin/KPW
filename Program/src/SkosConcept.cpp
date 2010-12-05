@@ -64,3 +64,36 @@ int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
     return 0;
   }
 }
+
+QList<SkosConceptScheme*>::iterator SkosConcept::findConceptAsTopInScheme(
+  const SkosConceptScheme &p_conceptScheme)
+{
+  for(QList<SkosConceptScheme*>::iterator l_topInSchemesIter =
+        m_topInSchemes.begin();
+      l_topInSchemesIter != m_topInSchemes.end();
+      ++l_topInSchemesIter)
+  {
+    if ((*l_topInSchemesIter)->getUrl() == p_conceptScheme.getUrl())
+    {
+      return l_topInSchemesIter;
+    }
+  }
+  return m_topInSchemes.end();
+}
+
+void SkosConcept::addAsTopInScheme(SkosConceptScheme *p_conceptScheme)
+{
+  qDebug() << "SkosConcept::addAsTopInScheme(p_conceptScheme="
+           << p_conceptScheme->getUrl() << ")";
+  QList<SkosConceptScheme*>::iterator l_topInSchemesIter =
+    findConceptAsTopInScheme(*p_conceptScheme);
+  if (l_topInSchemesIter == m_topInSchemes.end())
+  {
+    m_topInSchemes.append(p_conceptScheme);
+  }
+  else
+  {
+    qDebug() << "SkosConcept::addAsTopInScheme() - concept is"
+             << "already in scheme";
+  }
+}

@@ -31,10 +31,9 @@ private:
   void parseBroaderDeclaration(const Soprano::Statement &p_statement);
   void parseNarrowerDeclaration(const Soprano::Statement &p_statement);
   void parseRelatedDeclaration(const Soprano::Statement &p_statement);
-  void parseHasTopConcept(const QUrl &p_concept, 
-                          const QUrl &p_conceptScheme);
-  void parseIsTopConceptOf(const QUrl &p_conceptScheme,
-                           const QUrl &p_concept);
+  void parseHasTopConcept(const Soprano::Statement &p_statement);
+  void parseIsTopConceptOf(const Soprano::Statement &p_statement);
+
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
   UrlPredicateMap m_predicateMap;
