@@ -11,6 +11,8 @@ void UrlObjectMap::initializeMap()
 {
   qDebug() << "UrlMap::initMap()";
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#Concept")] = Concept;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#ConceptScheme")] =
+    ConceptScheme;
 }
 
 EUrlObject UrlObjectMap::mapUrl(const QUrl &p_url)

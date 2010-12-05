@@ -8,6 +8,7 @@ enum EUrlObject
 {
   GeneralObject = 0,
   Concept       = 1,
+  ConceptScheme = 2
 };
 
 class UrlObjectMap

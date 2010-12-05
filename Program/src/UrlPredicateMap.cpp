@@ -15,7 +15,13 @@ void UrlPredicateMap::initializeMap()
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#altLabel")] = AltLabel;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#hiddenLabel")] =
     HiddenLabel;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#related")] = Related;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#broader")] = Broader;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#narrower")] = Narrower;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#hasTopConcept")] =
+    HasTopConcept;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#isTopConceptOf")] =
+    IsTopConceptOf;
 }
 
 EUrlPredicate UrlPredicateMap::mapUrl(const QUrl &p_url)

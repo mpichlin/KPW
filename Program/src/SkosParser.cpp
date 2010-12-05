@@ -80,6 +80,14 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
       parseRelatedDeclaration(p_statement);
       break;
     }
+    case HasTopConcept:
+    {
+      break;
+    }
+    case IsTopConceptOf:
+    {
+      break;
+    }
     case GeneralPredicate:
     {
       qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
@@ -99,6 +107,11 @@ void SkosParser::parseClassDeclaration(const Soprano::Statement &p_statement)
       m_model->addConcept(p_statement.subject().uri());
       break;
     }
+    case ConceptScheme:
+    {
+      m_model->addConceptScheme(p_statement.subject().uri());
+      break;
+    }
     case GeneralObject:
     {
       qDebug() << "SkosParser::parseStatement() - GeneralObject";
@@ -111,8 +124,8 @@ void SkosParser::parsePrefLabelDeclaration(
 {
   qDebug() << "SkosParser::parsePrefLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addPrefLabelToConcept(p_statement.object(),
-                                 p_statement.subject().uri());
+  m_model->addPrefLabel(p_statement.object(),
+                        p_statement.subject().uri());
 }
 
 void SkosParser::parseAltLabelDeclaration(
@@ -120,8 +133,8 @@ void SkosParser::parseAltLabelDeclaration(
 {
   qDebug() << "SkosParser::parseAltLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addAltLabelToConcept(p_statement.object(),
-                                 p_statement.subject().uri());
+  m_model->addAltLabel(p_statement.object(),
+                       p_statement.subject().uri());
 }
 
 void SkosParser::parseHiddenLabelDeclaration(
@@ -129,8 +142,8 @@ void SkosParser::parseHiddenLabelDeclaration(
 {
   qDebug() << "SkosParser::parseHiddenLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addHiddenLabelToConcept(p_statement.object(),
-                                 p_statement.subject().uri());
+  m_model->addHiddenLabel(p_statement.object(),
+                          p_statement.subject().uri());
 }
 
 void SkosParser::parseBroaderDeclaration(
@@ -159,4 +172,13 @@ void SkosParser::parseRelatedDeclaration(
            << p_statement << ")";
   m_model->addRelatedConcept(p_statement.object().uri(),
                              p_statement.subject().uri());
+}
+
+void SkosParser::parseHasTopConcept(const QUrl &p_concept, 
+                                    const QUrl &p_conceptScheme)
+{
+}
+void SkosParser::parseIsTopConceptOf(const QUrl &p_conceptScheme,
+                                     const QUrl &p_concept)
+{
 }

@@ -13,7 +13,9 @@ enum EUrlPredicate
   HiddenLabel      = 4,
   Related          = 5,
   Broader          = 6,
-  Narrower         = 7
+  Narrower         = 7,
+  HasTopConcept    = 8,
+  IsTopConceptOf   = 9
 };
 
 class UrlPredicateMap
