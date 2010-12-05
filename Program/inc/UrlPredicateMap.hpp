@@ -11,7 +11,9 @@ enum EUrlPredicate
   PrefLabel        = 2,
   AltLabel         = 3,
   HiddenLabel      = 4,
-  Broader          = 5
+  Related          = 5,
+  Broader          = 6,
+  Narrower         = 7
 };
 
 class UrlPredicateMap

@@ -68,6 +68,16 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
       parseBroaderDeclaration(p_statement);
       break;
     }
+    case Narrower:
+    {
+      parseNarrowerDeclaration(p_statement);
+      break;
+    }  
+    case Related:
+    {
+      parseRelatedDeclaration(p_statement);
+      break;
+    }
     case GeneralPredicate:
     {
       qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
@@ -127,5 +137,24 @@ void SkosParser::parseBroaderDeclaration(
   qDebug() << "SkosParser::parseBroaderDeclaration(p_statement="
            << p_statement << ")";
   m_model->addBroaderConcept(p_statement.object().uri(),
+                             p_statement.subject().uri());
+}
+
+void SkosParser::parseNarrowerDeclaration(
+  const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseNarrowerDeclaration(p_statement="
+           << p_statement << ")";
+  m_model->addNarrowerConcept(p_statement.object().uri(),
+                              p_statement.subject().uri());
+  
+}
+
+void SkosParser::parseRelatedDeclaration(
+  const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseNarrowerDeclaration(p_statement="
+           << p_statement << ")";
+  m_model->addRelatedConcept(p_statement.object().uri(),
                              p_statement.subject().uri());
 }

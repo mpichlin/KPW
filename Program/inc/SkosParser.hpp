@@ -26,6 +26,8 @@ private:
   void parseAltLabelDeclaration(const Soprano::Statement &p_statement);
   void parseHiddenLabelDeclaration(const Soprano::Statement &p_statement);
   void parseBroaderDeclaration(const Soprano::Statement &p_statement);
+  void parseNarrowerDeclaration(const Soprano::Statement &p_statement);
+  void parseRelatedDeclaration(const Soprano::Statement &p_statement);
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
   UrlPredicateMap m_predicateMap;

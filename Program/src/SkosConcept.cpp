@@ -95,12 +95,28 @@ void SkosConcept::addHiddenLabel(Soprano::Node p_hiddenLabel)
   }
 }
 
-bool SkosConcept::isConceptAlreadyExists(const SkosConcept &p_broaderConcept)
+bool SkosConcept::isRelationAlreadyExists(const SkosConcept &p_concept)
 {
   for(QList<SkosConcept*>::iterator l_iter = m_broaderConcepts.begin();
       l_iter != m_broaderConcepts.end(); ++l_iter)
   {
-    if ((*l_iter)->getUrl() == p_broaderConcept.getUrl())
+    if ((*l_iter)->getUrl() == p_concept.getUrl())
+    {
+      return true;
+    }
+  }
+  for(QList<SkosConcept*>::iterator l_iter = m_narrowerConcepts.begin();
+      l_iter != m_narrowerConcepts.end(); ++l_iter)
+  {
+    if ((*l_iter)->getUrl() == p_concept.getUrl())
+    {
+      return true;
+    }
+  }
+  for(QList<SkosConcept*>::iterator l_iter = m_relatedConcepts.begin();
+      l_iter != m_relatedConcepts.end(); ++l_iter)
+  {
+    if ((*l_iter)->getUrl() == p_concept.getUrl())
     {
       return true;
     }
@@ -108,16 +124,36 @@ bool SkosConcept::isConceptAlreadyExists(const SkosConcept &p_broaderConcept)
   return false;
 }
 
-void SkosConcept::addBroaderConcept(SkosConcept *p_broaderConcept)
+int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
+                                    const ERelationType &p_relationType)
 {
-  qDebug() << "SkosConcept::addBroaderConcept(p_broaderConcept="
-           << p_broaderConcept->getUrl() << ")";
-  
-  if (isConceptAlreadyExists(*p_broaderConcept))
+  qDebug() << "SkosConcept::addConceptRelation(p_relatedConcept="
+           << p_relatedConcept->getUrl() << ", p_relationType="
+           << p_relationType << ")";
+  if (isRelationAlreadyExists(*p_relatedConcept))
   {
-    qDebug() << "SkosConcept::addBroaderConcept() - concept already exists";
+    qDebug() << "SkosConcept::addConceptRelation() - relation already exists";
+    return 1;
   }
+  else
   {
-    m_broaderConcepts.append(p_broaderConcept);
+    switch (p_relationType)
+    {
+      case RelatedRelation:
+      {
+        m_relatedConcepts.append(p_relatedConcept);
+      }    
+      case BroaderRelation:
+      {
+        m_broaderConcepts.append(p_relatedConcept);
+        break;
+      }
+      case NarrowerRelation:
+      {
+        m_narrowerConcepts.append(p_relatedConcept);
+        break;
+      }
+    }
+    return 0;
   }
 }
