@@ -1,20 +1,22 @@
 #include "SkosParser.hpp"
 #include <Soprano/Parser>
-#include <Soprano/Soprano>
 
 #include <QDebug>
 
-void SkosParser::parseFileToStatements(const QString &p_fileName)
+void SkosParser::parseFileToStatements(
+  const QString &p_fileName,
+  const Soprano::RdfSerialization &p_fileType)
 {
   qDebug() << "SkosParser::parseFileToStatement(p_fileName=" 
-           << p_fileName <<")";
+           << p_fileName <<", p_fileType=" 
+           << p_fileType << ")";
    const Soprano::Parser *l_parser =
      Soprano::PluginManager::instance()->
        discoverParserForSerialization(Soprano::SerializationTurtle);
    
    Soprano::StatementIterator l_statementIterator;
    l_statementIterator = l_parser->parseFile(p_fileName, QUrl(),
-                                             Soprano::SerializationTurtle);
+                                             p_fileType);
    
    m_statements = l_statementIterator.allStatements();
    

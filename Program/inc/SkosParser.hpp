@@ -3,6 +3,7 @@
 
 #include <QList>
 #include <Soprano/Statement>
+#include <Soprano/Soprano>
 
 #include "SkosModel.hpp"
 #include "UrlPredicateMap.hpp"
@@ -12,13 +13,15 @@ class SkosParser
 {
 public:
   SkosParser(SkosModel *p_model):m_model(p_model){};
-  void parseFile(QString p_fileName)
+  void parseFile(const QString &p_fileName, 
+                 const Soprano::RdfSerialization &p_fileType)
   {
-    parseFileToStatements(p_fileName);
+    parseFileToStatements(p_fileName, p_fileType);
     parseStatements();
   }
 private:
-  void parseFileToStatements(const QString& p_fileName);
+  void parseFileToStatements(const QString& p_fileName,
+                             const Soprano::RdfSerialization &p_fileType);
   void parseStatements();
   void parseStatement(const Soprano::Statement &p_statement);
   void parseClassDeclaration(const Soprano::Statement &p_statement);
