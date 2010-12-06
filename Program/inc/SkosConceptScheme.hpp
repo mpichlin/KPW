@@ -1,6 +1,8 @@
 #ifndef SKOS_CONCEPT_SCHEME_HPP
 #define SKOS_CONCEPT_SCHEME_HPP
 
+#include "ESchemeRelation.hpp"
+
 #include "SkosClass.hpp"
 #include "SkosConcept.hpp"
 
@@ -10,11 +12,18 @@ class SkosConceptScheme : public SkosClass
 {
 public:
   SkosConceptScheme(QUrl p_url){setUrl(p_url);};
-  void addTopConcept(SkosConcept *p_topConcept);
+  void addConcept(SkosConcept *p_topConcept,
+                  const ESchemeRelation &p_schemeRelation);
+  QList<SkosConcept*>::iterator findConcept(
+    const SkosConcept& p_concept,
+    const ESchemeRelation &p_schemeRelation);
 private:
-  QList<SkosConcept*>::iterator findTopConcept(
-    const SkosConcept& p_topConcept);
+  bool isConsistencyOk(const SkosConcept &p_concept);
+  QList<SkosConcept*>::iterator findConcept(
+    const SkosConcept& p_inconcept,
+    QList<SkosConcept*> p_internalConcepts);
   QList<SkosConcept*> m_topConcepts;
+  QList<SkosConcept*> m_inSchemeConcepts;
 };
 
 #endif

@@ -2,32 +2,75 @@
 
 #include <QDebug>
 
-void SkosConceptScheme::addTopConcept(SkosConcept *p_topConcept)
+void SkosConceptScheme::addConcept(SkosConcept *p_concept,
+                                   const ESchemeRelation &p_schemeRelation)
 {
-  QList<SkosConcept*>::iterator l_topConceptsIter = 
-    findTopConcept(*p_topConcept);
-  if (l_topConceptsIter == m_topConcepts.end())
+  qDebug() << "SkosConceptScheme::addConcept(p_topConcept="
+           << p_concept->getUrl() << ")";
+  if (isConsistencyOk(*p_concept))
   {
-    m_topConcepts.append(p_topConcept);
+    qDebug() << "SkosConceptScheme::addConcept() - Concept already exists";
   }
   else
   {
-    qDebug() << "SkosConceptScheme::addTopConcept() - Concept already exists";
+    switch (p_schemeRelation)
+    {
+      case Top:
+      {
+        m_topConcepts.append(p_concept);
+        break;
+      }
+      case InScheme:
+      {
+        m_inSchemeConcepts.append(p_concept);
+        break;
+      }
+    }
   }
 }
 
-QList<SkosConcept*>::iterator SkosConceptScheme::findTopConcept(
-  const SkosConcept& p_topConcept)
+QList<SkosConcept*>::iterator SkosConceptScheme::findConcept(
+  const SkosConcept& p_concept, const ESchemeRelation &p_schemeRelation)
 {
-  for (QList<SkosConcept*>::iterator l_topConceptsIter =  
-         m_topConcepts.begin(); 
-       l_topConceptsIter != m_topConcepts.end();
-       ++l_topConceptsIter)
+  qDebug() << "SkosConceptScheme::findConcept(p_inSchemeConcept="
+           << p_concept.getUrl() << ", p_schemeRelation=" 
+           << p_schemeRelation << ")";
+  switch (p_schemeRelation)
   {
-    if ((*l_topConceptsIter)->getUrl() == p_topConcept.getUrl())
+    case Top:
     {
-      return l_topConceptsIter;
+      return findConcept(p_concept, m_topConcepts);
+    }
+    case InScheme:
+    {
+      return findConcept(p_concept, m_inSchemeConcepts);
     }
   }
-  return m_topConcepts.end();
+}
+
+QList<SkosConcept*>::iterator SkosConceptScheme::findConcept(
+  const SkosConcept& p_concept,
+  QList<SkosConcept*> p_internalConcepts)
+{
+  qDebug() << "SkosConceptScheme::findConcept(p_inSchemeConcept="
+           << p_concept.getUrl() << ", p_internalConcepts)";
+  for (QList<SkosConcept*>::iterator l_internalConceptsIter =  
+         p_internalConcepts.begin(); 
+       l_internalConceptsIter != p_internalConcepts.end();
+       ++l_internalConceptsIter)
+  {
+    if ((*l_internalConceptsIter)->getUrl() == p_concept.getUrl())
+    {
+      return l_internalConceptsIter;
+    }
+  }
+  return p_internalConcepts.end();
+}
+
+bool SkosConceptScheme::isConsistencyOk(const SkosConcept &p_concept)
+{
+  return ((findConcept(p_concept, m_inSchemeConcepts) 
+           == m_inSchemeConcepts.end()) &&
+          (findConcept(p_concept, m_topConcepts) 
+           == m_topConcepts.end()));
 }

@@ -191,3 +191,12 @@ void SkosParser::parseIsTopConceptOf(const Soprano::Statement &p_statement)
   m_model->addTopConceptToScheme(p_statement.subject().uri(),
                                  p_statement.object().uri());
 }
+
+void SkosParser::parseInScheme(const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseInScheme(p_statement="
+           << p_statement << ")";
+  m_model->addConceptToScheme(p_statement.subject().uri(),
+                              p_statement.object().uri());
+
+}

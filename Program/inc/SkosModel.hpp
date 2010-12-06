@@ -19,10 +19,12 @@ public:
   void addNarrowerConcept(QUrl p_narrowerConcept, QUrl p_concept); 
   void addRelatedConcept(QUrl p_relatedConcept, QUrl p_concept); 
   void addTopConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
+  void addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
   QList<SkosConcept>::iterator findConcept(const QUrl &p_concept);
   QList<SkosConceptScheme>::iterator findConceptScheme(
     const QUrl &p_conceptScheme);
   SkosClass * findSkosClass(const QUrl &p_skosClass);
+  void removeConcept(QUrl p_concept);
 private:
   bool isConsistencyOk(const SkosClass &p_skosClass);
 

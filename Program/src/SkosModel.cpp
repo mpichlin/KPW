@@ -220,7 +220,32 @@ void SkosModel::addTopConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
   }
   else
   {
-    l_conceptSchemesIter->addTopConcept(&*l_conceptsIter);
-    l_conceptsIter->addAsTopInScheme(&*l_conceptSchemesIter);
+    l_conceptSchemesIter->addConcept(&*l_conceptsIter, Top);
+    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, Top);
   }
+}
+
+void SkosModel::addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
+{
+  qDebug() << "SkosModel::addConceptToScheme(p_concept="
+           << p_concept << ", p_conceptScheme=" << p_conceptScheme << ")";
+  QList<SkosConcept>::iterator l_conceptsIter = findConcept(p_concept);
+  QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
+    findConceptScheme(p_conceptScheme);
+  if ((l_conceptsIter == m_concepts.end()) ||
+      (l_conceptSchemesIter == m_conceptSchemes.end()))
+  {
+    qDebug() << "SkosModel::addConceptToScheme() - one of Classes does"
+             << "not exists";
+  }
+  else
+  {
+    l_conceptSchemesIter->addConcept(&*l_conceptsIter, InScheme);
+    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, InScheme);
+  }
+}
+
+void SkosModel::removeConcept(QUrl p_concept)
+{
+  
 }

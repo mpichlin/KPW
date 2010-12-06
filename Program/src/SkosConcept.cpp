@@ -65,35 +65,70 @@ int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
   }
 }
 
-QList<SkosConceptScheme*>::iterator SkosConcept::findConceptAsTopInScheme(
-  const SkosConceptScheme &p_conceptScheme)
+QList<SkosConceptScheme*>::iterator SkosConcept::findInScheme(
+  const SkosConceptScheme &p_conceptScheme,
+  const ESchemeRelation &p_schemeRelation)
 {
-  for(QList<SkosConceptScheme*>::iterator l_topInSchemesIter =
-        m_topInSchemes.begin();
-      l_topInSchemesIter != m_topInSchemes.end();
-      ++l_topInSchemesIter)
+  switch (p_schemeRelation)
   {
-    if ((*l_topInSchemesIter)->getUrl() == p_conceptScheme.getUrl())
+    case Top:
     {
-      return l_topInSchemesIter;
+      return findInScheme(p_conceptScheme, m_topInSchemes);
+      break;
+    }
+    case InScheme:
+    {
+      return findInScheme(p_conceptScheme, m_inSchemes);
+      break;
     }
   }
-  return m_topInSchemes.end();
 }
 
-void SkosConcept::addAsTopInScheme(SkosConceptScheme *p_conceptScheme)
+QList<SkosConceptScheme*>::iterator SkosConcept::findInScheme(
+  const SkosConceptScheme &p_conceptScheme,
+  QList<SkosConceptScheme*> p_internalSchemes)
 {
-  qDebug() << "SkosConcept::addAsTopInScheme(p_conceptScheme="
-           << p_conceptScheme->getUrl() << ")";
-  QList<SkosConceptScheme*>::iterator l_topInSchemesIter =
-    findConceptAsTopInScheme(*p_conceptScheme);
-  if (l_topInSchemesIter == m_topInSchemes.end())
+  for(QList<SkosConceptScheme*>::iterator l_internalSchemesIter =
+        p_internalSchemes.begin();
+      l_internalSchemesIter != p_internalSchemes.end();
+      ++l_internalSchemesIter)
   {
-    m_topInSchemes.append(p_conceptScheme);
+    if ((*l_internalSchemesIter)->getUrl() == p_conceptScheme.getUrl())
+    {
+      return l_internalSchemesIter;
+    }
+  }
+  return p_internalSchemes.end();
+}
+
+
+void SkosConcept::addToScheme(SkosConceptScheme *p_conceptScheme,
+                              const ESchemeRelation &p_schemeRelation)
+{
+  qDebug() << "SkosConcept::addToScheme(p_conceptScheme="
+           << p_conceptScheme->getUrl() << ", p_schemeRelation="
+           << p_schemeRelation << ")";
+  if ((findInScheme(*p_conceptScheme, m_topInSchemes) != m_topInSchemes.end()) 
+      ||
+      (findInScheme(*p_conceptScheme, m_inSchemes) != m_inSchemes.end()))
+  {
+    qDebug() << "SkosConcept::addAsTopInScheme() - concept is"
+             << "already in this scheme";
   }
   else
   {
-    qDebug() << "SkosConcept::addAsTopInScheme() - concept is"
-             << "already in scheme";
+    switch (p_schemeRelation)
+    {
+      case Top:
+      {
+        m_topInSchemes.append(p_conceptScheme);
+        break;
+      }
+      case InScheme:
+      {
+        m_inSchemes.append(p_conceptScheme);
+        break;
+      }
+    }
   }
 }
