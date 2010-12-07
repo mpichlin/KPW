@@ -247,5 +247,9 @@ void SkosModel::addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
 
 void SkosModel::removeConcept(QUrl p_concept)
 {
-  
+  for (QList<SkosConcept>::iterator l_conceptsIter; 
+       l_conceptsIter != m_concepts.end(); ++ l_conceptsIter)
+  {
+    //l_conceptsIter
+  }
 }

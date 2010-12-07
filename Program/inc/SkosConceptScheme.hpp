@@ -21,7 +21,7 @@ private:
   bool isConsistencyOk(const SkosConcept &p_concept);
   QList<SkosConcept*>::iterator findConcept(
     const SkosConcept& p_inconcept,
-    QList<SkosConcept*> p_internalConcepts);
+    QList<SkosConcept*> &p_internalConcepts);
   QList<SkosConcept*> m_topConcepts;
   QList<SkosConcept*> m_inSchemeConcepts;
 };

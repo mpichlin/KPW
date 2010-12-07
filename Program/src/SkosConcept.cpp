@@ -2,33 +2,32 @@
 
 #include <QDebug>
 
+QList<SkosConcept*>::iterator SkosConcept::findConceptInList(
+  const SkosConcept &p_concept, 
+  QList<SkosConcept*> &p_relationList)
+{
+  qDebug() << "SkosConcept::findConceptInList(p_concept="
+           << p_concept.getUrl() << ", p_relationList)";
+  for(QList<SkosConcept*>::iterator l_iter = p_relationList.begin();
+      l_iter != p_relationList.end(); ++l_iter)
+  {
+    if ((*l_iter)->getUrl() == p_concept.getUrl())
+    {
+      return l_iter;
+    }
+  }
+  qDebug() << "SkosConcept::findConceptInList() - concept not found";
+  return p_relationList.end();
+}
+
 bool SkosConcept::isRelationAlreadyExists(const SkosConcept &p_concept)
 {
-  for(QList<SkosConcept*>::iterator l_iter = m_broaderConcepts.begin();
-      l_iter != m_broaderConcepts.end(); ++l_iter)
-  {
-    if ((*l_iter)->getUrl() == p_concept.getUrl())
-    {
-      return true;
-    }
-  }
-  for(QList<SkosConcept*>::iterator l_iter = m_narrowerConcepts.begin();
-      l_iter != m_narrowerConcepts.end(); ++l_iter)
-  {
-    if ((*l_iter)->getUrl() == p_concept.getUrl())
-    {
-      return true;
-    }
-  }
-  for(QList<SkosConcept*>::iterator l_iter = m_relatedConcepts.begin();
-      l_iter != m_relatedConcepts.end(); ++l_iter)
-  {
-    if ((*l_iter)->getUrl() == p_concept.getUrl())
-    {
-      return true;
-    }
-  }
-  return false;
+  return ((findConceptInList(p_concept, m_broaderConcepts) != 
+           m_broaderConcepts.end()) ||
+          (findConceptInList(p_concept, m_narrowerConcepts) != 
+           m_narrowerConcepts.end()) ||
+          (findConceptInList(p_concept, m_relatedConcepts) != 
+           m_relatedConcepts.end()));
 }
 
 int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
@@ -49,6 +48,7 @@ int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
       case RelatedRelation:
       {
         m_relatedConcepts.append(p_relatedConcept);
+        break;
       }    
       case BroaderRelation:
       {
@@ -86,7 +86,7 @@ QList<SkosConceptScheme*>::iterator SkosConcept::findInScheme(
 
 QList<SkosConceptScheme*>::iterator SkosConcept::findInScheme(
   const SkosConceptScheme &p_conceptScheme,
-  QList<SkosConceptScheme*> p_internalSchemes)
+  QList<SkosConceptScheme*> &p_internalSchemes)
 {
   for(QList<SkosConceptScheme*>::iterator l_internalSchemesIter =
         p_internalSchemes.begin();
@@ -112,7 +112,7 @@ void SkosConcept::addToScheme(SkosConceptScheme *p_conceptScheme,
       ||
       (findInScheme(*p_conceptScheme, m_inSchemes) != m_inSchemes.end()))
   {
-    qDebug() << "SkosConcept::addAsTopInScheme() - concept is"
+    qDebug() << "SkosConcept::addToScheme() - concept is"
              << "already in this scheme";
   }
   else

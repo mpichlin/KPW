@@ -9,10 +9,6 @@ void SkosConceptScheme::addConcept(SkosConcept *p_concept,
            << p_concept->getUrl() << ")";
   if (isConsistencyOk(*p_concept))
   {
-    qDebug() << "SkosConceptScheme::addConcept() - Concept already exists";
-  }
-  else
-  {
     switch (p_schemeRelation)
     {
       case Top:
@@ -26,6 +22,10 @@ void SkosConceptScheme::addConcept(SkosConcept *p_concept,
         break;
       }
     }
+  }
+  else
+  {
+    qDebug() << "SkosConceptScheme::addConcept() - Concept already exists";
   }
 }
 
@@ -49,8 +49,8 @@ QList<SkosConcept*>::iterator SkosConceptScheme::findConcept(
 }
 
 QList<SkosConcept*>::iterator SkosConceptScheme::findConcept(
-  const SkosConcept& p_concept,
-  QList<SkosConcept*> p_internalConcepts)
+  const SkosConcept &p_concept,
+  QList<SkosConcept*> &p_internalConcepts)
 {
   qDebug() << "SkosConceptScheme::findConcept(p_inSchemeConcept="
            << p_concept.getUrl() << ", p_internalConcepts)";
