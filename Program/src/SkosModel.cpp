@@ -247,9 +247,12 @@ void SkosModel::addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
 
 void SkosModel::removeConcept(QUrl p_concept)
 {
-  for (QList<SkosConcept>::iterator l_conceptsIter; 
+  qDebug() << "SkosModel::removeConcept(p_concept=" << p_concept << ")";
+  for (QList<SkosConcept>::iterator l_conceptsIter = m_concepts.begin(); 
        l_conceptsIter != m_concepts.end(); ++ l_conceptsIter)
   {
-    //l_conceptsIter
+    l_conceptsIter->removeConceptFromRelation(p_concept, RelatedRelation);
+    l_conceptsIter->removeConceptFromRelation(p_concept, BroaderRelation);
+    l_conceptsIter->removeConceptFromRelation(p_concept, NarrowerRelation);
   }
 }

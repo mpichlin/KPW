@@ -132,3 +132,65 @@ void SkosConcept::addToScheme(SkosConceptScheme *p_conceptScheme,
     }
   }
 }
+
+void SkosConcept::removeConceptFromRelation(
+  const SkosConcept &p_conceptToRemove,
+  const ERelationType &p_relationType)
+{
+  qDebug() << "SkosConcept::removeConceptFromRelation(p_conceptToRemove="
+           << p_conceptToRemove.getUrl() << ", p_relationType="
+           << p_relationType << ")";
+  switch (p_relationType)
+  {
+    case RelatedRelation:
+    {
+      return removeConceptFromList(p_conceptToRemove, m_relatedConcepts);
+    }
+    case BroaderRelation:
+    {
+      return removeConceptFromList(p_conceptToRemove, m_broaderConcepts);
+    }
+    case NarrowerRelation:
+    {
+      return removeConceptFromList(p_conceptToRemove, m_narrowerConcepts);
+    }
+  }
+}
+
+void SkosConcept::removeConceptFromList(
+    const SkosConcept &p_concept, 
+    QList<SkosConcept*> &p_relationList)
+{
+  QList<SkosConcept*>::iterator l_relationListIter = 
+    findConceptInList(p_concept, p_relationList);
+  if (l_relationListIter == p_relationList.end())
+  {
+      qDebug() << "SkosConcept::removeConceptFromList() - no such concept";
+  }
+  else
+  {
+    p_relationList.erase(l_relationListIter);
+  }
+}
+  
+QList<SkosConcept*>::iterator SkosConcept::findConceptInRelation(
+  const SkosConcept &p_concept, 
+  const ERelationType &p_relationType)
+{
+  switch (p_relationType)
+  {
+    case RelatedRelation:
+    {
+      return findConceptInList(p_concept, m_relatedConcepts);
+    }
+    case BroaderRelation:
+    {
+      return findConceptInList(p_concept, m_broaderConcepts);
+    }
+    case NarrowerRelation:
+    {
+      return findConceptInList(p_concept, m_narrowerConcepts);
+    }
+  }
+}
+
