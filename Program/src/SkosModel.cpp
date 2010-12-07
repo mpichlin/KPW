@@ -255,4 +255,21 @@ void SkosModel::removeConcept(QUrl p_concept)
     l_conceptsIter->removeConceptFromRelation(p_concept, BroaderRelation);
     l_conceptsIter->removeConceptFromRelation(p_concept, NarrowerRelation);
   }
+  for (QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
+         m_conceptSchemes.begin(); 
+       l_conceptSchemesIter != m_conceptSchemes.end(); ++ l_conceptSchemesIter)
+  {
+    l_conceptSchemesIter->removeConcept(p_concept, Top);
+    l_conceptSchemesIter->removeConcept(p_concept, InScheme);
+  }
+  QList<SkosConcept>::iterator l_conceptsIter = findConcept(p_concept);
+  if (l_conceptsIter == m_concepts.end())
+  {
+    qDebug() << "SkosModel::removeConcept() - concept does not exists";
+  }
+  else
+  {
+    m_concepts.erase(l_conceptsIter);
+    qDebug() << "SkosModel::removeConcept() - successfuly removed from Model";
+  }
 }

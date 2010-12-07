@@ -74,3 +74,35 @@ bool SkosConceptScheme::isConsistencyOk(const SkosConcept &p_concept)
           (findConcept(p_concept, m_topConcepts) 
            == m_topConcepts.end()));
 }
+
+void SkosConceptScheme::removeConcept(const SkosConcept &p_conceptToRemove,
+                                      QList<SkosConcept*> &p_internalConcepts)
+{
+  QList<SkosConcept*>::iterator l_internalConceptsIter =
+    findConcept(p_conceptToRemove, p_internalConcepts);
+  if (l_internalConceptsIter == p_internalConcepts.end())
+  {
+    qDebug() << "SkosConceptScheme::removeConcept() - no such"
+             << "concept in scheme";
+  }
+  else
+  {
+    p_internalConcepts.erase(l_internalConceptsIter);
+  }
+}
+
+void SkosConceptScheme::removeConcept(const SkosConcept &p_conceptToRemove,
+                                      const ESchemeRelation &p_schemeRelation)
+{
+  switch (p_schemeRelation)
+  {
+    case Top:
+    {
+      return removeConcept(p_conceptToRemove, m_topConcepts);
+    }
+    case InScheme:
+    {
+      return removeConcept(p_conceptToRemove, m_inSchemeConcepts);
+    }
+  }
+}

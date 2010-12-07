@@ -15,7 +15,8 @@ enum EUrlPredicate
   Broader          = 6,
   Narrower         = 7,
   HasTopConcept    = 8,
-  IsTopConceptOf   = 9
+  IsTopConceptOf   = 9,
+  IsInScheme       = 10,
 };
 
 class UrlPredicateMap

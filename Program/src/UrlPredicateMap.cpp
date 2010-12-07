@@ -22,6 +22,7 @@ void UrlPredicateMap::initializeMap()
     HasTopConcept;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#isTopConceptOf")] =
     IsTopConceptOf;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#inScheme")] = IsInScheme;
 }
 
 EUrlPredicate UrlPredicateMap::mapUrl(const QUrl &p_url)

@@ -90,6 +90,11 @@ void SkosParser::parseStatement(const Soprano::Statement &p_statement)
       parseIsTopConceptOf(p_statement);
       break;
     }
+    case IsInScheme:
+    {
+      parseInScheme(p_statement);
+      break;
+    }
     case GeneralPredicate:
     {
       qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
