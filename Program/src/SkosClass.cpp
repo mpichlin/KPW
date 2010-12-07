@@ -47,10 +47,6 @@ bool SkosClass::isPrefLabelOk(const Soprano::Node &p_prefLabel) const
 {
   qDebug() << "SkosClass::isPrefLabelOk(p_prefLabel="
            << p_prefLabel.toString() << ")";
-  if(isLabelAlreadyExists(p_prefLabel))
-  {
-    qDebug() << "SkosClass::isPrefLabelOk() - label already exists";
-  }
   for(QList<Soprano::Node>::const_iterator l_iter = m_prefLabels.begin();
       l_iter != m_prefLabels.end(); ++l_iter)
   {
@@ -64,38 +60,46 @@ bool SkosClass::isPrefLabelOk(const Soprano::Node &p_prefLabel) const
   return true;
 }
 
-void SkosClass::addPrefLabel(Soprano::Node p_prefLabel)
+void SkosClass::addLabel(Soprano::Node p_label, 
+                         const ELabelType &p_labelType)
 {
-  qDebug() << "SkosClass::addPrefLabel(p_prefLabel="
-           << p_prefLabel.toString() << ")";
-  if (isPrefLabelOk(p_prefLabel))
+  qDebug() << "SkosClass::addLabel(p_prefLabel =" << p_label.toString()
+           << ", p_labelType =" << p_labelType << ")";
+  if (isLabelAlreadyExists(p_label))
   {
-    m_prefLabels.append(p_prefLabel);
+    qDebug() << "SkosClass::addLabel() - this label already exists for this"
+             << "class";
+  }
+  else
+  {
+    switch (p_labelType)
+    {
+      case PrefferedLabelType:
+      {
+        if(isPrefLabelOk(p_label))
+        {
+          addLabel(p_label, m_prefLabels);
+        }
+        break;
+      }
+      case AlternativeLabelType:
+      {
+        addLabel(p_label, m_altLabels);
+        break;
+      }
+      case HiddenLabelType:
+      {
+        addLabel(p_label, m_hiddenLabels);
+        break;
+      }
+    }      
   }
 }
 
-void SkosClass::addAltLabel(Soprano::Node p_altLabel)
+void SkosClass::addLabel(Soprano::Node p_label,
+                         QList<Soprano::Node> &p_labelList)
 {
-  qDebug() << "SkosClass::addAltLabel(p_altLabel="
-           << p_altLabel.toString() << ")";
-  if (isLabelAlreadyExists(p_altLabel))
-  {
-    qDebug() << "SkosClass::addAltLabel() - label already exists";
-  }
-  {
-    m_altLabels.append(p_altLabel);
-  }
-}
-
-void SkosClass::addHiddenLabel(Soprano::Node p_hiddenLabel)
-{
-  qDebug() << "SkosClass::addHiddenLabel(p_hiddenLabel="
-           << p_hiddenLabel.toString() << ")";
-  if (isLabelAlreadyExists(p_hiddenLabel))
-  {
-    qDebug() << "SkosClass::addHiddenLabel() - label already exists";
-  }
-  {
-    m_hiddenLabels.append(p_hiddenLabel);
-  }
+  qDebug() << "SkosClass::addLabel(p_label=" << p_label.toString()
+           << ", p_labelList)";
+  p_labelList.append(p_label);
 }

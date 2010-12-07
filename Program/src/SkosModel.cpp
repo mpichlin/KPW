@@ -43,49 +43,21 @@ bool SkosModel::isConsistencyOk(const SkosClass &p_skosClass)
   return true;
 }
 
-void SkosModel::addPrefLabel(Soprano::Node p_prefLabel,
-                             QUrl p_skosClass)
+void SkosModel::addLabel(Soprano::Node p_label, 
+                         const ELabelType &p_labelType,
+                         SkosClass p_skosClass)
 {
-  qDebug() << "SkosModel::addPrefLabel(p_prefLabel=" <<
-    p_prefLabel.toString() << ", p_skosClass=" << p_skosClass << ")";
-  if (findSkosClass(p_skosClass) == NULL)
+  qDebug() << "SkosModel::addLabel(p_label =" << p_label.toString()
+           << ", p_labelType =" << p_labelType << ", p_skosClass ="
+           << p_skosClass.getUrl();
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  if (l_skosClassPtr == NULL)
   {
-    qDebug() << "SkosModel::addPrefLabel() - Skos class does not exists";
+    qDebug() << "SkosModel::addLabel() - cllas does not exists";
   }
   else
   {
-    findSkosClass(p_skosClass)->addPrefLabel(p_prefLabel);
-  }
-}
-
-void SkosModel::addAltLabel(Soprano::Node p_altLabel,
-                            QUrl p_skosClass)
-{
-  qDebug() << "SkosModel::addAltLabel(p_altLabel=" <<
-    p_altLabel.toString() << ", p_skosClass=" << p_skosClass << ")";
-  if (findSkosClass(p_skosClass) == NULL)
-  {
-    qDebug() << "SkosModel::addAltLabel() - Skos class does not exists";
-  }
-  else
-  {
-    findSkosClass(p_skosClass)->addAltLabel(p_altLabel);
-  }
-}
-
-void SkosModel::addHiddenLabel(Soprano::Node p_hiddenLabel,
-                               QUrl p_skosClass)
-{
-  qDebug() << "SkosModel::addHiddenLabel(p_hiddenLabel=" <<
-    p_hiddenLabel.toString() << ", p_skosClass=" << p_skosClass << ")";
-  if (findSkosClass(p_skosClass) == NULL)
-  {
-    qDebug() << "SkosModel::addHiddenLabel()"
-             << "- Skos class does not exists";
-  }
-  else
-  {
-      findSkosClass(p_skosClass)->addHiddenLabel(p_hiddenLabel);
+    l_skosClassPtr->addLabel(p_label, p_labelType);
   }
 }
 
@@ -162,12 +134,12 @@ void SkosModel::addRelatedConcept(QUrl p_relatedConcept, QUrl p_concept)
 } 
 
 QList<SkosConcept>::iterator SkosModel::findConcept(
-  const QUrl &p_concept)
+  const SkosConcept &p_concept)
 {
   for (QList<SkosConcept>::iterator l_iter = m_concepts.begin();
        l_iter != m_concepts.end(); ++l_iter)
   {
-    if (l_iter->getUrl() == p_concept)
+    if (l_iter->getUrl() == p_concept.getUrl())
     {
       return l_iter;
     }
@@ -176,12 +148,12 @@ QList<SkosConcept>::iterator SkosModel::findConcept(
 }
 
 QList<SkosConceptScheme>::iterator SkosModel::findConceptScheme(
-  const QUrl &p_conceptScheme)
+  const SkosConceptScheme &p_conceptScheme)
 {
   for (QList<SkosConceptScheme>::iterator l_iter = m_conceptSchemes.begin();
        l_iter != m_conceptSchemes.end(); ++l_iter)
   {
-    if (l_iter->getUrl() == p_conceptScheme)
+    if (l_iter->getUrl() == p_conceptScheme.getUrl())
     {
       return l_iter;
     }
@@ -189,15 +161,16 @@ QList<SkosConceptScheme>::iterator SkosModel::findConceptScheme(
   return m_conceptSchemes.end();
 }
 
-SkosClass * SkosModel::findSkosClass(const QUrl &p_skosClass)
+SkosClass * SkosModel::findSkosClass(const SkosClass &p_skosClass)
 {
-  QList<SkosConcept>::iterator l_conceptsIter = findConcept(p_skosClass);
+  QList<SkosConcept>::iterator l_conceptsIter = 
+    findConcept(p_skosClass.getUrl());
   if (l_conceptsIter != m_concepts.end())
   {
     return &*l_conceptsIter;
   }
   QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
-    findConceptScheme(p_skosClass);
+    findConceptScheme(p_skosClass.getUrl());
   if (l_conceptSchemesIter != m_conceptSchemes.end())
   {
     return &*l_conceptSchemesIter;

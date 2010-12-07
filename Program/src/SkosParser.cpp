@@ -131,8 +131,9 @@ void SkosParser::parsePrefLabelDeclaration(
 {
   qDebug() << "SkosParser::parsePrefLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addPrefLabel(p_statement.object(),
-                        p_statement.subject().uri());
+  m_model->addLabel(p_statement.object(),
+                    PrefferedLabelType,
+                    p_statement.subject().uri());
 }
 
 void SkosParser::parseAltLabelDeclaration(
@@ -140,8 +141,9 @@ void SkosParser::parseAltLabelDeclaration(
 {
   qDebug() << "SkosParser::parseAltLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addAltLabel(p_statement.object(),
-                       p_statement.subject().uri());
+  m_model->addLabel(p_statement.object(),
+                    AlternativeLabelType,
+                    p_statement.subject().uri());
 }
 
 void SkosParser::parseHiddenLabelDeclaration(
@@ -149,8 +151,9 @@ void SkosParser::parseHiddenLabelDeclaration(
 {
   qDebug() << "SkosParser::parseHiddenLabelDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addHiddenLabel(p_statement.object(),
-                          p_statement.subject().uri());
+  m_model->addLabel(p_statement.object(),
+                    HiddenLabelType,
+                    p_statement.subject().uri());
 }
 
 void SkosParser::parseBroaderDeclaration(
