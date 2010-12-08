@@ -15,8 +15,9 @@ public:
   void addConceptRelation(const SkosConcept &p_baseConcept,
                           const SkosConcept &p_relatedConcept,
                           const ERelationType &p_relationType);
-  void addTopConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
-  void addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
+  void addConceptToScheme(const SkosConcept &p_concept,
+                          const SkosConceptScheme &p_conceptScheme,
+                          const ESchemeRelation &p_schemeRelation);
   QList<SkosConcept>::iterator findConcept(const SkosConcept &p_concept);
   QList<SkosConceptScheme>::iterator findConceptScheme(
     const SkosConceptScheme &p_conceptScheme);

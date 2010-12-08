@@ -190,16 +190,18 @@ void SkosParser::parseHasTopConcept(const Soprano::Statement &p_statement)
 {
   qDebug() << "SkosParser::parseHasTopConcept(p_statement="
            << p_statement << ")";
-  m_model->addTopConceptToScheme(p_statement.object().uri(),
-                                 p_statement.subject().uri());
+  m_model->addConceptToScheme(p_statement.object().uri(),
+                              p_statement.subject().uri(),
+                              Top);
 }
 
 void SkosParser::parseIsTopConceptOf(const Soprano::Statement &p_statement)
 {
   qDebug() << "SkosParser::parseIsTopConceptOf(p_statement="
            << p_statement << ")";
-  m_model->addTopConceptToScheme(p_statement.subject().uri(),
-                                 p_statement.object().uri());
+  m_model->addConceptToScheme(p_statement.subject().uri(),
+                              p_statement.object().uri(),
+                              Top);
 }
 
 void SkosParser::parseInScheme(const Soprano::Statement &p_statement)
@@ -207,6 +209,6 @@ void SkosParser::parseInScheme(const Soprano::Statement &p_statement)
   qDebug() << "SkosParser::parseInScheme(p_statement="
            << p_statement << ")";
   m_model->addConceptToScheme(p_statement.subject().uri(),
-                              p_statement.object().uri());
-
+                              p_statement.object().uri(),
+                              InScheme);
 }

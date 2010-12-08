@@ -195,4 +195,3 @@ QList<SkosConcept*>::iterator SkosConcept::findConceptInRelation(
   }
   return NULL;
 }
-

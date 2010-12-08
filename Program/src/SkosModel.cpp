@@ -161,43 +161,27 @@ SkosClass * SkosModel::findSkosClass(const SkosClass &p_skosClass)
   return NULL;
 }
 
-void SkosModel::addTopConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
-{
-  qDebug() << "SkosModel::addTopConceptToScheme(p_concept="
-           << p_concept << ", p_conceptScheme=" << p_conceptScheme << ")";
-  QList<SkosConcept>::iterator l_conceptsIter = findConcept(p_concept);
-  QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
-    findConceptScheme(p_conceptScheme);
-  if ((l_conceptsIter == m_concepts.end()) ||
-      (l_conceptSchemesIter == m_conceptSchemes.end()))
-  {
-    qDebug() << "SkosModel::addTopConceptToScheme() - one of Classes does"
-             << "not exists";
-  }
-  else
-  {
-    l_conceptSchemesIter->addConcept(&*l_conceptsIter, Top);
-    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, Top);
-  }
-}
-
-void SkosModel::addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme)
+void SkosModel::addConceptToScheme(const SkosConcept &p_concept,
+                                   const SkosConceptScheme &p_conceptScheme,
+                                   const ESchemeRelation &p_schemeRelation)
 {
   qDebug() << "SkosModel::addConceptToScheme(p_concept="
-           << p_concept << ", p_conceptScheme=" << p_conceptScheme << ")";
+           << p_concept.getUrl() << ", p_conceptScheme=" 
+           << p_conceptScheme.getUrl() << "p_schemeRelation="
+           << p_schemeRelation << ")";
   QList<SkosConcept>::iterator l_conceptsIter = findConcept(p_concept);
   QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
     findConceptScheme(p_conceptScheme);
   if ((l_conceptsIter == m_concepts.end()) ||
       (l_conceptSchemesIter == m_conceptSchemes.end()))
   {
-    qDebug() << "SkosModel::addConceptToScheme() - one of Classes does"
+    qDebug() << "SkosModel::addConceptToScheme() - one of classes does"
              << "not exists";
   }
   else
   {
-    l_conceptSchemesIter->addConcept(&*l_conceptsIter, InScheme);
-    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, InScheme);
+    l_conceptSchemesIter->addConcept(&*l_conceptsIter, p_schemeRelation);
+    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, p_schemeRelation);
   }
 }
 
