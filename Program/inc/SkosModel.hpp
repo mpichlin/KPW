@@ -12,6 +12,9 @@ public:
   void addLabel(Soprano::Node p_label, 
                 const ELabelType &p_labelType,
                 SkosClass p_skosClass);
+  void removeLabel(const Soprano::Node &p_label, 
+                   const ELabelType &p_labelType,
+                   const SkosClass &p_skosClass);
   void addConceptRelation(const SkosConcept &p_baseConcept,
                           const SkosConcept &p_relatedConcept,
                           const ERelationType &p_relationType);

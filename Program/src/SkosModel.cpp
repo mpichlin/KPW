@@ -108,11 +108,29 @@ void SkosModel::addLabel(Soprano::Node p_label,
   SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
   if (l_skosClassPtr == NULL)
   {
-    qDebug() << "SkosModel::addLabel() - cllas does not exists";
+    qDebug() << "SkosModel::addLabel() - class does not exists";
   }
   else
   {
     l_skosClassPtr->addLabel(p_label, p_labelType);
+  }
+}
+
+void SkosModel::removeLabel(const Soprano::Node &p_label, 
+                            const ELabelType &p_labelType,
+                            const SkosClass &p_skosClass)
+{
+  qDebug() << "SkosModel::remove(p_label =" << p_label.toString()
+           << ", p_labelType =" << p_labelType << ", p_skosClass ="
+           << p_skosClass.getUrl();
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  if (l_skosClassPtr == NULL)
+  {
+    qDebug() << "SkosModel::removeLabel() - class does not exists";
+  }
+  else
+  {
+    l_skosClassPtr->removeLabel(p_label, p_labelType);
   }
 }
 

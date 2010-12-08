@@ -8,6 +8,8 @@ int main()
   g_skosParser.parseFile("example.tur", Soprano::SerializationTurtle);
   g_skosModel.removeConceptScheme(QUrl("http://example.org/ns/ConceptScheme"));
   g_skosModel.removeConcept(QUrl("http://example.org/ns/AnotherConcept"));
-
+  g_skosModel.removeLabel(Soprano::Node("Ukryty smok","pl"), 
+                          HiddenLabelType,
+                          QUrl("http://example.org/ns/MyConcept"));
   return 0;
 }
