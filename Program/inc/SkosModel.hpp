@@ -18,6 +18,9 @@ public:
   void addConceptRelation(const SkosConcept &p_baseConcept,
                           const SkosConcept &p_relatedConcept,
                           const ERelationType &p_relationType);
+  void removeConceptRelation(const SkosConcept &p_baseConcept,
+                             const SkosConcept &p_relatedConcept,
+                             const ERelationType &p_relationType);
   void addConceptToScheme(const SkosConcept &p_concept,
                           const SkosConceptScheme &p_conceptScheme,
                           const ESchemeRelation &p_schemeRelation);

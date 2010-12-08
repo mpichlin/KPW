@@ -140,3 +140,25 @@ QList<Soprano::Node>::iterator SkosClass::findLabel(
   }
   return p_labelList.end();
 }
+
+QList<Soprano::Node> SkosClass::getLabelList(
+  const ELabelType &p_labelType) const
+{
+  qDebug() << "SkosClass::getLabelList(p_labelType=" << p_labelType << ")";
+  switch (p_labelType)
+  {
+    case PrefferedLabelType:
+    {
+      return m_prefLabels;
+    }
+    case AlternativeLabelType:
+    {
+      return m_altLabels;
+    }
+    case HiddenLabelType:
+    {
+      return m_hiddenLabels;
+    }
+  }
+  return QList<Soprano::Node>();
+}

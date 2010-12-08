@@ -11,5 +11,8 @@ int main()
   g_skosModel.removeLabel(Soprano::Node("Ukryty smok","pl"), 
                           HiddenLabelType,
                           QUrl("http://example.org/ns/MyConcept"));
+  g_skosModel.removeLabel(Soprano::Node("Ukryty smok","pl"), 
+                          HiddenLabelType,
+                          QUrl("http://example.org/ns/MyConcept"));
   return 0;
 }
