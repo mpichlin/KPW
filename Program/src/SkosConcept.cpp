@@ -231,3 +231,41 @@ void SkosConcept::removeSchemeFromList(
     p_schemeList.erase(l_schemeListIter);
   }
 }
+
+QList<SkosConcept*> SkosConcept::getRelatedConceptsList(
+  const ERelationType &p_relationType) const
+{
+  switch (p_relationType)
+  {
+    case BroaderRelation:
+    {
+      return m_broaderConcepts;
+    }
+    case NarrowerRelation:
+    {
+      return m_narrowerConcepts;
+    }
+    case RelatedRelation:
+    {
+      return m_relatedConcepts;
+    }
+  }
+  return QList<SkosConcept*>();
+}
+
+QList<SkosConceptScheme*> SkosConcept::getConceptSchemesList(
+  const ESchemeRelation &p_schemeRelation) const
+{
+  switch (p_schemeRelation)
+  {
+    case Top:
+    {
+      return m_topInSchemes;
+    }
+    case InScheme:
+    {
+      return m_inSchemes;
+    }
+  }
+  return QList<SkosConceptScheme*>();
+}
