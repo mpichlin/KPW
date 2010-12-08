@@ -185,9 +185,10 @@ void SkosModel::addConceptToScheme(const SkosConcept &p_concept,
   }
 }
 
-void SkosModel::removeConcept(QUrl p_concept)
+void SkosModel::removeConcept(const SkosConcept &p_concept)
 {
-  qDebug() << "SkosModel::removeConcept(p_concept=" << p_concept << ")";
+  qDebug() << "SkosModel::removeConcept(p_concept=" << p_concept.getUrl()
+           << ")";
   for (QList<SkosConcept>::iterator l_conceptsIter = m_concepts.begin(); 
        l_conceptsIter != m_concepts.end(); ++ l_conceptsIter)
   {
@@ -211,5 +212,30 @@ void SkosModel::removeConcept(QUrl p_concept)
   {
     m_concepts.erase(l_conceptsIter);
     qDebug() << "SkosModel::removeConcept() - successfuly removed from Model";
+  }
+}
+
+void SkosModel::removeConceptScheme(const SkosConceptScheme &p_conceptScheme)
+{
+  qDebug() << "SkosModel::removeConceptScheme(p_conceptScheme="
+           << p_conceptScheme.getUrl() << ")";
+  for (QList<SkosConcept>::iterator l_conceptsIter = m_concepts.begin(); 
+       l_conceptsIter != m_concepts.end(); ++ l_conceptsIter)
+  {
+    l_conceptsIter->removeConceptFromScheme(p_conceptScheme, Top);
+    l_conceptsIter->removeConceptFromScheme(p_conceptScheme, InScheme);
+  }
+  QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
+    findConceptScheme(p_conceptScheme);
+  if (l_conceptSchemesIter == m_conceptSchemes.end())
+  {
+    qDebug() << "SkosModel::removeConceptScheme() - concept scheme does"
+             << " not exists";
+  }
+  else
+  {
+    m_conceptSchemes.erase(l_conceptSchemesIter);
+    qDebug() << "SkosModel::removeConceptScheme() - successfuly removed"
+             << "from Model";
   }
 }

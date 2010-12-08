@@ -31,6 +31,8 @@ public:
     const ERelationType &p_relationType);
   void removeConceptFromRelation(const SkosConcept &p_conceptToRemove,
                                  const ERelationType &p_relationType);
+  void removeConceptFromScheme(const SkosConceptScheme &p_conceptScheme,
+                               const ESchemeRelation &p_schemeRelation);
 private:
   QList<SkosConceptScheme*>::iterator findInScheme(
     const SkosConceptScheme &p_conceptScheme,
@@ -43,6 +45,8 @@ private:
     QList<SkosConcept*> &p_relationList);
   void removeConceptFromList(const SkosConcept &p_concept, 
                              QList<SkosConcept*> &p_relationList);
+  void removeSchemeFromList(const SkosConceptScheme &p_conceptScheme, 
+                            QList<SkosConceptScheme*> &p_schemeList);
 
 
   QList<SkosConcept*> m_broaderConcepts;

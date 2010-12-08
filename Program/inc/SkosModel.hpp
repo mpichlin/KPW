@@ -22,7 +22,8 @@ public:
   QList<SkosConceptScheme>::iterator findConceptScheme(
     const SkosConceptScheme &p_conceptScheme);
   SkosClass * findSkosClass(const SkosClass &p_skosClass);
-  void removeConcept(QUrl p_concept);
+  void removeConcept(const SkosConcept &p_concept);
+  void removeConceptScheme(const SkosConceptScheme &p_conceptScheme);
 private:
   bool isConsistencyOk(const SkosClass &p_skosClass);
 

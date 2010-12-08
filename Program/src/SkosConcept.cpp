@@ -166,7 +166,7 @@ void SkosConcept::removeConceptFromList(
     findConceptInList(p_concept, p_relationList);
   if (l_relationListIter == p_relationList.end())
   {
-      qDebug() << "SkosConcept::removeConceptFromList() - no such concept";
+    qDebug() << "SkosConcept::removeConceptFromList() - no such concept";
   }
   else
   {
@@ -194,4 +194,40 @@ QList<SkosConcept*>::iterator SkosConcept::findConceptInRelation(
     }
   }
   return NULL;
+}
+
+void SkosConcept::removeConceptFromScheme(
+  const SkosConceptScheme &p_conceptScheme,
+  const ESchemeRelation &p_schemeRelation)
+{
+  qDebug() << "SkosConcept::removeConceptFromScheme(p_conceptScheme="
+           << p_conceptScheme.getUrl() << ", p_schemeRelation="
+           << p_schemeRelation << ")";
+  switch (p_schemeRelation)
+  {
+    case Top:
+    {
+      return removeSchemeFromList(p_conceptScheme, m_topInSchemes);
+    }
+    case InScheme:
+    {
+      return removeSchemeFromList(p_conceptScheme, m_inSchemes);
+    }
+  }
+}
+
+void SkosConcept::removeSchemeFromList(
+  const SkosConceptScheme &p_conceptScheme, 
+  QList<SkosConceptScheme*> &p_schemeList)
+{
+  QList<SkosConceptScheme*>::iterator l_schemeListIter = 
+    findInScheme(p_conceptScheme, p_schemeList);
+  if (l_schemeListIter == p_schemeList.end())
+  {
+    qDebug() << "SkosConcept::removeSchemeFromList() - no such scheme";
+  }
+  else
+  {
+    p_schemeList.erase(l_schemeListIter);
+  }
 }
