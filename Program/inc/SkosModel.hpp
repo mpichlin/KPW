@@ -12,9 +12,9 @@ public:
   void addLabel(Soprano::Node p_label, 
                 const ELabelType &p_labelType,
                 SkosClass p_skosClass);
-  void addBroaderConcept(QUrl p_broaderConcept, QUrl p_concept); 
-  void addNarrowerConcept(QUrl p_narrowerConcept, QUrl p_concept); 
-  void addRelatedConcept(QUrl p_relatedConcept, QUrl p_concept); 
+  void addConceptRelation(const SkosConcept &p_baseConcept,
+                          const SkosConcept &p_relatedConcept,
+                          const ERelationType &p_relationType);
   void addTopConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
   void addConceptToScheme(QUrl p_concept, QUrl p_conceptScheme);
   QList<SkosConcept>::iterator findConcept(const SkosConcept &p_concept);

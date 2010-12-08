@@ -30,6 +30,61 @@ void SkosModel::addConceptScheme(SkosConceptScheme p_conceptScheme)
   }
 }
 
+void SkosModel::addConceptRelation(const SkosConcept &p_baseConcept,
+                                   const SkosConcept &p_relatedConcept,
+                                   const ERelationType &p_relationType)
+{
+  qDebug() << "SkosModel::addConceptRelation(p_baseConcept="
+           << p_baseConcept.getUrl() << ", p_relatedConcept="
+           << p_relatedConcept.getUrl() << ", p_relationType="
+           << p_relationType << ")";
+  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_baseConcept);
+  QList<SkosConcept>::iterator l_relatedConceptIter = 
+    findConcept(p_relatedConcept);
+  if ((l_baseConceptIter == m_concepts.end()) ||
+      (l_relatedConceptIter == m_concepts.end()))
+  {
+    qDebug() << "SkosModel::addConceptRelation()"
+             << "- at least one of concepts does not exists";
+  }
+  else
+  {
+    switch (p_relationType)
+    {
+      case BroaderRelation:
+      {
+        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter,
+                                                  BroaderRelation) == 0))
+        {
+          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+                                                   NarrowerRelation);
+        }
+        break;
+      }
+      case NarrowerRelation:
+      {
+        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter, 
+                                                  NarrowerRelation)) == 0)
+        {
+          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+                                                   BroaderRelation);
+        }
+        break;
+      }
+      case RelatedRelation:
+      {
+        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter, 
+                                                  RelatedRelation)) == 0)
+        {
+          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+                                                   RelatedRelation);
+        }
+        break;
+      }
+    }
+  }
+}
+
 bool SkosModel::isConsistencyOk(const SkosClass &p_skosClass)
 {
   if (findConcept(p_skosClass.getUrl()) != m_concepts.end())
@@ -60,78 +115,6 @@ void SkosModel::addLabel(Soprano::Node p_label,
     l_skosClassPtr->addLabel(p_label, p_labelType);
   }
 }
-
-void SkosModel::addBroaderConcept(QUrl p_broaderConcept, QUrl p_concept)
-{
-  qDebug() << "SkosModel::addBroaderConcept(p_broaderConcept=" <<
-    p_broaderConcept << ", p_concept=" << p_concept << ")";
-  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_concept);
-  QList<SkosConcept>::iterator l_broaderConceptIter = 
-    findConcept(p_broaderConcept);
-  if ((l_baseConceptIter == m_concepts.end()) ||
-      (l_broaderConceptIter == m_concepts.end()))
-  {
-    qDebug() << "SkosModel::addBroaderConcept()"
-             << "- at least one of concepts does not exists";
-  }
-  else
-  {
-    if((l_baseConceptIter->addConceptRelation(&*l_broaderConceptIter,
-                                              BroaderRelation) == 0))
-    {
-      l_broaderConceptIter->addConceptRelation(&*l_baseConceptIter,
-                                               NarrowerRelation);
-    }
-  }
-}
-
-void SkosModel::addNarrowerConcept(QUrl p_narrowerConcept, QUrl p_concept)
-{
-  qDebug() << "SkosModel::addNarrowerConcept(p_narrowerConcept=" <<
-    p_narrowerConcept << ", p_concept=" << p_concept << ")";
-  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_concept);
-  QList<SkosConcept>::iterator l_narrowerConceptIter = 
-    findConcept(p_narrowerConcept);
-  if ((l_baseConceptIter == m_concepts.end()) ||
-      (l_narrowerConceptIter == m_concepts.end()))
-  {
-    qDebug() << "SkosModel::addNarrowerConcept()"
-             << "- at least one of concepts does not exists";
-  }
-  else
-  {
-    if((l_baseConceptIter->addConceptRelation(&*l_narrowerConceptIter, 
-                                              NarrowerRelation)) == 0)
-    {
-      l_narrowerConceptIter->addConceptRelation(&*l_baseConceptIter,
-                                                BroaderRelation);
-    }
-  }
-} 
-
-void SkosModel::addRelatedConcept(QUrl p_relatedConcept, QUrl p_concept)
-{
-  qDebug() << "SkosModel::addRelatedConcept(p_relatedConcept=" <<
-    p_relatedConcept << ", p_concept=" << p_concept << ")";
-  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_concept);
-  QList<SkosConcept>::iterator l_relatedConceptIter = 
-    findConcept(p_relatedConcept);
-  if ((l_baseConceptIter == m_concepts.end()) ||
-      (l_relatedConceptIter == m_concepts.end()))
-  {
-    qDebug() << "SkosModel::addRelatedConcept()"
-             << "- at least one of concepts does not exists";
-  }
-  else
-  {
-    if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter, 
-                                              RelatedRelation)) == 0)
-    {
-      l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
-                                               RelatedRelation);
-    }
-  }
-} 
 
 QList<SkosConcept>::iterator SkosModel::findConcept(
   const SkosConcept &p_concept)

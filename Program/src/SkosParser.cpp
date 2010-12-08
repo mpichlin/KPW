@@ -161,8 +161,9 @@ void SkosParser::parseBroaderDeclaration(
 {
   qDebug() << "SkosParser::parseBroaderDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addBroaderConcept(p_statement.object().uri(),
-                             p_statement.subject().uri());
+  m_model->addConceptRelation(p_statement.subject().uri(),
+                              p_statement.object().uri(),
+                              BroaderRelation);
 }
 
 void SkosParser::parseNarrowerDeclaration(
@@ -170,9 +171,9 @@ void SkosParser::parseNarrowerDeclaration(
 {
   qDebug() << "SkosParser::parseNarrowerDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addNarrowerConcept(p_statement.object().uri(),
-                              p_statement.subject().uri());
-  
+  m_model->addConceptRelation(p_statement.subject().uri(),
+                              p_statement.object().uri(),
+                              NarrowerRelation);
 }
 
 void SkosParser::parseRelatedDeclaration(
@@ -180,8 +181,9 @@ void SkosParser::parseRelatedDeclaration(
 {
   qDebug() << "SkosParser::parseNarrowerDeclaration(p_statement="
            << p_statement << ")";
-  m_model->addRelatedConcept(p_statement.object().uri(),
-                             p_statement.subject().uri());
+  m_model->addConceptRelation(p_statement.subject().uri(),
+                              p_statement.object().uri(),
+                              RelatedRelation);
 }
 
 void SkosParser::parseHasTopConcept(const Soprano::Statement &p_statement)

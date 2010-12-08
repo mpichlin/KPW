@@ -61,6 +61,7 @@ int SkosConcept::addConceptRelation(SkosConcept *p_relatedConcept,
         break;
       }
     }
+    qDebug() << "SkosConcept::addConceptRelation() - concept relation added";
     return 0;
   }
 }
@@ -192,5 +193,6 @@ QList<SkosConcept*>::iterator SkosConcept::findConceptInRelation(
       return findConceptInList(p_concept, m_narrowerConcepts);
     }
   }
+  return NULL;
 }
 
