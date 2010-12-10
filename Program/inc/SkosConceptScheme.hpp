@@ -12,7 +12,7 @@ class SkosConceptScheme : public SkosClass
 {
 public:
   SkosConceptScheme(QUrl p_url){setUrl(p_url);};
-  void addConcept(SkosConcept *p_topConcept,
+  void addConcept(SkosConcept *p_concept,
                   const ESchemeRelation &p_schemeRelation);
   QList<SkosConcept*>::iterator findConcept(
     const SkosConcept& p_concept,

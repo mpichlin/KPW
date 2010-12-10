@@ -27,10 +27,12 @@ public:
   QList<SkosConcept>::iterator findConcept(const SkosConcept &p_concept);
   QList<SkosConceptScheme>::iterator findConceptScheme(
     const SkosConceptScheme &p_conceptScheme);
-  SkosClass * findSkosClass(const SkosClass &p_skosClass);
   void removeConcept(const SkosConcept &p_concept);
   void removeConceptScheme(const SkosConceptScheme &p_conceptScheme);
+  QList<SkosConcept> getConcepts() const {return m_concepts;};
+  QList<SkosConceptScheme> getConceptSchemes() const {return m_conceptSchemes;};
 private:
+  SkosClass * findSkosClass(const SkosClass &p_skosClass);
   bool isConsistencyOk(const SkosClass &p_skosClass);
 
   QList<SkosConcept> m_concepts;
