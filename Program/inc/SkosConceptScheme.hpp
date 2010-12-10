@@ -19,6 +19,8 @@ public:
     const ESchemeRelation &p_schemeRelation);
   void removeConcept(const SkosConcept &p_conceptToRemove,
                      const ESchemeRelation &p_schemeRelation);
+  QList<SkosConcept*> getConcepts(
+    const ESchemeRelation &p_schemeRelation) const;
 private:
   bool isConsistencyOk(const SkosConcept &p_concept);
   QList<SkosConcept*>::iterator findConcept(

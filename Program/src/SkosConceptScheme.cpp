@@ -106,3 +106,18 @@ void SkosConceptScheme::removeConcept(const SkosConcept &p_conceptToRemove,
     }
   }
 }
+QList<SkosConcept*> SkosConceptScheme::getConcepts(
+  const ESchemeRelation &p_schemeRelation) const
+{
+  switch (p_schemeRelation)
+  {
+    case Top:
+    {
+      return m_topConcepts;
+    }
+    case InScheme:
+    {
+      return m_inSchemeConcepts;
+    }
+  }
+}
