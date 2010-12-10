@@ -12,7 +12,7 @@ void SkosParser::parseFileToStatements(
            << p_fileType << ")";
    const Soprano::Parser *l_parser =
      Soprano::PluginManager::instance()->
-       discoverParserForSerialization(Soprano::SerializationTurtle);
+       discoverParserForSerialization(p_fileType);
    
    Soprano::StatementIterator l_statementIterator;
    l_statementIterator = l_parser->parseFile(p_fileName, QUrl(),
