@@ -20,7 +20,7 @@ void UrlPredicateMap::initializeMap()
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#narrower")] = Narrower;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#hasTopConcept")] =
     HasTopConcept;
-  m_map[QUrl("http://www.w3.org/2004/02/skos/core#isTopConceptOf")] =
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#topConceptOf")] =
     IsTopConceptOf;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#inScheme")] = IsInScheme;
 }
