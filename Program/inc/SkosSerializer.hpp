@@ -13,11 +13,12 @@ public:
                  const Soprano::RdfSerialization &p_fileType)
     {
       createStatementsFromModel();
-      serializeStatemetsToFile();
+      serializeStatemetsToFile(p_fileName, p_fileType);
     };
 private:
   void createStatementsFromModel();
-  void serializeStatemetsToFile();
+  void serializeStatemetsToFile(const QString &p_fileName,
+                                const Soprano::RdfSerialization &p_fileType);
   void serializeConcepts(const QList<SkosConcept> &p_conceptsList);
   void serializeConceptSchemes(
     const QList<SkosConceptScheme> &p_conceptSchemesList);

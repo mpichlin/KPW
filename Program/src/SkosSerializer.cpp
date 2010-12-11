@@ -1,4 +1,5 @@
 #include "SkosSerializer.hpp"
+#include <QFile>
 
 void SkosSerializer::createStatementsFromModel()
 {
@@ -13,17 +14,21 @@ void SkosSerializer::createStatementsFromModel()
   serializeLabelsFromSchemes(l_conceptSchemesList);
 }
 
-void SkosSerializer::serializeStatemetsToFile()
+void SkosSerializer::serializeStatemetsToFile(
+  const QString &p_fileName,
+  const Soprano::RdfSerialization &p_fileType)
 { 
   const Soprano::Serializer* serializer =
     Soprano::PluginManager::instance()->discoverSerializerForSerialization( 
-      Soprano::SerializationTurtle);
-  QTextStream stream(stdout);
+      p_fileType);
+  QFile l_outputFile(p_fileName);
+  l_outputFile.open(QIODevice::WriteOnly);
+  QTextStream l_stream(&l_outputFile);
   Soprano::Model* sopranoModel = Soprano::createModel();
   sopranoModel->addStatements(m_statements);
   serializer->serialize(sopranoModel->listStatements(), 
-                        stream, 
-                        Soprano::SerializationTurtle);
+                        l_stream, 
+                        p_fileType);
 }
 
 void SkosSerializer::serializeConcepts(
