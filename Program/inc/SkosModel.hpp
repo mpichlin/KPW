@@ -35,8 +35,19 @@ public:
   QList<SkosConceptScheme> getConceptSchemes() const {return m_conceptSchemes;};
   void clearEmptyClasses();
 private:
-  SkosClass * findSkosClass(const SkosClass &p_skosClass);
   bool isConsistencyOk(const SkosClass &p_skosClass);
+  SkosClass * findSkosClass(const SkosClass &p_skosClass);
+  bool isRelationConsistencyOk(const SkosConcept &p_baseConcept,
+                               const SkosConcept &p_relatedConcept,
+                               const ERelationType &p_relationType) const;
+  bool isRelationConsistencyOk(
+    const QList<SkosConcept *> &p_baseRelationListType1,
+    const QList<SkosConcept *> &p_baseRelationListType2,
+    const QList<SkosConcept *> &p_relatedRelationListType1,
+    const QList<SkosConcept *> &p_relatedRelationListType2) const;
+  bool isTwoListsHaveAtLeastOneCommonElement(
+    const QList<SkosConcept *> &l_firstList,
+    const QList<SkosConcept *> &l_secondList) const;
 
   QList<SkosConcept> m_concepts;
   QList<SkosConceptScheme> m_conceptSchemes;

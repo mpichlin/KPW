@@ -1,6 +1,7 @@
 #include "SkosModel.hpp"
 
 #include <QDebug>
+#include <QStack>
 
 void SkosModel::addConcept(QUrl p_concept)
 {
@@ -17,9 +18,8 @@ void SkosModel::addConcept(QUrl p_concept)
 
 void SkosModel::addConcept(SkosConcept p_concept)
 {
-  //TODO: Do more specific (check if not empty and better consistency test)
   qDebug() << "SkosModel::addConcept(p_concept =" << p_concept.getUrl() << ")";
-  if (isConsistencyOk(p_concept))
+  if (isConsistencyOk(p_concept) && !p_concept.isEmpty())
   {
     m_concepts.append(p_concept);
   }
@@ -60,6 +60,10 @@ void SkosModel::addConceptRelation(const SkosConcept &p_baseConcept,
   {
     qDebug() << "SkosModel::addConceptRelation()"
              << "- one of concepts does not exists";
+  }
+  if (!isRelationConsistencyOk(p_baseConcept, p_relatedConcept, p_relationType))
+  {
+    qDebug() << "SkosModel::addConceptRelation() - relation is not consistent";
   }
   else
   {
@@ -279,28 +283,154 @@ void SkosModel::removeConceptScheme(const SkosConceptScheme &p_conceptScheme)
 void SkosModel::clearEmptyClasses()
 {
   qDebug() << "SkosModel::clearEmptyClasses()";
+  QStack<SkosConcept> l_conceptsToDelete;
   for (QList<SkosConcept>::iterator l_conceptsIt = m_concepts.begin();
        l_conceptsIt != m_concepts.end();
-       ++ l_conceptsIt)
+       ++l_conceptsIt)
   {
     if (l_conceptsIt->isEmpty())
     {
-      qDebug() << "SkosModel::clearEmptyClasses() - removing empty concept:"
+      qDebug() << "SkosModel::clearEmptyClasses() - adding concept to remove:"
                << l_conceptsIt->getUrl();
-      removeConcept(*l_conceptsIt);
+      l_conceptsToDelete.push(SkosConcept(*l_conceptsIt));
     }
   }
+  while (!l_conceptsToDelete.isEmpty())
+  {
+    removeConcept(l_conceptsToDelete.pop());
+  }
+  QStack<SkosConceptScheme> l_conceptSchemesToDelete;
   for (QList<SkosConceptScheme>::iterator l_conceptSchemesIt =
-                                   m_conceptSchemes.begin();
+         m_conceptSchemes.begin();
        l_conceptSchemesIt != m_conceptSchemes.end();
-       ++ l_conceptSchemesIt)
+       ++l_conceptSchemesIt)
   {
     if (l_conceptSchemesIt->isEmpty())
     {
-      qDebug() << "SkosModel::clearEmptyClasses() - removing empty concept"
+      qDebug() << "SkosModel::clearEmptyClasses() - added to remove  concept"
                << "scheme:" << l_conceptSchemesIt->getUrl();
-      removeConceptScheme(*l_conceptSchemesIt);
+      l_conceptSchemesToDelete.push(*l_conceptSchemesIt);
+    }
+  }
+  while (!l_conceptSchemesToDelete.isEmpty())
+  {
+    removeConceptScheme(l_conceptSchemesToDelete.pop());
+  }
+  qDebug() << "SkosModel::clearEmptyClasses() - all empty classes has been"
+           << "removed";
+}
+
+bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
+                                        const SkosConcept &p_relatedConcept,
+                                        const ERelationType &p_relationType) 
+  const
+{
+  switch (p_relationType)
+  {
+    case RelatedRelation:
+    {
+      return isRelationConsistencyOk(
+        p_baseConcept.getRelatedConceptsList(NarrowerRelation),
+        p_baseConcept.getRelatedConceptsList(BroaderRelation),
+        p_relatedConcept.getRelatedConceptsList(NarrowerRelation),
+        p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+    }
+    case BroaderRelation:
+    {
+      return isRelationConsistencyOk(
+        p_baseConcept.getRelatedConceptsList(RelatedRelation),
+        p_baseConcept.getRelatedConceptsList(NarrowerRelation),
+        p_relatedConcept.getRelatedConceptsList(RelatedRelation),
+        p_relatedConcept.getRelatedConceptsList(NarrowerRelation));
+    }
+    case NarrowerRelation:
+    {
+      return isRelationConsistencyOk(
+        p_baseConcept.getRelatedConceptsList(RelatedRelation),
+        p_baseConcept.getRelatedConceptsList(BroaderRelation),
+        p_relatedConcept.getRelatedConceptsList(RelatedRelation),
+        p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+    }
+  }
+  return false;
+}
+/*
+  const QList<SkosConcept *> &l_relatedList = 
+    p_baseConcept.getRelatedConceptsList(RelatedRelation);
+  const QList<SkosConcept *> &l_narrowerList = 
+    p_baseConcept.getRelatedConceptsList(NarrowerRelation);
+  const QList<SkosConcept *> &l_broaderList = 
+    p_baseConcept.getRelatedConceptsList(BroaderRelation);
+  
+  for (QList<SkosConcept *>::const_iterator l_iter = l_relatedList.begin();
+       l_iter != l_relatedList.end(); ++l_iter)
+  {
+    QList<SkosConcept>::const_iterator l_relatedIter = findConcept(*(*l_iter));
+    if (l_relatedIter != m_concepts.end())
+    {
+      const QList<SkosConcept *> &l_narrowerListOfRelatedConcept = 
+        l_relatedIter->getRelatedConceptsList(NarrowerRelation);
+      const QList<SkosConcept *> &l_broaderListOfRelatedConcept =
+        l_relatedIter->getRelatedConceptsList(BroaderRelation);
+      if ((isTwoListsHaveAtLeastOneCommonElement(
+             l_narrowerListOfRelatedConcept,
+             l_narrowerList)) ||
+          (isTwoListsHaveAtLeastOneCommonElement(
+            l_narrowerListOfRelatedConcept,
+            l_broaderList)) ||
+          (isTwoListsHaveAtLeastOneCommonElement(
+            l_broaderListOfRelatedConcept,
+            l_narrowerList)) ||
+          (isTwoListsHaveAtLeastOneCommonElement(
+            l_broaderListOfRelatedConcept,
+            l_broaderList)))
+      {
+        return false;
+      }
     }
   }
 }
+*/
+bool SkosModel::isRelationConsistencyOk(
+  const QList<SkosConcept *> &p_baseRelationListType1,
+  const QList<SkosConcept *> &p_baseRelationListType2,
+  const QList<SkosConcept *> &p_relatedRelationListType1,
+  const QList<SkosConcept *> &p_relatedRelationListType2) const
+{
+  return (!((isTwoListsHaveAtLeastOneCommonElement(
+               p_relatedRelationListType1,
+               p_baseRelationListType1)) ||
+            (isTwoListsHaveAtLeastOneCommonElement(
+              p_relatedRelationListType1,
+              p_baseRelationListType2)) ||
+            (isTwoListsHaveAtLeastOneCommonElement(
+              p_relatedRelationListType2,
+              p_baseRelationListType1)) ||
+            (isTwoListsHaveAtLeastOneCommonElement(
+              p_relatedRelationListType2,
+              p_baseRelationListType2))));
+}
 
+bool SkosModel::isTwoListsHaveAtLeastOneCommonElement(
+  const QList<SkosConcept *> &l_firstList,
+  const QList<SkosConcept *> &l_secondList) const
+{
+  for (QList<SkosConcept *>::const_iterator l_firstListIter = 
+         l_firstList.begin();
+       l_firstListIter != l_firstList.end();
+       ++l_firstListIter)
+  {
+    for(QList<SkosConcept *>::const_iterator l_secondListIter =
+          l_secondList.begin();
+        l_secondListIter != l_secondList.end();
+        ++l_secondListIter)
+    {
+      if ((*l_firstListIter)->getUrl() == 
+          (*l_secondListIter)->getUrl())
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+} 

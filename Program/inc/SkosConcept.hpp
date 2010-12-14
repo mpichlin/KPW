@@ -18,6 +18,7 @@ enum ERelationType
 class SkosConcept : public SkosClass
 {
 public:
+  SkosConcept(){};
   SkosConcept(QUrl p_url){setUrl(p_url);};
   int  addConceptRelation(SkosConcept *p_relatedConcept,
                           const ERelationType &p_relationType);
@@ -33,7 +34,7 @@ public:
                                  const ERelationType &p_relationType);
   void removeConceptFromScheme(const SkosConceptScheme &p_conceptScheme,
                                const ESchemeRelation &p_schemeRelation);
-  QList<SkosConcept*> getRelatedConceptsList(
+  const QList<SkosConcept*> getRelatedConceptsList(
     const ERelationType &p_relationType) const;
   QList<SkosConceptScheme*> getConceptSchemesList(
     const ESchemeRelation &p_schemeRelation) const;

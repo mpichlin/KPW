@@ -11,6 +11,7 @@ class SkosConcept;
 class SkosConceptScheme : public SkosClass
 {
 public:
+  SkosConceptScheme(){};
   SkosConceptScheme(QUrl p_url){setUrl(p_url);};
   void addConcept(SkosConcept *p_concept,
                   const ESchemeRelation &p_schemeRelation);

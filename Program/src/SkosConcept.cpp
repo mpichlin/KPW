@@ -232,7 +232,7 @@ void SkosConcept::removeSchemeFromList(
   }
 }
 
-QList<SkosConcept*> SkosConcept::getRelatedConceptsList(
+const QList<SkosConcept*> SkosConcept::getRelatedConceptsList(
   const ERelationType &p_relationType) const
 {
   switch (p_relationType)
