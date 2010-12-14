@@ -4,9 +4,11 @@
 #include "SkosConcept.hpp"
 #include "SkosConceptScheme.hpp"
 
+#include <QDebug>
 class SkosModel
 {
 public:
+  void addConcept(QUrl p_concept);
   void addConcept(SkosConcept p_concept);
   void addConceptScheme(SkosConceptScheme p_conceptScheme);
   void addLabel(Soprano::Node p_label, 
@@ -31,6 +33,7 @@ public:
   void removeConceptScheme(const SkosConceptScheme &p_conceptScheme);
   QList<SkosConcept> getConcepts() const {return m_concepts;};
   QList<SkosConceptScheme> getConceptSchemes() const {return m_conceptSchemes;};
+  void clearEmptyClasses();
 private:
   SkosClass * findSkosClass(const SkosClass &p_skosClass);
   bool isConsistencyOk(const SkosClass &p_skosClass);

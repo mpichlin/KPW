@@ -6,7 +6,7 @@
 #include <Soprano/Soprano>
 
 #include "SkosModel.hpp"
-#include "UrlPredicateMap.hpp"
+#include "UrlSkosPropertyMap.hpp"
 #include "UrlObjectMap.hpp"
 
 class SkosParser
@@ -23,7 +23,8 @@ private:
   void parseFileToStatements(const QString& p_fileName,
                              const Soprano::RdfSerialization &p_fileType);
   void parseStatements();
-  void parseStatement(const Soprano::Statement &p_statement);
+  void parseStatementToClass(const Soprano::Statement &p_statement);
+  void parseStatementToProperty(const Soprano::Statement &p_statement);
   void parseClassDeclaration(const Soprano::Statement &p_statement);
   void parsePrefLabelDeclaration(const Soprano::Statement &p_statement);
   void parseAltLabelDeclaration(const Soprano::Statement &p_statement);
@@ -37,7 +38,7 @@ private:
 
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;
-  UrlPredicateMap m_predicateMap;
+  UrlSkosPropertyMap m_skosPropertyMap;
   UrlObjectMap m_objectMap;
 };
 #endif

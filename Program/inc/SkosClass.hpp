@@ -19,6 +19,7 @@ public:
   QUrl getUrl() const;
   void setUrl(const QUrl &p_url);
   QList<Soprano::Node> getLabelList(const ELabelType &p_labelType) const;
+  bool isEmpty() const;
 private:
   void addLabel(Soprano::Node p_label,
                 QList<Soprano::Node> &p_labelList);

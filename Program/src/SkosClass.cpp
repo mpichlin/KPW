@@ -162,3 +162,9 @@ QList<Soprano::Node> SkosClass::getLabelList(
   }
   return QList<Soprano::Node>();
 }
+
+bool SkosClass::isEmpty() const
+{
+  return((m_prefLabels.size() == 0) && (m_altLabels.size() == 0) 
+         && (m_hiddenLabels.size() == 0));
+}

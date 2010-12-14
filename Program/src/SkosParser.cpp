@@ -33,71 +33,81 @@ void SkosParser::parseStatements()
   for (QList<Soprano::Statement>::iterator iter = m_statements.begin();
        iter != m_statements.end(); ++iter)
   {
-    parseStatement(*iter);
+    parseStatementToClass(*iter);
+  }
+  for (QList<Soprano::Statement>::iterator iter = m_statements.begin();
+       iter != m_statements.end(); ++iter)
+  {
+    parseStatementToProperty(*iter);
+  }
+  m_model->clearEmptyClasses();
+}
+
+void SkosParser::parseStatementToClass(const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseStatementToClass(p_statement="
+           << p_statement << ")";
+  if (p_statement.predicate() ==
+      QUrl("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"))
+  {
+    parseClassDeclaration(p_statement);
   }
 }
 
-void SkosParser::parseStatement(const Soprano::Statement &p_statement)
+void SkosParser::parseStatementToProperty(const Soprano::Statement &p_statement)
 {
-  qDebug() << "SkosParser::parseStatement(p_statement="
-           << p_statement << ")";
-  EUrlPredicate l_specialUrl =
-    m_predicateMap.mapUrl(p_statement.predicate().uri());
-  switch (l_specialUrl)
+  ESkosProperty l_skosProperty =
+    m_skosPropertyMap.mapUrl(p_statement.predicate().uri());
+  switch (l_skosProperty)
   {
-    case RdfType:
-    {
-      parseClassDeclaration(p_statement);
-      break;
-    }
-    case PrefLabel:
+    case EPrefLabel:
     {
       parsePrefLabelDeclaration(p_statement);
       break;
     }
-    case AltLabel:
+    case EAltLabel:
     {
       parseAltLabelDeclaration(p_statement);
       break;
     }
-    case HiddenLabel:
+    case EHiddenLabel:
     {
       parseHiddenLabelDeclaration(p_statement);
       break;
     }
-    case Broader:
+    case EBroader:
     {
       parseBroaderDeclaration(p_statement);
       break;
     }
-    case Narrower:
+    case ENarrower:
     {
       parseNarrowerDeclaration(p_statement);
       break;
     }  
-    case Related:
+    case ERelated:
     {
       parseRelatedDeclaration(p_statement);
       break;
     }
-    case HasTopConcept:
+    case EHasTopConcept:
     {
       parseHasTopConcept(p_statement);
       break;
     }
-    case IsTopConceptOf:
+    case EIsTopConceptOf:
     {
       parseIsTopConceptOf(p_statement);
       break;
     }
-    case IsInScheme:
+    case EIsInScheme:
     {
       parseInScheme(p_statement);
       break;
     }
-    case GeneralPredicate:
+    case ENonSkosProperty:
     {
-      qDebug() << "SkosParser::parseStatement() - GeneralPredicate";
+      qDebug() << "SkosParser::parseStatement() - ENonSkosProperty";
     }
   }
 }
