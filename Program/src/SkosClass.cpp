@@ -141,6 +141,54 @@ QList<Soprano::Node>::iterator SkosClass::findLabel(
   return p_labelList.end();
 }
 
+void SkosClass::addDefinition(Soprano::Node p_definition)
+{
+  if (isDefinitionOk(p_definition))
+  {
+    m_definitions.append(p_definition);
+  }
+}
+
+bool SkosClass::isDefinitionOk(const Soprano::Node &p_definition)
+{
+  for (QList<Soprano::Node>::iterator l_iter = m_definitions.begin();
+       l_iter != m_definitions.end(); ++l_iter)
+  {
+    if (p_definition == *l_iter)
+    {
+      qDebug() << "SkosClass::isDefinitionOk() -"
+               << "This definition already exists";
+      return false;
+    }
+  }
+  return true;
+}
+
+void SkosClass::removeDefinition(Soprano::Node p_definition)
+{
+  QList<Soprano::Node>::iterator l_definitionToRemoveIter = 
+    findDefinition(p_definition);
+  if (l_definitionToRemoveIter != m_definitions.end())
+  {
+    qDebug() << "SkosClass::removeDefinition() - removing definition";
+    m_definitions.erase(l_definitionToRemoveIter);
+  }
+}
+
+QList<Soprano::Node>::iterator SkosClass::findDefinition(
+  const Soprano::Node &p_definition)
+{
+  for (QList<Soprano::Node>::iterator l_iter = m_definitions.begin();
+       l_iter != m_definitions.end(); ++l_iter)
+  {
+    if (p_definition == *l_iter)
+    {
+      return l_iter;
+    }
+  }
+  return m_definitions.end();
+}
+
 QList<Soprano::Node> SkosClass::getLabelList(
   const ELabelType &p_labelType) const
 {
@@ -161,6 +209,11 @@ QList<Soprano::Node> SkosClass::getLabelList(
     }
   }
   return QList<Soprano::Node>();
+}
+
+QList<Soprano::Node> SkosClass::getDefinitions() const
+{
+  return m_definitions;
 }
 
 bool SkosClass::isEmpty() const

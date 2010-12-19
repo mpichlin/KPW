@@ -22,6 +22,7 @@ void UrlSkosPropertyMap::initializeMap()
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#topConceptOf")] =
     EIsTopConceptOf;
   m_map[QUrl("http://www.w3.org/2004/02/skos/core#inScheme")] = EIsInScheme;
+  m_map[QUrl("http://www.w3.org/2004/02/skos/core#definition")] = EDefinition;
 }
 
 ESkosProperty UrlSkosPropertyMap::mapUrl(const QUrl &p_url)

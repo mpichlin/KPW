@@ -35,6 +35,7 @@ private:
   void parseHasTopConcept(const Soprano::Statement &p_statement);
   void parseIsTopConceptOf(const Soprano::Statement &p_statement);
   void parseInScheme(const Soprano::Statement &p_statement);
+  void parseDefinition(const Soprano::Statement &p_statement);
 
   SkosModel *m_model;
   QList<Soprano::Statement> m_statements;

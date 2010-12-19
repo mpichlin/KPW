@@ -354,43 +354,7 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
   }
   return false;
 }
-/*
-  const QList<SkosConcept *> &l_relatedList = 
-    p_baseConcept.getRelatedConceptsList(RelatedRelation);
-  const QList<SkosConcept *> &l_narrowerList = 
-    p_baseConcept.getRelatedConceptsList(NarrowerRelation);
-  const QList<SkosConcept *> &l_broaderList = 
-    p_baseConcept.getRelatedConceptsList(BroaderRelation);
-  
-  for (QList<SkosConcept *>::const_iterator l_iter = l_relatedList.begin();
-       l_iter != l_relatedList.end(); ++l_iter)
-  {
-    QList<SkosConcept>::const_iterator l_relatedIter = findConcept(*(*l_iter));
-    if (l_relatedIter != m_concepts.end())
-    {
-      const QList<SkosConcept *> &l_narrowerListOfRelatedConcept = 
-        l_relatedIter->getRelatedConceptsList(NarrowerRelation);
-      const QList<SkosConcept *> &l_broaderListOfRelatedConcept =
-        l_relatedIter->getRelatedConceptsList(BroaderRelation);
-      if ((isTwoListsHaveAtLeastOneCommonElement(
-             l_narrowerListOfRelatedConcept,
-             l_narrowerList)) ||
-          (isTwoListsHaveAtLeastOneCommonElement(
-            l_narrowerListOfRelatedConcept,
-            l_broaderList)) ||
-          (isTwoListsHaveAtLeastOneCommonElement(
-            l_broaderListOfRelatedConcept,
-            l_narrowerList)) ||
-          (isTwoListsHaveAtLeastOneCommonElement(
-            l_broaderListOfRelatedConcept,
-            l_broaderList)))
-      {
-        return false;
-      }
-    }
-  }
-}
-*/
+
 bool SkosModel::isRelationConsistencyOk(
   const QList<SkosConcept *> &p_baseRelationListType1,
   const QList<SkosConcept *> &p_baseRelationListType2,
@@ -434,3 +398,31 @@ bool SkosModel::isTwoListsHaveAtLeastOneCommonElement(
   }
   return false;
 } 
+
+void SkosModel::addDefinition(Soprano::Node p_definition, 
+                              SkosClass p_skosClass)
+{
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  if (l_skosClassPtr == NULL)
+  {
+    qDebug() << "SkosModel::addDefinition() - class does not exists";
+  }
+  else
+  {
+    l_skosClassPtr->addDefinition(p_definition);
+  }
+}
+
+void SkosModel::removeDefinition(Soprano::Node p_definition, 
+                                 SkosClass p_skosClass)
+{
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  if (l_skosClassPtr == NULL)
+  {
+    qDebug() << "SkosModel::removeDefinition() - class does not exists";
+  }
+  else
+  {
+    l_skosClassPtr->removeDefinition(p_definition);
+  }
+}

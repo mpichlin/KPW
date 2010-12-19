@@ -16,6 +16,7 @@ enum ESkosProperty
   EHasTopConcept    = 7,
   EIsTopConceptOf   = 8,
   EIsInScheme       = 9,
+  EDefinition       = 10
 };
 
 class UrlSkosPropertyMap

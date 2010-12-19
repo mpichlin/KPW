@@ -105,6 +105,10 @@ void SkosParser::parseStatementToProperty(const Soprano::Statement &p_statement)
       parseInScheme(p_statement);
       break;
     }
+    case EDefinition:
+    {
+      parseDefinition(p_statement);
+    }
     case ENonSkosProperty:
     {
       qDebug() << "SkosParser::parseStatement() - ENonSkosProperty";
@@ -221,4 +225,12 @@ void SkosParser::parseInScheme(const Soprano::Statement &p_statement)
   m_model->addConceptToScheme(p_statement.subject().uri(),
                               p_statement.object().uri(),
                               InScheme);
+}
+
+void SkosParser::parseDefinition(const Soprano::Statement &p_statement)
+{
+  qDebug() << "SkosParser::parseDefinition(p_statement="
+           << p_statement << ")";
+  m_model->addDefinition(p_statement.subject().uri(),
+                         p_statement.object().uri());
 }
