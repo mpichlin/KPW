@@ -76,15 +76,19 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Gz1ZSBNEqW,guid=8222f16e91e4441ee91ed7394d03385e</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-zS5joDhoE3,guid=41fcd2f6be54c9e3db9f47124d184e60</value>
     <value type="QString">DEFAULTS_PATH=/usr/share/gconf/gnome.default.path</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DVDCSS_CACHE=/home/ja/.dvdcss/</value>
+    <value type="QString">DVDCSS_METHOD=key</value>
+    <value type="QString">DVDCSS_RAW_DEVICE=/dev/rdvd</value>
+    <value type="QString">DVDCSS_VERBOSE=0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=pl</value>
     <value type="QString">GDM_LANG=pl_PL.UTF-8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-gDA24d</value>
+    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-AqpuG8</value>
     <value type="QString">GTK_MODULES=canberra-gtk-module</value>
     <value type="QString">HOME=/home/ja</value>
     <value type="QString">LANG=pl_PL.UTF-8</value>
@@ -96,20 +100,20 @@
     <value type="QString">PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString">PWD=/home/ja</value>
     <value type="QString">QTDIR=/usr/share/qt4</value>
-    <value type="QString">SESSION_MANAGER=local/ja-laptop:@/tmp/.ICE-unix/1358,unix/ja-laptop:/tmp/.ICE-unix/1358</value>
+    <value type="QString">SESSION_MANAGER=local/ja-laptop:@/tmp/.ICE-unix/1354,unix/ja-laptop:/tmp/.ICE-unix/1354</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SPEECHD_PORT=7560</value>
-    <value type="QString">SSH_AGENT_PID=1394</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-gDA24d/ssh</value>
+    <value type="QString">SSH_AGENT_PID=1390</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-AqpuG8/ssh</value>
     <value type="QString">USER=ja</value>
     <value type="QString">USERNAME=ja</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-ja-21AiA7/database</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-ja-LonrN4/database</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg/xdg-gnome:/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString">XDG_SESSION_COOKIE=704088ba996b699350d412f74cc81d1e-1292056670.653138-1437265127</value>
+    <value type="QString">XDG_SESSION_COOKIE=704088ba996b699350d412f74cc81d1e-1293438560.598803-1835213579</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">/home/ja/tezaurus/tezaurus.pro</value>
+    <value type="QString">/home/ja/Pulpit/KPW/interfejs/tezaurus.pro</value>
     <value type="QString">-spec</value>
     <value type="QString">linux-g++</value>
     <value type="QString">-r</value>
@@ -117,7 +121,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool">false</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/ja/tezaurus</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/ja/Pulpit/KPW/interfejs</value>
   </valuemap>
  </data>
  <data>
@@ -125,15 +129,19 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Gz1ZSBNEqW,guid=8222f16e91e4441ee91ed7394d03385e</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-zS5joDhoE3,guid=41fcd2f6be54c9e3db9f47124d184e60</value>
     <value type="QString">DEFAULTS_PATH=/usr/share/gconf/gnome.default.path</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DVDCSS_CACHE=/home/ja/.dvdcss/</value>
+    <value type="QString">DVDCSS_METHOD=key</value>
+    <value type="QString">DVDCSS_RAW_DEVICE=/dev/rdvd</value>
+    <value type="QString">DVDCSS_VERBOSE=0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=pl</value>
     <value type="QString">GDM_LANG=pl_PL.UTF-8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-gDA24d</value>
+    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-AqpuG8</value>
     <value type="QString">GTK_MODULES=canberra-gtk-module</value>
     <value type="QString">HOME=/home/ja</value>
     <value type="QString">LANG=pl_PL.UTF-8</value>
@@ -145,17 +153,17 @@
     <value type="QString">PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString">PWD=/home/ja</value>
     <value type="QString">QTDIR=/usr/share/qt4</value>
-    <value type="QString">SESSION_MANAGER=local/ja-laptop:@/tmp/.ICE-unix/1358,unix/ja-laptop:/tmp/.ICE-unix/1358</value>
+    <value type="QString">SESSION_MANAGER=local/ja-laptop:@/tmp/.ICE-unix/1354,unix/ja-laptop:/tmp/.ICE-unix/1354</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SPEECHD_PORT=7560</value>
-    <value type="QString">SSH_AGENT_PID=1394</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-gDA24d/ssh</value>
+    <value type="QString">SSH_AGENT_PID=1390</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-AqpuG8/ssh</value>
     <value type="QString">USER=ja</value>
     <value type="QString">USERNAME=ja</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-ja-21AiA7/database</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-ja-LonrN4/database</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg/xdg-gnome:/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString">XDG_SESSION_COOKIE=704088ba996b699350d412f74cc81d1e-1292056670.653138-1437265127</value>
+    <value type="QString">XDG_SESSION_COOKIE=704088ba996b699350d412f74cc81d1e-1293438560.598803-1835213579</value>
    </valuelist>
    <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
@@ -163,7 +171,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">/home/ja/tezaurus</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/ja/Pulpit/KPW/interfejs</value>
   </valuemap>
  </data>
  <data>

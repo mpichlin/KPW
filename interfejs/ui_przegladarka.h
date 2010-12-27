@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Fri Dec 10 13:37:37 2010
+** Created: Sat Dec 11 11:53:45 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -150,16 +150,19 @@ public:
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         wezszeBox = new QCheckBox(centralwidget);
         wezszeBox->setObjectName(QString::fromUtf8("wezszeBox"));
+        wezszeBox->setChecked(true);
 
         gridLayout->addWidget(wezszeBox, 0, 0, 1, 1);
 
         szerszeBox = new QCheckBox(centralwidget);
         szerszeBox->setObjectName(QString::fromUtf8("szerszeBox"));
+        szerszeBox->setChecked(true);
 
         gridLayout->addWidget(szerszeBox, 1, 0, 1, 1);
 
         skojarzoneBox = new QCheckBox(centralwidget);
         skojarzoneBox->setObjectName(QString::fromUtf8("skojarzoneBox"));
+        skojarzoneBox->setChecked(true);
 
         gridLayout->addWidget(skojarzoneBox, 2, 0, 1, 1);
 
@@ -180,16 +183,19 @@ public:
 
         definicjaBox = new QCheckBox(centralwidget);
         definicjaBox->setObjectName(QString::fromUtf8("definicjaBox"));
+        definicjaBox->setChecked(true);
 
         gridLayout->addWidget(definicjaBox, 0, 2, 1, 1);
 
         przykladyBox = new QCheckBox(centralwidget);
         przykladyBox->setObjectName(QString::fromUtf8("przykladyBox"));
+        przykladyBox->setChecked(true);
 
         gridLayout->addWidget(przykladyBox, 1, 2, 1, 1);
 
         skumulowaneBox = new QCheckBox(centralwidget);
         skumulowaneBox->setObjectName(QString::fromUtf8("skumulowaneBox"));
+        skumulowaneBox->setChecked(true);
 
         gridLayout->addWidget(skumulowaneBox, 2, 2, 1, 1);
 
@@ -332,6 +338,13 @@ public:
         menuPomoc->addAction(actionDokumentacja);
 
         retranslateUi(przegladarka);
+        QObject::connect(actionKoniec, SIGNAL(activated()), przegladarka, SLOT(close()));
+        QObject::connect(przykladyBox, SIGNAL(toggled(bool)), przykladyTextBrowser, SLOT(setVisible(bool)));
+        QObject::connect(definicjaBox, SIGNAL(toggled(bool)), definicjaTextBrowser, SLOT(setVisible(bool)));
+        QObject::connect(przykladyBox, SIGNAL(toggled(bool)), label_3, SLOT(setVisible(bool)));
+        QObject::connect(definicjaBox, SIGNAL(toggled(bool)), label_4, SLOT(setVisible(bool)));
+        QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), skumulowaneTextBrowser, SLOT(setVisible(bool)));
+        QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), label_7, SLOT(setVisible(bool)));
 
         QMetaObject::connectSlotsByName(przegladarka);
     } // setupUi

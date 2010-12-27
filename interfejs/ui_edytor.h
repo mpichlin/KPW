@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Fri Dec 10 13:10:21 2010
+** Created: Sat Dec 11 18:18:28 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -67,6 +67,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *dodaj_skojarzoneButton;
     QPushButton *usun_skojarzoneButton;
+    QPushButton *zatwierdzButton;
 
     void setupUi(QWidget *edytor)
     {
@@ -285,6 +286,11 @@ public:
 
         gridLayout_3->addLayout(Layout, 0, 0, 1, 1);
 
+        zatwierdzButton = new QPushButton(edytor);
+        zatwierdzButton->setObjectName(QString::fromUtf8("zatwierdzButton"));
+
+        gridLayout_3->addWidget(zatwierdzButton, 1, 0, 1, 1);
+
 
         retranslateUi(edytor);
 
@@ -326,6 +332,7 @@ public:
         label_6->setText(QApplication::translate("edytor", "Poj\304\231cia skojarzone", 0, QApplication::UnicodeUTF8));
         dodaj_skojarzoneButton->setText(QApplication::translate("edytor", "dodaj", 0, QApplication::UnicodeUTF8));
         usun_skojarzoneButton->setText(QApplication::translate("edytor", "usu\305\204", 0, QApplication::UnicodeUTF8));
+        zatwierdzButton->setText(QApplication::translate("edytor", "ZATWIERD\305\271", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

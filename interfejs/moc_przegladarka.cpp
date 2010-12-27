@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'przegladarka.h'
 **
-** Created: Fri Dec 10 13:08:09 2010
+** Created: Mon Dec 27 13:25:34 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_przegladarka[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,16 @@ static const uint qt_meta_data_przegladarka[] = {
 
  // slots: signature, parameters, type, tag, flags
       14,   13,   13,   13, 0x0a,
+      23,   13,   13,   13, 0x0a,
+      31,   13,   13,   13, 0x0a,
+      40,   13,   13,   13, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_przegladarka[] = {
-    "przegladarka\0\0otworz_edytor()\0"
+    "przegladarka\0\0edytuj()\0pokaz()\0zapisz()\0"
+    "wczytaj()\0"
 };
 
 const QMetaObject przegladarka::staticMetaObject = {
@@ -69,10 +73,13 @@ int przegladarka::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: otworz_edytor(); break;
+        case 0: edytuj(); break;
+        case 1: pokaz(); break;
+        case 2: zapisz(); break;
+        case 3: wczytaj(); break;
         default: ;
         }
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

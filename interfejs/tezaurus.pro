@@ -5,8 +5,11 @@ TARGET = tezaurus
 TEMPLATE = app
 SOURCES += main.cpp \
     edytor.cpp \
-    przegladarka.cpp
+    przegladarka.cpp \
+    dodaj.cpp
 HEADERS += edytor.h \
-    przegladarka.h
+    przegladarka.h \
+    dodaj.h
 FORMS += edytor.ui \
-    przegladarka.ui
+    przegladarka.ui \
+    dodaj.ui

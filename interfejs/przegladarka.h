@@ -12,14 +12,14 @@ class przegladarka : public QMainWindow {
 public:
     przegladarka(QWidget *parent = 0);
     ~przegladarka();
-
-protected:
-    void changeEvent(QEvent *e);
-
 private:
     Ui::przegladarka *ui;
 public slots:
-    void otworz_edytor();
+    void edytuj();
+    void pokaz();
+    void zapisz();
+    void wczytaj();
+
 };
 
 #endif // PRZEGLADARKA_H

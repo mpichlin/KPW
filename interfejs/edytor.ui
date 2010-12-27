@@ -264,6 +264,13 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="zatwierdzButton">
+     <property name="text">
+      <string>ZATWIERDŹ</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

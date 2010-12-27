@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dodaj.ui'
 **
-** Created: Sat Dec 11 19:39:08 2010
+** Created: Mon Dec 27 13:28:14 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
