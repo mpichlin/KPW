@@ -1,17 +1,8 @@
-\documentclass[12pt,a4paper,notitlepage]{article}
-\usepackage[]{polski}
-\usepackage[utf8]{inputenc}
-\usepackage{url}
-\usepackage{pstricks}
-\usepackage{graphicx}
-
-\title{Budowa modeli informacyjnych i ich profilowanie \\
-  Komputerowe przetwarzanie wiedzy - projekt}
-\author{Piotr Batog, Michał Pichliński}
-
-\begin{document}
-\bibliographystyle{plplain}
-\maketitle
+\bibliographystyle{myaplike}
+\renewcommand{\autorzy}{P. Batog, M. Pichliński}
+\chapter[Budowa modeli informacyjnych i ich profilowanie]
+        [Budowa modeli informacyjnych i ich profilowanie]
+        {Budowa modeli informacyjnych i ich profilowanie}
 
 \section{Wstęp}
 Rozwój komputerów i sprzętu elektronicznego oraz Internetu sprzyja zwiększaniu
@@ -336,7 +327,9 @@ ex:gwiazda skos:inScheme ex:tezaurusAstronomiczny
 \end{verbatim}
       \end{itemize}
 \end{itemize}
-\bibliography{Literatura}{}
+\bibliography{Literatura}
+\addcontentsline{toc}{section}{Bibliografia}
+
 \end{document}
 
 \end{document}
