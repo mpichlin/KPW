@@ -1,0 +1,24 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://example.org/ns/> .
+    
+<MyConcept> rdf:type skos:Concept ;
+            skos:prefLabel "Some Concept"@en;
+            skos:definition "Definicja"@pl.
+<AnotherConcept> rdf:type skos:Concept;
+                 skos:broader <MyConcept>;
+                 skos:prefLabel "Ech"@pl.
+<MyConcept> skos:prefLabel "Another Pref eng label"@en ,
+                           "Polska labelka"@pl;
+            skos:narrower <AnotherConcept>.
+<MyConcept> rdf:type skos:Concept .
+<MyConcept> skos:altLabel "Some Concept"@en ,
+                          "Jakiś koncept"@pl;
+            skos:hiddenLabel "Ukryty smok"@pl.
+<ConceptScheme> rdf:type     skos:ConceptScheme;
+                skos:prefLabel  "Tezaurus"@pl;
+                skos:hasTopConcept <MyConcept> ;
+                skos:hasTopConcept <MyConcept> .
+<AnotherConcept> skos:inScheme <ConceptScheme>.
