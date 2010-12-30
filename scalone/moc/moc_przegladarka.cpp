@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'przegladarka.h'
 **
-** Created: Thu Dec 30 12:42:09 2010
+** Created: Thu Dec 30 20:31:11 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
