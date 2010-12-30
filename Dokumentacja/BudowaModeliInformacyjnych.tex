@@ -1,0 +1,335 @@
+\bibliographystyle{myaplike}
+\renewcommand{\autorzy}{P. Batog, M. Pichliñski}
+\chapter[Budowa modeli informacyjnych i ich profilowanie]
+        [Budowa modeli informacyjnych i ich profilowanie]
+        {Budowa modeli informacyjnych i ich profilowanie}
+
+\section{Wstêp}
+Rozwój komputerów i sprzêtu elektronicznego oraz Internetu sprzyja zwiêkszaniu
+iloœci informacji oraz daje coraz to ³atwiejszy do niej dostêp. W roku 2003
+za pomoc¹ wyszukiwarek internetowych (tzw. powierzchniowy Internet)
+by³o dostêpne 167 terabajtów danych (w porównaniu do 2000 roku jest ich
+trzykrotnie wiêcej) \cite{HowMuchInformation}.
+IBM w 2006 roku stwierdzi³o, ¿e w 2010 iloœæ przechowywanej elektronicznej
+informacji bêdzie zwiêksza³a siê dwukrotnie w przeci¹gu 11 godzin 
+(nie koniecznie w samej sieci) \cite{ToxicTerabyte}.
+
+Dodatkowo ,,powierzchnia'' Internetu to wierzcho³ek góry lodowej, poniewa¿
+ukryty (g³êboki) Internet, czyli taki którego dane nie s¹ dostêpne 
+bezpoœrednio przez hiperlinki (np. wewnêtrzne bazy danych) szacuje siê na 500
+krotnie wiêkszy ni¿ to co na codzieñ mo¿na otrzymaæ dziêki Google 
+\cite{DeepWeb}. Taka zatrwa¿aj¹ca iloœæ informacji powoduje takie szkody jak: 
+utrudnienie uzyskania potrzebnych danych, problemy z powstrzymaniem
+wzrastaj¹cego chaosu informacyjnego, spowolnienie dostêpu do danych z powodu
+obci¹¿enia powsta³ego w wyniku przeszukiwania zasobów \cite{ToxicTerabyte}.
+Powy¿sze problemy wynikaj¹ce z nadmiaru zasobów wiedzy, próbuje siê rozwi¹zaæ 
+za pomoc¹ modeli informacyjnych. 
+
+W niniejszej pracy zostanie przedstawione ontologiczne podejœcie w zagadnieniu budowy modelu informacji, na przyk³adzie tworzenia tezaurusa. 
+
+\section{Czym s¹ modele informacyjne?}
+Modele informacyjne s¹ to sposoby reprezentacji zasobów wiedzy, takich jak:
+koncepty, relacje, ograniczenia, zasady, operacje. Polegaj¹ one na nadaniu
+danym znaczenia semantycznego \cite{Tina}. Dziêki modelom informacyjnym,
+wiedza, która jest w nich przechowywana, nabiera elastycznoœci pozwalaj¹cej 
+na dzielenie jej pomiêdzy ró¿nymi aplikacjami, ³atwiejsze wyszukiwanie
+po¿¹danych informacji oraz dostosowanie do potrzeb u¿ytkownika 
+\cite{GilbaneReport}.
+
+
+Warto wspomnieæ o ró¿nicy pomiêdzy modelami informacyjnymi a modelami danych,
+które mog¹ byæ mylnie uto¿samiane ze sob¹. Celem tych pierwszych jest 
+zarz¹dzanie modelami na poziomie ideowym oraz przedstawienie relacji pomiêdzy
+nimi, niezale¿nie od konkretnych implementacji b¹dŸ protoko³ów transmisji
+danych. Model informacyjny jest narzêdziem przeznaczonym dla projektantów.
+Natomiast modele danych odnosz¹ siê ni¿szemu poziomowi abstrakcji, zawieraj¹
+wiêcej szczegó³ów, s¹ one ju¿ konkretn¹ implementacj¹ modeli informacyjnych 
+\cite{RFC3444}.
+
+
+
+\section{Ontologia jako model informacji}
+Celem stworzenia modelu informacji jest nadanie jej wy¿szego stopienia organizacji. Uporz¹dkowanie ma zaœ umo¿liwiæ ³atwiejsze przetwarzanie informacji i wyci¹gania na ich podstawie okreœlonych wniosków. Innymi s³owy jest to dodanie abstrakcji umo¿liwiaj¹cej przechodzenie od informacji w kierunku do wiedzy. Budowa modelu informacji jest zagadnieniem z natury heurystycznym. Nie istniej¹ bowiem ogólne prawa, wed³ug których proces budowy takiego modelu mia³by zostaæ przeprowadzony. 
+
+Budowa modelu œciœle wi¹¿e siê z dziedzin¹ i problemem, którego ma byæ rozwi¹zaniem. W dzisiejszych czasach dostêpnych jest mnóstwo odpowiednich metod i technik. Co wiêcej poszczególne organizacje modyfikuj¹ ogólnie znane metody bazuj¹c na doœwiadczeniach w konkretnych zagadnieniach i technikach. Taka sytuacje bywa nazywana w literaturze ,,d¿ungl¹ metodologiczn¹'' \cite{Verhoef}. W niniejszej pracy skupiono siê na podejœciu ontologicznym.
+
+\subsection{Ontologia}
+Ontologia, jest reprezentacj¹ dystrybuowanej konceptualizacji okreœlonej domeny\footnote{Hodge}. Mówi¹c proœciej, jest budow¹ wspólnej warstwy pojêciowej, rozwiniêciem konceptualizacji poprzez dodanie relacji pomiêdzy poszczególnymi podmiotami. Obydwa pojêcia maj¹ swoje korzenie w naukach filozoficznych.
+\begin{itemize}
+   \item Konceptualizacja - próba okreœlenia œcis³ych pojêæ, (usuniêcie wieloznacznoœci) niezbêdnych do opisu jednoznacznie rozumianego procesu z okreœlonej dziedziny.
+	\item Ontologia - (od greckich $o \nu \tau o$ - byt i $\iota o\gamma o\varsigma$ - nauka ) najogólniejsza nauka rozwa¿aj¹ca pojêcie bytu, do XVII w uto¿samiana z metafizyk¹. Jej pocz¹tków mo¿na szukaæ u Arystotelesa. Dziedzina metafizyki, zwi¹zana z badaniem, wyjaœnianiem natury, kluczowych w³aœciwoœci oraz relacji rz¹dz¹cych wszelakimi bytami b¹dŸ g³ównych zasad i przyczyn bytu \footnote{Webster}.
+\end{itemize}  
+
+W praktyce technologii informacyjnej poprzez ontologiê rozumie siê jako  œwiadom¹, formaln¹ 
+specyfikacjê konceptów (pojêæ) w danej dziedzinie i relacji pomiêdzy nimi. Ontologia ³¹czy ze sob¹ nie tylko wyra¿one w niej pojêcia, ale równie¿ wiedzê, która mo¿e byæ na jej podstawie wywnioskowana. Jako sposób reprezentacji zintegrowanego  modelu wiedzy dziedziny oraz jako instrument badawczy treœci informacji tekstowej razem z innymi technologiami informatycznymi jest obecnie jednym z kluczowych elementów 
+rozwijaj¹cej siê idei spo³eczeñstwa informacyjnego. Dowodem na to jest dynamiczny rozwój internetu trzeciej generacji \footnote{Semantic Web, Web 3.0 - http://www.slideshare.net/skruk/sie-semantyczna-w-teorii-i-praktyce}. 
+ 
+\section{Tezaurus}
+Tezaurus w ogólnym rozumieniu stanowi s³ownik terminów bliskoznacznych. S³owo pochodzi z greckiego $\Theta \eta \sigma \alpha \upsilon \rho o \varsigma$, gdzie oznacza³o zbiór rzeczy o wielkiej wartoœci (magazyn, skarbiec). W technologii informacyjnej i bibliotekoznawstwie tezaurus jest œciœle okreœlonym\footnote{przyk³adowe normy s¹ prezentowane w kolejnym rozdziale}  rozwiniêciem s³ownika. Jest to zbiór semantycznie i hierarchicznie powi¹zanych terminów, u³atwiaj¹cy wyszukiwanie informacji. 
+
+Tezaurus jest pewnego rodzaju zastosowaniem podejœcia ontologicznego w celu sklasyfikowania s³ów jêzyka naturalnego. Jak wiadomo, jêzyk naturalny zawiera wiele s³ów o wielu znaczeniach, ale relacje pomiêdzy s³owem a jego znaczeniem nie s¹ jednoznaczne. Jedno s³owo bowiem mo¿e mieæ wiele znaczeñ, a jedno pojêcie mo¿e byæ wyra¿ane przez wiele s³ów. Co wiêcej czêsto relacje te zmieniaj¹ siê w zale¿noœci od kontekstu jak i samy osób je wypowiadaj¹cych i czytaj¹cych. Cz³owieka interesuje przewa¿nie znaczenie\footnote{oczywiœcie, jeœli pominie siê aspekty natury estetycznej}, jednak musi siê on pos³ugiwaæ siê s³owami. 
+
+Idea³em tezaurusa jest system komputerowy, który po wprowadzeniu pewnych s³ów, odpowiednio je zinterpretuje i zdefiniuje koncepty poszukiwane przez u¿ytkownika, dziêki czemu mo¿liwe bêdzie zwrócenie dok³adnie wszystkich wyników interesuj¹cych u¿ytkownika, ale bez ¿adnego nadmiaru. Przyk³adowo, na zapytanie ,,lodówka'' system wyœwietli tak¿e to co by³o opisane jako ,,ch³odziarko-zamra¿arka'', ale ju¿ nie jako ,,ch³odnie''. 
+
+Istota inteligentna bez wiêkszego trudu uczy siê relacji zachodz¹cych pomiêdzy s³owami i znaczeniami, choæ proces ten trwa przez ca³e ¿ycie. Jednak nawet dla ludzi jest to nietrywialne zagadnienie, o czym œwiadcz¹ tak zwane nieporozumienia, wystêpuj¹ce gdy odbiorca zrozumia³ zupe³nie co innego, ni¿ nadawca mia³ na myœli. Œwiadczy o tym tak¿e szacunek dla ludzi, którzy opanowali umiejêtnoœæ jasnego i zwiêz³ego wypowiadania siê. Jak jednak nauczyæ tego maszynê, by umo¿liwiæ komputerowe przetwarzanie wiedzy i wyszukiwanie informacji w ogromnych zbiorach danych?
+
+\subsection{Katalog przedmiotowy}
+Pierwsz¹ próbê semantycznego usystematyzowania terminów podjêli ju¿ dawno bibliotekarze. By³o ni¹ utworzenie katalogu przedmiotowego. W takim systemie ka¿da z ksi¹¿ek opisana jest jednym lub wieloma has³ami z katalogu. Zak³ada siê, ¿e opisywanie zawartoœci tematycznej ksi¹¿ek, jak i wyszukiwanie odbywa siê przy u¿yciu tego samego zbioru s³ów. Niestety katalog taki jest ma³o elastyczny i odporny a efektywne korzystanie z niego jest rzecz¹ wymagaj¹c¹ odpowiedniego przygotowania. O ile doœwiadczony bibliotekarz na co dzieñ obcuj¹cy z katalogiem nie ma problemów z okreœleniem odpowiednich kategorii, to przypadku przeciêtnego u¿ytkownika czêœæ zasobów pozostanie ukryta, bowiem jego intuicje co do tego do jakiej kategorii zosta³ zaklasyfikowany poszukiwany przez niego temat mog¹ byæ mylne. Co wiêcej odwo³uj¹c siê do has³a np. \textit{Rzeki w Polsce} mo¿na znaleŸæ jedynie pozycje omawiaj¹ce ogólnie Rzeki, natomiast ju¿ nie odnajdzie siê monografii o Odrze, Wiœle itd. ani ksi¹¿ek opisuj¹cych ogólnie rzeki w Europie. U¿ytkownik musia³by odnaleŸæ w katalogu pojêcia wê¿sze i szersze a nastêpnie przeszukaæ listy ksi¹¿ek im odpowiadaj¹ce, co z pewnoœci¹ by³oby czasoch³onne.  
+
+Komputeryzacja katalogu zwiêksza wygodê u¿ytkowania i efektywnoœæ systemu, m.in. poprzez znaczne zwiêkszenie iloœci kategorii mo¿liwych do przeszukania w tym samym czasie, jednak nie zmienia zasady dzia³ania, i nie usuwa jego zasadniczych wad. Co wiêcej z komputerowych katalogów korzystaj¹ z regu³y bez pomocy bibliotekarzy sami czytelnicy, przewa¿nie nie uœwiadamiaj¹cy sobie opisanych wad katalogów, co mo¿e zniechêcaæ do odwiedzania bibliotek i prowadziæ do frustracji.
+\subsection{S³owa kluczowe}
+W ostatnich latach do opisywania danych coraz czêœciej pos³ugiwano siê technologi¹ s³ów kluczowych. Z uwagi na ich ,,luŸny'' charakter nale¿y stwierdziæ, ¿e jest to technologia komplementarna w stosunku do s³ownictwa kontrolowanego \cite{KasperekKonf}. Oczywiœcie bardzo u¿yteczna, posiada jednak szereg wad takich jak:
+\begin{itemize}
+   \item koniecznoœæ podawania synonimów
+	\item niepe³ny opis
+	\item brak usystematyzowania
+	\item zwracanie setek bezu¿ytecznych trafieñ\footnote{por. wyszukiwarki internetowe}
+	\item brak relacji
+	\item trudnoœci ze zbudowaniem systemu inteligentnego
+\end{itemize}    
+
+\subsection{Wyszukiwanie pe³notekstowe}
+Zamiast ograniczaæ siê do samego opisu danego podmiotu, mo¿na rozwa¿yæ jako alternatywê odwo³anie siê do pe³nego tekstu - ksi¹¿ki, artyku³u, itp. Niestety nie wszystko posiada swój ,,pe³ny tekst''. Obiektem kategoryzacji i wyszukiwania s¹ nie tylko ksi¹¿ki i artyku³y, ale tak¿e dzie³a sztuki, utwory muzyczne, artyku³y sklepowe i wiele innych. Warto zauwa¿yæ, ¿e sama zawartoœæ bibliotek jest rzadko w pe³ni zdigitalizowana a pe³ny tekst dostêpny w formie elektronicznej. Ponadto takie rozwi¹zanie tak¿e ma swoje ograniczenia, m.in.
+ \begin{itemize}
+   \item znacznie d³u¿szy czas trwania
+	\item zwracanie znacznie wiêkszej iloœci bezu¿ytecznych trafieñ
+	\item ograniczenie do jednego jêzyka naturalnego.
+\end{itemize}
+
+\subsection{Proces tworzenia tezaurusa}
+Tezaurus w uproszczeniu mo¿na rozumieæ jako zbiór s³ownictwa kontrolowanego i zbiór relacji zachodz¹cych pomiêdzy s³owami.
+S³ownictwo kontrolowane jest ujednoznacznione (poprzez jawne zdefiniowanie pojêæ lub rozró¿nienie pomiêdzy ró¿nymi znaczeniami tego samego s³owa). Przewa¿nie zbiór s³ów jest ograniczony do jakiejœ konkretnej dziedziny, w której bêdzie wykorzystywany. Do opisu zasobów wolno pos³ugiwaæ siê tylko s³owami które s¹ w systemie. 
+
+Nastêpnym krokiem w organizacji wiedzy jest okreœlenie regu³ relacyjnych zachodz¹cych pomiêdzy danymi konceptami. Koncept jest pojêciem abstrakcyjnym, mo¿e odpowiadaæ mu wiele s³ów, ale mo¿e te¿ nie istnieæ w³aœciwe s³owo. Najczêœciej spotyka siê implementacjê nastêpuj¹cych regu³:
+\begin{itemize}
+   \item Hiperonimia - terminy nadrzêdne (koncepty ogólniejsze)
+	\item Hiponimia - terminy podrzêdne (koncepty bardziej szczegó³owe)
+	\item Synonimia  - termin bliskoznaczny (wymienienie Deskryptorów - terminów preferowanych i Askryptorów)
+	\item Homonimia - ró¿ne znaczenie tego samego s³owa (stworzenie odrêbnych konceptów)
+	\item Asocjacja - skojarzenie ze sob¹ pokrewnych konceptów
+\end{itemize} 
+Poprzez dodanie relacji hierarchicznych i skojarzeniowych, otrzymuje siê narzêdzie, które umo¿liwia stworzenie inteligentnego systemu wyszukiwawczego oferuj¹cego znacznie wiêksze mo¿liwoœci ni¿ zwyk³y katalog.   
+Jadwiga WoŸniak-Kasperek \cite{KasperekPoradnik} wymienia nastêpuj¹ce etapy budowy tezaurusa: 
+\begin{enumerate}
+   \item Okreœlenie zakresu jêzyka
+	\item Wskazanie  Ÿróde³, z których (lub na podstawie których) bêdzie pobierane s³ownictwo
+	\item Robocze okreœlenie struktury czêœci rzeczowej (systematycznej) tezaurusa 
+	\item Wybór metody gromadzenia s³ownictwa
+	\item Zgromadzenie s³ownictwa
+	\item Ustalenie zasad tworzenia ci¹gów synonimicznych
+	\item Ustalenie, jak bêd¹ ,,oddzielane'' ró¿ne znaczenia wyra¿eñ wieloznacznych
+	\item Wybranie sposobu zapisu deskryptorów, askryptorów, ew. modyfikatorów, przyjêcie notacji, za pomoc¹ której bêd¹ oznaczane 
+typy relacji ³¹cz¹cych has³a w tezaurusie.
+	\item  Opracowanie kilku wzorcowych przyk³adów artyku³ów deskryptorowych i 
+askryptorowych (z komentarzem)
+	\item Opracowanie tezaurusa, w tym czêœci systematycznej
+\end{enumerate}
+\subsection{Przyk³ady tezaurusów}
+Od XVI w nazwa tezaurus wystêpuje jako oznaczenie s³ownika lub leksykonu. W Polsce, pierwszym dzie³em tego typu by³ \textit{ Thesaurus Polono-Latino-Graecus} Grzegorza Knapiusza (Kraków 1621-32). Twórc¹ pierwszego nowo¿ytnego, usystematyzowanego semantycznie tezaurusa by³ Peter Mark Roget. \textit{Thesaurus of English Words and Phrases}, dzie³o jego ¿ycia ukaza³o siê w 1852r w Londynie i jest u¿ywane tak¿e dziœ, choæ oczywiœcie nieustannie aktualizowane. Tezaurus Rogeta dotyczy³ jêzyka angielskiego i zawiera³ 6 poziomów hierarchicznych. Tezaurusy jako jêzyk wyszukiwawczo-informacyjny zaczê³y siê intensywnie rozwijaæ w drugiej po³owie XX w. i trend ten trwa w³aœciwie do dzisiaj. Pierwszy polski tezaurus ukaza³ siê w 1969 r. i by³ wykazem terminów z zakresu urz¹dzeñ budowlanych i transportu bliskiego \cite{Sosinska}. Budow¹ (tak¿e wielojêzycznych) tezaurusów m.in. w zakresie dziedzictwa kulturowego zajmuje siê wiele oœrodków naukowych w Europie (korzystaj¹c tak¿e ze wsparcia Unii Europejskiej).
+Przyk³adowe tezaurusy dostêpne on-line:
+\begin{itemize}
+    \item Roget Thesaurus http://www.roget.org/
+	\item WordNet http://wordnetweb.princeton.edu/perl/webwn
+	\item Visual Thesaurus http://www.visualthesaurus.com/
+	\item Tezaurus Dziedzictwa Kulturowego 
+
+http://historiasztuki.uni.wroc.pl/tezaurus.html
+\end{itemize}  
+
+\subsection{Wykorzystanie tezaurusów}
+Tezaurusy mog¹ byæ stosowane wszêdzie tam gdzie zachodzi potrzeba wyszukiwania lub ,,zrozumienia'' tekstu przez komputer. Przyk³adowo bêd¹ to: 
+\begin{itemize}
+   \item Biblioteki
+	\item Archiwa
+	\item Muzea
+	\item Bazy danych
+	\item Wyszukiwarki
+	\item Rozbudowane sklepy internetowe i serwisy aukcyjne
+	\item Systemy przetwarzania i rozumienia mowy
+\end{itemize}
+\section{Normy}
+Za wzorzec tezaurusa uwa¿a siê opublikowany w 1967 r. Thesaurus of Engineering and Scientific Terms (TEST), który powsta³ w ramach tzw. projektu LEX, realizowanego w latach szeœædziesi¹tych wspólnie przez przez Office of Naval Research amerykañskiego Department of Defence (DOD) oraz Engineering Joint Council (EJC). Mia³ on formê tzw. alfabetyczno-hierarchicznego wykazu deskryptorów i askryptorów, w którym zastosowano symetryczne oznaczenia relacji ekwiwalencji (USE – UF), hierarchicznych (BT i NT) oraz asocjacyjnych (RT) u¿ywanych do dzisiaj \cite{Sosinska}. Na podstawie w³aœnie tego systemu powsta³a w USA pierwsza na œwiecie norma dotycz¹ca budowy tezaurusów - ANSI Z39.19-1974.
+Pierwszym miêdzynarodowym standardem by³a norma ISO 2788 \textit{Documentation – Guidelines for the Establishment and Development of Monolingual Thesauri}, przyjêta w Polsce jako PN/N-09008. Z pocz¹tkiem XXI w. w zwi¹zku z koniecznoœci¹ zapewnienia odpowiedniej elastycznoœci (interoperacyjnoœci pomiêdzy tezaurusami i innymi systemami organizacji wiedzy) wydane zosta³y nowe normy, amerykañska Z39.19-2005 \textit{Guidelines for Construction, Format, and Management of Controlled Vocabularies} (ANSI-NISO, 2005), brytyjska BS 8723 \textit{Structured Vocabularies for Information Retrieval}(BSI, 2005a; BSI, 2005b), a w trakcie budowy jest miêdzynarodowa norma ISO 25964\footnote{http://www.niso.org/workrooms/iso25964/}.
+Diagram klas wchodz¹cych w sk³ad tezaurusa, wed³ug normy BS8723\footnote{http://schemas.bs8723.org/} zosta³ umieszczony na rysunku 1. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=13cm]{./Model.pdf}
+\caption{Klasy wchodz¹ce w sk³ad tezaurusa, wed³ug normy BS8723}
+\end{figure}
+
+
+\section{Jêzyk SKOS}
+\emph{Simple Knowledge Organization System} jest jêzykiem, który pozwala na
+tworzenie systemów organizacji wiedzy jak tezaurusy, schematy klasyfikacji,
+systemy nag³ówkowe oraz taksonomie. Modele, które s¹ zapisane za pomoc¹ SKOS,
+mog¹ byæ ³atwo przetwarzane przez maszyny, wymieniane pomiêdzy aplikacjami
+komputerowymi oraz publikowane w internecie.
+
+Modele informacyjne utworzone w jêzyku SKOS spe³niaj¹ warunki 
+\emph{OWL Full ontology} i mog¹ one zawieraæ równie¿ informacje zapisane za
+pomoc¹ OWL (\emph{Web Ontology Language}). SKOS podobnie jak OWL powsta³ w
+oparciu o twierdzenia RDF (\emph{Resource Description Framework}) i formalna 
+sk³adnia jak¹ siê pos³uguje to RDF/XML oraz Turtle \cite{SKOS-ref}. 
+
+\subsubsection{S³ownictwo}
+Zasoby s³ownictwa jakim pos³uguje siê SKOS znajduj¹ siê pod adresem:
+\url{http://www.w3.org/2004/02/skos/core#}, w niniejszym dokumencie bêdzie on
+opisany skrótem: \textbf{skos:}. Na podstawie \cite{SKOS-pr} dostêpne s¹
+nastêpuj¹ce s³owa kluczowe, które definiuj¹ klasy (s³owa zaczynaj¹ce siê z
+du¿ej litery) oraz w³aœciwoœci (s¹ pisane z ma³ej litery):
+\begin{itemize}
+  \item \textbf{skos:Concept} - jednostka myœli, bêd¹ca abstrakcyjn¹ encj¹
+    niezale¿n¹ od pojêæ u¿ytych do zetykietowania jej; semantyczna zawartoœæ
+    danego konceptu, mo¿e zostaæ wyra¿ona za pomoc¹ kombinacji innych konceptów
+    \cite{Willpower}:
+  \item Etykiety - s¹ cechami konceptów, które s³u¿¹ jako odnoœniki do nich
+    wyra¿one w jêzyku naturalnym. Skos pozwala na tworzynie etykiet w ró¿nych
+    jêzykach w postaci:
+\begin{verbatim}
+"treœæ etykiety"@skrót_jêzyka
+\end{verbatim}
+    Istniej¹ trzy rodzaje etykiet, które wzajemnie siê wykluczaj¹, wiêc nie
+    dozwolone jest istnienie etykiet innego typu o tej samej treœci
+    \begin{itemize}
+      \item \textbf{skos:prefLabel} - preferowana etykieta, mo¿e byæ tylko
+        jedna dla danego konceptu; nie jest zabronione by ró¿ne koncepty
+        zawiera³y t¹ sam¹ etykietê, jednak zaleca siê by takich przypadków
+        nie by³o
+      \item \textbf{skos:altLabel} - alternatywna etykieta, przydatna do
+        okreœlenia synonimów, jak równie¿ wyrazów bliskoznacznych oraz
+        akronimów
+      \item \textbf{skos:hiddenLabel} - ukryta etykieta, dostêpnie jedynie
+        wewnêtrznie przez aplikacjê, w celu indeksowania i wyszukiwania, nie
+        jest ona widoczna dla u¿ytkownika; mo¿e s³u¿yæ do uwzglêdniania
+        literówek podczas poszukiwania danego konceptu
+    \end{itemize}
+  \item Relacje - s³u¿¹ do linkowania konceptów pomiêdzy sob¹, SKOS dostarcza
+    nastêpuj¹ce typy relacji:
+    \begin{itemize}
+      \item \textbf{skos:narrower} - hierarchiczne po³¹czenie z konceptem
+        bardziej szczegó³owym na przyk³ad:
+\begin{verbatim}
+ex:figuraGeometryczna rdf:type skos:Concept;
+  skos:narrower ex:kwadrat.
+ex:kwadrat rdf:type skos:Concept.
+\end{verbatim}
+      \item \textbf{skos:broader} - ³¹czy z konceptem bardziej ogólnym:
+\begin{verbatim}
+ex:kwadrat rdf:type skos:Concept;
+  skos:broader ex:figuraGeometryczna.
+ex:figuraGeometryczna rdf:type skos:Concept.
+\end{verbatim}
+      \item \textbf{skos:related} - ³¹czy z innym konceptem bez
+        ustalania hierarchii, nie jest relacj¹ tranzytywn¹
+    \end{itemize}
+    Pojêcia skos:broader i skos:narrower s¹ przeciwieñstwami, wiêc wystarczy
+    okreœliæ tylko jedn¹ z tych relacji, druga natomiast zostanie automatycznie
+    przypisania w procesie wnioskowania OWL. Dodatkow¹ cech¹ wy¿ej wymienionych
+    relacji jest brak ich tranzytywnoœci, czyli:
+\begin{verbatim}
+ex:figuraGeometryczna rdf:type skos:Concept;
+  skos:narrower ex:prostokat.
+ex:prostokat rdf:type skos:Concept;
+  skos:narrower ex:kwadrat.
+ex:kwadrat rdf:type skos:Concept.
+\end{verbatim}
+    nie implikuje relacji:
+\begin{verbatim}
+ex:figuraGeometryczna skos:narrower ex:kwadrat.
+\end{verbatim}
+    Jednak w \cite{SKOS-ref} opisane s¹ tranzytywne wersje relacji
+    \emph{broader} i \emph{narrower}: \textbf{skos:broaderTransitive},
+    \textbf{skos:narrowerTransitive}, które umo¿liwiaj¹ z powy¿szej deklaracji
+    wnioskowaæ:
+\begin{verbatim}
+ex:figuraGeometryczna skos:narrowerTransitive ex:kwadrat.
+\end{verbatim}
+    Nale¿y pamiêtaæ równie¿ o tym, ¿e poszczególne typy relacji wzajemnie siê
+    wykluczaj¹.
+  \item Przypisy dokumentacyjne - informacje w postaci zrozumia³ej dla
+    cz³owieka, przypisane do konceptu, w celu jego opisania:
+    \begin{itemize}
+      \item \textbf{skos:definition} - zawiera pe³ne wyjaœnienie znaczenia 
+        danego konceptu
+      \item \textbf{skos:example} - zawiera przyk³ady u¿ycia konceptu
+      \item \textbf{skos:scopeNote} - dostarcza czêœciowego znaczenia konceptu
+        w szczególnoœci okreœla zakres jego u¿ycia
+      \item \textbf{skos:historyNote} - opisuje znacz¹ce zmiany jakie zasz³y w 
+        znaczeniu, b¹dŸ formie konceptu
+      \item \textbf{skos:editorialNote} - informacja od autora, umieszczana 
+        w celu u³atwienia utrzymania konceptu
+      \item \textbf{skos:changeNote} - informacja o zmianach w koncepcie,
+        umieszczona w celach administracyjnych
+    \end{itemize}
+  \item Schematy konceptów - s³u¿¹ do grupowania, pojedynczych konceptów, w
+    celu u³atwienia indeksowania i tworzenia np. tezaurusów:
+    \begin{itemize}
+      \item \textbf{skos:ConceptScheme} - kontener bêd¹cy schematem konceptów,
+        zawieraj¹cym inne koncepty
+      \item \textbf{skos:hasTopConcept} - przypisuje danemu schematowi,
+        najwy¿szy w hierarchii koncept; mo¿e byæ kilka najwy¿szych konceptów
+      \item \textbf{skos:topConceptOf} - przypisuje danemu konceptowi
+        schemat konceptów, w którym bêdzie on najwy¿szy w hierarchii
+      \item \textbf{skos:inScheme} - przypisuje danemu konceptowi schemat
+        konceptów, w którym siê znajduje, bez okreœlenia hierarchii
+    \end{itemize}
+    Niestety w \cite{SKOS-ref} okreœlone jest, ¿e relacje pomiêdzy konceptami
+    (tzn. broader, narrower, itp.) nie s¹ przenoszone na schemat konceptów,
+    czyli:
+\begin{verbatim}
+ex:tezaurusAstronomiczny rdf:type skos:ConceptScheme;
+  hasTopConcept ex:cialoNiebieskie.
+ex:cialoNiebieskie rdf:type skos:Concept;
+  skos:narrower ex:gwiazda.
+ex:gwiazda rdf:type skos:Concept.
+\end{verbatim}
+    nie implikuje:
+\begin{verbatim}
+ex:gwiazda skos:inScheme ex:tezaurusAstronomiczny
+\end{verbatim}
+    \item Mapowanie konceptów pomiêdzy schematami - SKOS dostarcza odpowiednich
+      narzêdzi, pozwalaj¹cych mapowaæ miêdzy sob¹ poszczególne koncepty w 
+      ró¿nych schematach:
+      \begin{itemize}
+        \item \textbf{skos:exactMatch} - dok³adne dopasowanie, koncepty
+          s¹ identyczne
+        \item \textbf{skos:closeMatch} - dopasowanie czêœciowe, które oznacza,
+          ¿e koncepty mog¹ byæ u¿ywane zamiennie, jednak w ograniczonym
+          zakresie
+        \item \textbf{skos:broaderMatch} - dopasowanie konceptu o bardziej
+          ogólnym znaczeniu
+        \item \textbf{skos:narrowerMatch} - dopasowanie konceptu o bardziej
+          szczegó³owym znaczeniu
+        \item \textbf{skos:relatedMatch} - dopasowanie konceptu o powi¹zanym
+          znaczeniu z danym konceptem bez wyró¿nienia hierarchii
+      \end{itemize}
+    \item Kolekcje - s³u¿¹ do zgrupowania konceptów, które mog¹ zostaæ wspólnie
+      dzieliæ t¹ sam¹ etykietê:
+      \begin{itemize}
+        \item \textbf{skos:Collection} - kolekcja konceptów
+        \item \textbf{skos:OrderedCollection} - kolekcja konceptów, których
+          kolejnoœæ jest znacz¹ca np w kolekcji ,,wykszta³cenie'' umieœciæ:
+          \begin{enumerate}
+            \item podstawowe
+            \item œrednie
+            \item wy¿sze
+          \end{enumerate}
+        \item \textbf{skos:member} - przypisuje do danej kolekcji, wybrany
+          koncept, u¿ycie:
+\begin{verbatim}
+<kolekcja> skos:member <koncept>
+\end{verbatim}
+        \item \textbf{skos:memberList} - przypisuje do danej kolekcji, listê
+          konceptów, u¿ycie:
+\begin{verbatim}
+<kolekcja> skos:memberList (<koncept1> <koncept2>)
+\end{verbatim}
+      \end{itemize}
+\end{itemize}
+\bibliography{BudowaModeliInformacyjnych}
+\addcontentsline{toc}{section}{Bibliografia}
+
+\end{document}
+
+\end{document}
