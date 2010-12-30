@@ -1,0 +1,201 @@
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 47667112116832 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 140026921875328 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 140624530507648 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 140488727488384 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 139646325512064 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 139693374842752 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 140732263868288 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: SkosParser::parseFileToStatement(p_fileName= "example.tur" , p_fileType= 8 ) 
+Debug: "(Soprano)" Error in thread 139652188346240 : "Could not open file example.tur for reading."
+Debug: UrlMap::initMap() 
+Debug: UrlMap::initMap() 
+Debug: (Soprano::Redland::BackendPlugin) creating model of type "hashes" with options "hash-type='memory',contexts='yes'" 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: (Soprano::Redland::BackendPlugin) creating model of type "hashes" with options "hash-type='memory',contexts='yes'" 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: (Soprano::Redland::BackendPlugin) creating model of type "hashes" with options "hash-type='memory',contexts='yes'" 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: (Soprano::Redland::BackendPlugin) creating model of type "hashes" with options "hash-type='memory',contexts='yes'" 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: (Soprano::Redland::BackendPlugin) creating model of type "hashes" with options "hash-type='memory',contexts='yes'" 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Debug: SkosModel::addConcept(p_concept =  QUrl( "" )  ) 
+Debug: SkosModel::findConcept() - concept not found:  QUrl( "" )  
+Debug: SkosModel::addConcept() - Concept is not consistent 
+Warning: Object::connect: No such signal QListWidget::itemChanged(dodaj_alt) in src/edytor.cpp:23
+Warning: Object::connect:  (sender name:   'alternatywneQlista')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such signal QListWidget::itemChanged(dodaj_alt) in src/edytor.cpp:23
+Warning: Object::connect:  (sender name:   'alternatywneQlista')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such signal QListWidget::itemChanged(dodaj_alt) in src/edytor.cpp:23
+Warning: Object::connect:  (sender name:   'alternatywneQlista')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such signal QListWidget::itemChanged(dodaj_alt) in src/edytor.cpp:23
+Warning: Object::connect:  (sender name:   'alternatywneQlista')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alternatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alterhgjfnatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_alterhgjfnatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne(QListWidgetItem*) in src/edytor.cpp:23
+Warning: Object::connect:  (sender name:   'alternatywneQlista')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
+Warning: Object::connect: No such slot edytor::dodaj_atlernatywne() in src/edytor.cpp:20
+Warning: Object::connect:  (sender name:   'usun_skojarzoneButton')
+Warning: Object::connect:  (receiver name: 'edytor')
