@@ -1,3 +1,11 @@
+*.aux
+*.idx
+*.log
+*.out
+Dokumentacja/kpw2010.pdf
+*.toc
+*.bbl
+*.blg
 scalone/Makefile
 scalone/ThesauriDesigner.pro.user
 scalone/ThesauriDesigner
