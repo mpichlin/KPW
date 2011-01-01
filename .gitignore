@@ -13,3 +13,6 @@ scalone/ThesauriDesigner
 *.app
 *.o
 scalone/moc/*
+scalone/html/*
+scalone/latex/*
+scalone/log
