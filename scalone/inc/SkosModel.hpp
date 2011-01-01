@@ -8,19 +8,19 @@
 class SkosModel
 {
 public:
-  void addConcept(QUrl p_concept);
-  void addConcept(SkosConcept p_concept);
-  void addConceptScheme(SkosConceptScheme p_conceptScheme);
-  void addLabel(Soprano::Node p_label, 
+  void addConcept(const QUrl &p_concept);
+  void addConcept(const SkosConcept &p_concept);
+  void addConceptScheme(const SkosConceptScheme &p_conceptScheme);
+  void addLabel(const Soprano::Node &p_label, 
                 const ELabelType &p_labelType,
-                SkosClass p_skosClass);
+                const QUrl &p_classUrl);
   void removeLabel(const Soprano::Node &p_label, 
                    const ELabelType &p_labelType,
-                   const SkosClass &p_skosClass);
-  void addDefinition(Soprano::Node p_definition, 
-                     SkosClass p_skosClass);
-  void removeDefinition(Soprano::Node p_definition, 
-                        SkosClass p_skosClass);
+                   const QUrl &p_classUrl);
+  void addDefinition(const Soprano::Node &p_definition, 
+                     const QUrl &p_classUrl);
+  void removeDefinition(const Soprano::Node &p_definition, 
+                        const QUrl &p_classUrl);
   void addConceptRelation(const SkosConcept &p_baseConcept,
                           const SkosConcept &p_relatedConcept,
                           const ERelationType &p_relationType);
@@ -35,12 +35,13 @@ public:
     const SkosConceptScheme &p_conceptScheme);
   void removeConcept(const SkosConcept &p_concept);
   void removeConceptScheme(const SkosConceptScheme &p_conceptScheme);
-  QList<SkosConcept> getConcepts() const {return m_concepts;};
-  QList<SkosConceptScheme> getConceptSchemes() const {return m_conceptSchemes;};
+  const QList<SkosConcept> &getConcepts() const {return m_concepts;};
+  const QList<SkosConceptScheme> &getConceptSchemes() const
+    {return m_conceptSchemes;};
   void clearEmptyClasses();
 private:
-  bool isConsistencyOk(const SkosClass &p_skosClass);
-  SkosClass * findSkosClass(const SkosClass &p_skosClass);
+  bool isConsistencyOk(const QUrl &p_classUrl);
+  SkosClass * findSkosClass(const QUrl &p_classUrl);
   bool isRelationConsistencyOk(const SkosConcept &p_baseConcept,
                                const SkosConcept &p_relatedConcept,
                                const ERelationType &p_relationType) const;

@@ -3,10 +3,10 @@
 #include <QDebug>
 #include <QStack>
 
-void SkosModel::addConcept(QUrl p_concept)
+void SkosModel::addConcept(const QUrl &p_concept)
 {
   qDebug() << "SkosModel::addConcept(p_concept =" << p_concept << ")";
-  if (isConsistencyOk(SkosConcept(p_concept)))
+  if (isConsistencyOk(p_concept))
   {
     m_concepts.append(SkosConcept(p_concept));
   }
@@ -16,10 +16,10 @@ void SkosModel::addConcept(QUrl p_concept)
   }
 }
 
-void SkosModel::addConcept(SkosConcept p_concept)
+void SkosModel::addConcept(const SkosConcept &p_concept)
 {
   qDebug() << "SkosModel::addConcept(p_concept =" << p_concept.getUrl() << ")";
-  if (isConsistencyOk(p_concept) && !p_concept.isEmpty())
+  if (isConsistencyOk(p_concept.getUrl()) && !p_concept.isEmpty())
   {
     m_concepts.append(p_concept);
   }
@@ -29,7 +29,7 @@ void SkosModel::addConcept(SkosConcept p_concept)
   }
 }
 
-void SkosModel::addConceptScheme(SkosConceptScheme p_conceptScheme)
+void SkosModel::addConceptScheme(const SkosConceptScheme &p_conceptScheme)
 {
   qDebug() << "SkosModel::addConceptScheme(p_conceptScheme =" 
            << p_conceptScheme.getUrl() << ")";
@@ -103,27 +103,27 @@ void SkosModel::addConceptRelation(const SkosConcept &p_baseConcept,
   }
 }
 
-bool SkosModel::isConsistencyOk(const SkosClass &p_skosClass)
+bool SkosModel::isConsistencyOk(const QUrl &p_skosClassUrl)
 {
-  if (findConcept(p_skosClass.getUrl()) != m_concepts.end())
+  if (findConcept(p_skosClassUrl) != m_concepts.end())
   {
     return false;
   }
-  if (findConceptScheme(p_skosClass.getUrl()) != m_conceptSchemes.end())
+  if (findConceptScheme(p_skosClassUrl) != m_conceptSchemes.end())
   {
     return false;
   }
   return true;
 }
 
-void SkosModel::addLabel(Soprano::Node p_label, 
+void SkosModel::addLabel(const Soprano::Node &p_label, 
                          const ELabelType &p_labelType,
-                         SkosClass p_skosClass)
+                         const QUrl &p_skosClassUrl)
 {
   qDebug() << "SkosModel::addLabel(p_label =" << p_label.toString()
            << ", p_labelType =" << p_labelType << ", p_skosClass ="
-           << p_skosClass.getUrl();
-  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+           << p_skosClassUrl;
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClassUrl);
   if (l_skosClassPtr == NULL)
   {
     qDebug() << "SkosModel::addLabel() - class does not exists";
@@ -136,12 +136,12 @@ void SkosModel::addLabel(Soprano::Node p_label,
 
 void SkosModel::removeLabel(const Soprano::Node &p_label, 
                             const ELabelType &p_labelType,
-                            const SkosClass &p_skosClass)
+                            const QUrl &p_skosClassUrl)
 {
   qDebug() << "SkosModel::remove(p_label =" << p_label.toString()
            << ", p_labelType =" << p_labelType << ", p_skosClass ="
-           << p_skosClass.getUrl();
-  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+           << p_skosClassUrl;
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClassUrl);
   if (l_skosClassPtr == NULL)
   {
     qDebug() << "SkosModel::removeLabel() - class does not exists";
@@ -184,16 +184,16 @@ QList<SkosConceptScheme>::iterator SkosModel::findConceptScheme(
   return m_conceptSchemes.end();
 }
 
-SkosClass * SkosModel::findSkosClass(const SkosClass &p_skosClass)
+SkosClass * SkosModel::findSkosClass(const QUrl &p_skosClassUrl)
 {
   QList<SkosConcept>::iterator l_conceptsIter = 
-    findConcept(p_skosClass.getUrl());
+    findConcept(p_skosClassUrl);
   if (l_conceptsIter != m_concepts.end())
   {
     return &*l_conceptsIter;
   }
   QList<SkosConceptScheme>::iterator l_conceptSchemesIter = 
-    findConceptScheme(p_skosClass.getUrl());
+    findConceptScheme(p_skosClassUrl);
   if (l_conceptSchemesIter != m_conceptSchemes.end())
   {
     return &*l_conceptSchemesIter;
@@ -399,10 +399,10 @@ bool SkosModel::isTwoListsHaveAtLeastOneCommonElement(
   return false;
 } 
 
-void SkosModel::addDefinition(Soprano::Node p_definition, 
-                              SkosClass p_skosClass)
+void SkosModel::addDefinition(const Soprano::Node &p_definition, 
+                              const QUrl &p_skosClassUrl)
 {
-  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClassUrl);
   if (l_skosClassPtr == NULL)
   {
     qDebug() << "SkosModel::addDefinition() - class does not exists";
@@ -413,10 +413,10 @@ void SkosModel::addDefinition(Soprano::Node p_definition,
   }
 }
 
-void SkosModel::removeDefinition(Soprano::Node p_definition, 
-                                 SkosClass p_skosClass)
+void SkosModel::removeDefinition(const Soprano::Node &p_definition, 
+                                 const QUrl &p_skosClassUrl)
 {
-  SkosClass *l_skosClassPtr = findSkosClass(p_skosClass);
+  SkosClass *l_skosClassPtr = findSkosClass(p_skosClassUrl);
   if (l_skosClassPtr == NULL)
   {
     qDebug() << "SkosModel::removeDefinition() - class does not exists";

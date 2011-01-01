@@ -38,7 +38,7 @@ bool SkosClass::isPrefLabelOk(const Soprano::Node &p_prefLabel) const
   return true;
 }
 
-void SkosClass::addLabel(Soprano::Node p_label, 
+void SkosClass::addLabel(const Soprano::Node &p_label, 
                          const ELabelType &p_labelType)
 {
   qDebug() << "SkosClass::addLabel(p_prefLabel =" << p_label.toString()
@@ -99,7 +99,7 @@ void SkosClass::removeLabel(const Soprano::Node &p_label,
   }      
 }
 
-void SkosClass::addLabel(Soprano::Node p_label,
+void SkosClass::addLabel(const Soprano::Node &p_label,
                          QList<Soprano::Node> &p_labelList)
 {
   qDebug() << "SkosClass::addLabel(p_label=" << p_label.toString()
@@ -141,7 +141,7 @@ QList<Soprano::Node>::iterator SkosClass::findLabel(
   return p_labelList.end();
 }
 
-void SkosClass::addDefinition(Soprano::Node p_definition)
+void SkosClass::addDefinition(const Soprano::Node &p_definition)
 {
   if (isDefinitionOk(p_definition))
   {
@@ -164,7 +164,7 @@ bool SkosClass::isDefinitionOk(const Soprano::Node &p_definition)
   return true;
 }
 
-void SkosClass::removeDefinition(Soprano::Node p_definition)
+void SkosClass::removeDefinition(const Soprano::Node &p_definition)
 {
   QList<Soprano::Node>::iterator l_definitionToRemoveIter = 
     findDefinition(p_definition);
@@ -189,7 +189,7 @@ QList<Soprano::Node>::iterator SkosClass::findDefinition(
   return m_definitions.end();
 }
 
-QList<Soprano::Node> SkosClass::getLabelList(
+const QList<Soprano::Node> &SkosClass::getLabelList(
   const ELabelType &p_labelType) const
 {
   qDebug() << "SkosClass::getLabelList(p_labelType=" << p_labelType << ")";
@@ -208,10 +208,10 @@ QList<Soprano::Node> SkosClass::getLabelList(
       return m_hiddenLabels;
     }
   }
-  return QList<Soprano::Node>();
+  return m_prefLabels;
 }
 
-QList<Soprano::Node> SkosClass::getDefinitions() const
+const QList<Soprano::Node> &SkosClass::getDefinitions() const
 {
   return m_definitions;
 }
