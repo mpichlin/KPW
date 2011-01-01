@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Sat Jan 1 16:26:16 2011
+** Created: Sat Jan 1 17:38:47 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -54,7 +54,6 @@ public:
     QVBoxLayout *verticalLayout_11;
     QPushButton *edytujButton;
     QPushButton *dodajButton;
-    QPushButton *usunButton;
     QGridLayout *gridLayout;
     QCheckBox *wezszeBox;
     QCheckBox *szerszeBox;
@@ -159,11 +158,6 @@ public:
         dodajButton->setObjectName(QString::fromUtf8("dodajButton"));
 
         verticalLayout_11->addWidget(dodajButton);
-
-        usunButton = new QPushButton(centralwidget);
-        usunButton->setObjectName(QString::fromUtf8("usunButton"));
-
-        verticalLayout_11->addWidget(usunButton);
 
 
         horizontalLayout->addLayout(verticalLayout_11);
@@ -384,9 +378,8 @@ public:
         actionDokumentacja->setText(QApplication::translate("przegladarka", "Dokumentacja", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("przegladarka", "Znajdz s\305\202owo", 0, QApplication::UnicodeUTF8));
         pokazButton->setText(QApplication::translate("przegladarka", "Poka\305\274", 0, QApplication::UnicodeUTF8));
-        edytujButton->setText(QApplication::translate("przegladarka", "Edytuj poj\304\231cie", 0, QApplication::UnicodeUTF8));
+        edytujButton->setText(QApplication::translate("przegladarka", "Edytuj/Usu\305\204 poj\304\231cie", 0, QApplication::UnicodeUTF8));
         dodajButton->setText(QApplication::translate("przegladarka", "Dodaj poj\304\231cie", 0, QApplication::UnicodeUTF8));
-        usunButton->setText(QApplication::translate("przegladarka", "Usun poj\304\231cie", 0, QApplication::UnicodeUTF8));
         wezszeBox->setText(QApplication::translate("przegladarka", "poj\304\231cia w\304\231\305\274sze", 0, QApplication::UnicodeUTF8));
         szerszeBox->setText(QApplication::translate("przegladarka", "poj\304\231cia szersze", 0, QApplication::UnicodeUTF8));
         skojarzoneBox->setText(QApplication::translate("przegladarka", "poj\304\231cia skojarzone", 0, QApplication::UnicodeUTF8));

@@ -262,10 +262,17 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QPushButton" name="zatwierdzButton">
      <property name="text">
-      <string>ZATWIERDŹ</string>
+      <string>ZATWIERDŹ ZMIANY</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>USUŃ</string>
      </property>
     </widget>
    </item>

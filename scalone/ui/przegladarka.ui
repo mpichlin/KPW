@@ -68,7 +68,7 @@
             <item>
              <widget class="QPushButton" name="edytujButton">
               <property name="text">
-               <string>Edytuj pojęcie</string>
+               <string>Edytuj/Usuń pojęcie</string>
               </property>
              </widget>
             </item>
@@ -76,13 +76,6 @@
              <widget class="QPushButton" name="dodajButton">
               <property name="text">
                <string>Dodaj pojęcie</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="usunButton">
-              <property name="text">
-               <string>Usun pojęcie</string>
               </property>
              </widget>
             </item>

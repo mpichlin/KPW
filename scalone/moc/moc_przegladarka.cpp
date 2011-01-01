@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'przegladarka.h'
 **
-** Created: Sat Jan 1 16:28:55 2011
+** Created: Sat Jan 1 18:03:08 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -28,23 +28,26 @@ static const uint qt_meta_data_przegladarka[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      33,   13,   14,   13, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      14,   13,   13,   13, 0x0a,
-      23,   13,   13,   13, 0x0a,
-      31,   13,   13,   13, 0x0a,
-      38,   13,   13,   13, 0x0a,
-      46,   13,   13,   13, 0x0a,
-      55,   13,   13,   13, 0x0a,
-      65,   13,   13,   13, 0x0a,
-      75,   13,   13,   13, 0x0a,
+      51,   13,   13,   13, 0x0a,
+      60,   13,   13,   13, 0x0a,
+      68,   13,   13,   13, 0x0a,
+      76,   13,   13,   13, 0x0a,
+      85,   13,   13,   13, 0x0a,
+      95,   13,   13,   13, 0x0a,
+     105,   13,   13,   13, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_przegladarka[] = {
-    "przegladarka\0\0edytuj()\0dodaj()\0usun()\0"
+    "przegladarka\0\0QList<SkosConcept>\0"
+    "lista_konceptow()\0edytuj()\0dodaj()\0"
     "pokaz()\0zapisz()\0wczytaj()\0odswiez()\0"
     "wstaw_z_listy()\0"
 };
@@ -78,9 +81,10 @@ int przegladarka::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: edytuj(); break;
-        case 1: dodaj(); break;
-        case 2: usun(); break;
+        case 0: { QList<SkosConcept> _r = lista_konceptow();
+            if (_a[0]) *reinterpret_cast< QList<SkosConcept>*>(_a[0]) = _r; }  break;
+        case 1: edytuj(); break;
+        case 2: dodaj(); break;
         case 3: pokaz(); break;
         case 4: zapisz(); break;
         case 5: wczytaj(); break;
@@ -91,5 +95,14 @@ int przegladarka::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 8;
     }
     return _id;
+}
+
+// SIGNAL 0
+QList<SkosConcept> przegladarka::lista_konceptow()
+{
+    QList<SkosConcept> _t0;
+    void *_a[] = { const_cast<void*>(reinterpret_cast<const void*>(&_t0)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+    return _t0;
 }
 QT_END_MOC_NAMESPACE

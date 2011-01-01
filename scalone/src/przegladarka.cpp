@@ -17,7 +17,6 @@ przegladarka::przegladarka(QWidget *parent) :
     connect(ui->edytujButton, SIGNAL(clicked()), this,SLOT(edytuj()));
     connect(ui->dodajButton, SIGNAL(clicked()), this,SLOT(dodaj()));
     connect(ui->pokazButton, SIGNAL(clicked()), this,SLOT(pokaz()));
-    connect(ui->usunButton, SIGNAL(clicked()), this, SLOT(usun()));
     connect(ui->actionZapisz, SIGNAL(triggered()), this,SLOT (zapisz()));
     connect(ui->actionWczytaj, SIGNAL(triggered()), this,SLOT (wczytaj()));
     connect(ui->znajdzLineEdit, SIGNAL(textEdited(QString)), this,SLOT(odswiez()));
@@ -38,7 +37,8 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        Model.findConcept(Koncept);
+        QList<SkosConcept>::iterator iter;
+        iter=Model.findConcept(Koncept);
         for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
           edyt.alternatywne.push_back(Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString());
         }
@@ -48,25 +48,32 @@ void przegladarka::edytuj()
         for(int j=0;j<Koncept.getLabelList(PrefferedLabelType).size();j++){
           edyt.preferowany=Koncept.getLabelList(PrefferedLabelType).value(j).literal().toString();
         }
-    }
+        for(int j=0;j< Koncept.getRelatedConceptsList(RelatedRelation).size();j++){
+          edyt.skojarzone.push_back(Koncept.getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
+        }
+        for(int j=0;j< Koncept.getRelatedConceptsList(NarrowerRelation).size();j++){
+          edyt.wezsze.push_back(Koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
+        }
+        for(int j=0;j< Koncept.getRelatedConceptsList(BroaderRelation).size();j++){
+          edyt.szersze.push_back(Koncept.getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
+        }
+        for(int j=0;j<Koncept.getDefinitions().size();j++){
+          edyt.definicja+=Koncept.getDefinitions().value(j).literal().toString();
+          edyt.definicja+=QChar(QChar::LineSeparator);
+        }
+        edyt.przeladuj();
+        edyt.show();
+        if (edyt.exec() == QDialog::Accepted) {   ;
 
+           //zapelnij_liste();
+        }
+    }
     else{
             QMessageBox::information(this, tr("Nie znaleziono"),
               tr("Niestety nie ma wyrazu \"%1\" w bazie").arg(slowo));
     }
-    edyt.przeladuj();
-    edyt.show();
-    if (edyt.exec() == QDialog::Accepted) {
-        zapelnij_liste();
-
-    }
-
-
 }
-void przegladarka::usun()
-{
 
-}
 void przegladarka::dodaj()
 {
     edytor edyt;
