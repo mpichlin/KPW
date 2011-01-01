@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'dodaj.h'
 **
-** Created: Sat Jan 1 16:26:25 2011
+** Created: Sat Jan 1 16:28:57 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
