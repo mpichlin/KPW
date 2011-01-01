@@ -38,6 +38,7 @@ public:
   QList<SkosConcept> getConcepts() const {return m_concepts;};
   QList<SkosConceptScheme> getConceptSchemes() const {return m_conceptSchemes;};
   void clearEmptyClasses();
+
 private:
   bool isConsistencyOk(const SkosClass &p_skosClass);
   SkosClass * findSkosClass(const SkosClass &p_skosClass);

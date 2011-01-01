@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'edytor.h'
 **
-** Created: Thu Dec 30 20:31:11 2010
+** Created: Fri Dec 31 17:19:35 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!

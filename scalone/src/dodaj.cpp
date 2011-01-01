@@ -27,7 +27,7 @@ void dodaj::odswiez()
     int n;
     n=ui->listWidget->count();
     for(int i=0;i<n;i++){
-        if (ui->listWidget->item(i)->text().contains(pom)){
+        if (ui->listWidget->item(i)->text().contains(pom,Qt::CaseInsensitive)){
             ui->listWidget->item(i)->setHidden(0);
             ui->listWidget->setCurrentRow(i);}
         else

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'przegladarka.h'
 **
-** Created: Thu Dec 30 20:31:11 2010
+** Created: Sat Jan 1 13:43:48 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_przegladarka[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,15 +34,19 @@ static const uint qt_meta_data_przegladarka[] = {
       14,   13,   13,   13, 0x0a,
       23,   13,   13,   13, 0x0a,
       31,   13,   13,   13, 0x0a,
-      39,   13,   13,   13, 0x0a,
-      48,   13,   13,   13, 0x0a,
+      38,   13,   13,   13, 0x0a,
+      46,   13,   13,   13, 0x0a,
+      55,   13,   13,   13, 0x0a,
+      65,   13,   13,   13, 0x0a,
+      75,   13,   13,   13, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_przegladarka[] = {
-    "przegladarka\0\0edytuj()\0dodaj()\0pokaz()\0"
-    "zapisz()\0wczytaj()\0"
+    "przegladarka\0\0edytuj()\0dodaj()\0usun()\0"
+    "pokaz()\0zapisz()\0wczytaj()\0odswiez()\0"
+    "wstaw_z_listy()\0"
 };
 
 const QMetaObject przegladarka::staticMetaObject = {
@@ -76,12 +80,15 @@ int przegladarka::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: edytuj(); break;
         case 1: dodaj(); break;
-        case 2: pokaz(); break;
-        case 3: zapisz(); break;
-        case 4: wczytaj(); break;
+        case 2: usun(); break;
+        case 3: pokaz(); break;
+        case 4: zapisz(); break;
+        case 5: wczytaj(); break;
+        case 6: odswiez(); break;
+        case 7: wstaw_z_listy(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 8;
     }
     return _id;
 }

@@ -79,6 +79,13 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="usunButton">
+              <property name="text">
+               <string>Usun pojęcie</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
