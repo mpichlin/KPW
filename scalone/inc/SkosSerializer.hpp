@@ -37,7 +37,11 @@ private:
     const QList<SkosConceptScheme> &p_schemesList);
   void serializeLabelsFromConcepts(const QList<SkosConcept> &p_conceptsList);
   void serializeLabelsFromSchemes(
-    const QList<SkosConceptScheme> &p_conceptsList);
+    const QList<SkosConceptScheme> &p_conceptSchemesList);
+  void serializeDefinitionsFromConcepts(
+    const QList<SkosConcept> &p_conceptsList);
+  void serializeDefinitionsFromSchemes(
+    const QList<SkosConceptScheme> &p_conceptSchemesList);
   void serializeLabelType(
     const QList<SkosConcept>::const_iterator &p_conceptIter,
     const ELabelType &p_labelType,

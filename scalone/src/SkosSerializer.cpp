@@ -12,6 +12,8 @@ void SkosSerializer::createStatementsFromModel()
   serializeTopConceptsFromSchemes(l_conceptSchemesList);
   serializeLabelsFromConcepts(l_conceptsList);
   serializeLabelsFromSchemes(l_conceptSchemesList);
+  serializeDefinitionsFromConcepts(l_conceptsList);
+  serializeDefinitionsFromSchemes(l_conceptSchemesList);
 }
 
 void SkosSerializer::serializeStatemetsToFile(
@@ -156,6 +158,52 @@ void SkosSerializer::serializeTopConceptsFromSchemes(
           Soprano::Node(
             QUrl("http://www.w3.org/2004/02/skos/core#hasTopConcept")),
           Soprano::Node((*l_conceptsIter)->getUrl())));
+    }
+  }  
+}
+
+void SkosSerializer::serializeDefinitionsFromSchemes(
+  const QList<SkosConceptScheme> &p_conceptSchemesList)
+{
+  for (QList<SkosConceptScheme>::const_iterator l_schemesIter =
+         p_conceptSchemesList.begin();
+       l_schemesIter != p_conceptSchemesList.end(); ++l_schemesIter)
+  {
+    QList<Soprano::Node> l_definitions = l_schemesIter->getDefinitions();
+    for(QList<Soprano::Node>::const_iterator l_definitionsIter = 
+          l_definitions.begin();
+        l_definitionsIter != l_definitions.end();
+        ++l_definitionsIter)
+    {
+      m_statements.append(
+        Soprano::Statement(
+          Soprano::Node(l_schemesIter->getUrl()),
+          Soprano::Node(
+            QUrl("http://www.w3.org/2004/02/skos/core#definition")),
+          *l_definitionsIter));
+    }
+  }  
+}
+
+void SkosSerializer::serializeDefinitionsFromConcepts(
+  const QList<SkosConcept> &p_conceptsList)
+{
+  for (QList<SkosConcept>::const_iterator l_conceptsIter =
+         p_conceptsList.begin();
+       l_conceptsIter != p_conceptsList.end(); ++l_conceptsIter)
+  {
+    QList<Soprano::Node> l_definitions = l_conceptsIter->getDefinitions();
+    for(QList<Soprano::Node>::const_iterator l_definitionsIter = 
+          l_definitions.begin();
+        l_definitionsIter != l_definitions.end();
+        ++l_conceptsIter)
+    {
+      m_statements.append(
+        Soprano::Statement(
+          Soprano::Node(l_conceptsIter->getUrl()),
+          Soprano::Node(
+            QUrl("http://www.w3.org/2004/02/skos/core#definition")),
+          *l_definitionsIter));
     }
   }  
 }
