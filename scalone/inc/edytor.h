@@ -5,6 +5,7 @@
 #include <QString>
 #include <QList>
 #include <QListWidgetItem>
+#include "SkosConcept.hpp"
 namespace Ui {
     class edytor;
 }
@@ -15,6 +16,7 @@ public:
     edytor(QWidget *parent = 0);
     ~edytor();
 
+    //QString id;
     QString preferowany;
     QString definicja;
     QString przyklady;
@@ -23,13 +25,12 @@ public:
     QList<QString> ukryte;
     QList<QString> wezsze;
     QList<QString> szersze;
+    QList<QString> skojarzone;
     void przeladuj();
 
 
 private:
     Ui::edytor *ui;
-
-
 public slots:
     void zmien_szersze();
     void dodaj_skojarzone();

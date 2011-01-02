@@ -17,7 +17,7 @@ edytor::edytor(QWidget *parent) :
     connect(ui->dodaj_skojarzoneButton, SIGNAL(clicked()), this,
                                    SLOT(dodaj_skojarzone()));
     connect(ui->usun_skojarzoneButton, SIGNAL(clicked()), this,
-                                   SLOT(dodaj_atlernatywne()));
+                                   SLOT(usun_skojarzone()));
     connect(ui->zatwierdzButton, SIGNAL(clicked()), this,
                                    SLOT(zatwierdz()));
 }
@@ -28,7 +28,6 @@ edytor::~edytor()
 void edytor::dodaj_atlernatywne(QListWidgetItem* zmieniona)
 {
     if (ui->alternatywneQlista->row(zmieniona)==ui->alternatywneQlista->count()-1){   
-        ui->preferowanyQline->setText("dupa");
         ui->alternatywneQlista->sortItems(Qt::AscendingOrder);
 
         QListWidgetItem *pom = new QListWidgetItem();
@@ -127,8 +126,13 @@ void edytor::zatwierdz()
     this->preferowany=ui->preferowanyQline->text();
     this->definicja=ui->definicjaText->toPlainText();
     this->przyklady=ui->przykladyText->toPlainText();
-    //this->alternatywne=ui->alternatywneQlista->
-
-
+    this->alternatywne.clear();
+    for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
+        this->alternatywne.push_back(ui->alternatywneQlista->item(i)->text());
+    }
+    this->ukryte.clear();
+    for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
+        this->ukryte.push_back(ui->ukryteQlista->item(i)->text());
+    }
     this->accept();
 }

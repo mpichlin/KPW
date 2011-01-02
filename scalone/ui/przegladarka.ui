@@ -68,7 +68,7 @@
             <item>
              <widget class="QPushButton" name="edytujButton">
               <property name="text">
-               <string>Edytuj pojęcie</string>
+               <string>Edytuj/Usuń pojęcie</string>
               </property>
              </widget>
             </item>
