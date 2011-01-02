@@ -23,7 +23,7 @@ void myMessageHandler(QtMsgType type, const char *msg)
 		abort();
 	}
 	QFile outFile("log");
-	outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+	outFile.open(QIODevice::WriteOnly);
 	QTextStream ts(&outFile);
 	ts << txt << endl;
     }
