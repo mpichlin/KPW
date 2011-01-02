@@ -192,12 +192,17 @@ void SkosSerializer::serializeDefinitionsFromConcepts(
          p_conceptsList.begin();
        l_conceptsIter != p_conceptsList.end(); ++l_conceptsIter)
   {
+    qDebug() << "SkosSerializer::serializeDefinitionsFromConcepts - "
+             << "finding definitions in concept"
+             << l_conceptsIter->getUrl();
     QList<Soprano::Node> l_definitions = l_conceptsIter->getDefinitions();
     for(QList<Soprano::Node>::const_iterator l_definitionsIter = 
           l_definitions.begin();
         l_definitionsIter != l_definitions.end();
-        ++l_conceptsIter)
+        ++l_definitionsIter)
     {
+        qDebug() << "SkosSerializer::serializeDefinitionsFromConcepts -"
+                 << "append definition:" << *l_definitionsIter;
       m_statements.append(
         Soprano::Statement(
           Soprano::Node(l_conceptsIter->getUrl()),
