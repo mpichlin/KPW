@@ -231,6 +231,6 @@ void SkosParser::parseDefinition(const Soprano::Statement &p_statement)
 {
   qDebug() << "SkosParser::parseDefinition(p_statement="
            << p_statement << ")";
-  m_model->addDefinition(p_statement.subject().uri(),
-                         p_statement.object().uri());
+  m_model->addDefinition(p_statement.object(),
+                         p_statement.subject().uri());
 }

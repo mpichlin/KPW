@@ -146,6 +146,7 @@ void SkosClass::addDefinition(const Soprano::Node &p_definition)
   if (isDefinitionOk(p_definition))
   {
     m_definitions.append(p_definition);
+    qDebug() << "SkosClass::addDefinition - added:" << p_definition;
   }
 }
 
