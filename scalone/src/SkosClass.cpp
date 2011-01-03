@@ -222,3 +222,10 @@ bool SkosClass::isEmpty() const
   return((m_prefLabels.size() == 0) && (m_altLabels.size() == 0) 
          && (m_hiddenLabels.size() == 0));
 }
+
+void SkosClass::clearLabels()
+{
+  m_prefLabels.clear();
+  m_altLabels.clear();
+  m_hiddenLabels.clear();
+}

@@ -109,6 +109,13 @@ public:
    * \return Stałą referencja na listę wszystkich definicji danego obiektu
    */
   const QList<Soprano::Node> &getDefinitions() const;
+
+  /*! \brief Usuwa wszystkie etykiety
+   *
+   * Usuwa wszystkie etykiety przypisane do obiektu
+   * \post Obiekt nie zawiera etykiet.
+   */
+  void clearLabels();
 protected:
   /*! \brief Konstruktor domyślny
    *
