@@ -55,7 +55,59 @@ void edytor::dodaj_ukryte(QListWidgetItem* zmieniona)
 }
 
 void edytor::przeladuj(){
-//zaladuj wszystkie pola:
+    //zaladuj etykiety alternatywne:
+    for(int j=0;j<Koncept->getLabelList(AlternativeLabelType).size();j++){
+        QListWidgetItem *pom = new QListWidgetItem(ui->alternatywneQlista);
+        pom->setText(Koncept->getLabelList(AlternativeLabelType).value(j).literal().toString());
+        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
+    }
+    ui->alternatywneQlista->sortItems(Qt::AscendingOrder);
+    QListWidgetItem *dodaj = new QListWidgetItem();
+    dodaj->setText("DODAJ");
+    dodaj->setFlags (dodaj->flags () | Qt::ItemIsEditable);
+    ui->alternatywneQlista->insertItem(ui->alternatywneQlista->count(),dodaj);
+
+    //zaladuj etykiety ukryte:
+    for(int j=0;j<Koncept->getLabelList(HiddenLabelType).size();j++){
+        QListWidgetItem *pom = new QListWidgetItem(ui->ukryteQlista);
+        pom->setText(Koncept->getLabelList(HiddenLabelType).value(j).literal().toString());
+        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
+    }
+    ui->ukryteQlista->sortItems(Qt::AscendingOrder);
+    QListWidgetItem *dodaj1 = new QListWidgetItem();
+    dodaj1->setText("DODAJ");
+    dodaj1->setFlags (dodaj1->flags () | Qt::ItemIsEditable);
+    ui->ukryteQlista->insertItem(ui->ukryteQlista->count(),dodaj1);
+    //zaladuj preferowany:
+    ui->preferowanyQline->setText(Koncept->getLabelList(PrefferedLabelType).value(0).literal().toString());
+    //zaladuj skojarzone:
+    for(int j=0;j< Koncept->getRelatedConceptsList(RelatedRelation).size();j++){
+        QListWidgetItem *pom = new QListWidgetItem(ui->skojarzoneQlista);
+        pom->setText(Koncept->getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
+    }
+    //zaladuj wezsze
+    for(int j=0;j< Koncept->getRelatedConceptsList(NarrowerRelation).size();j++){
+        QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
+        pom->setText(Koncept->getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
+    }
+    //zaladuj szersze
+    for(int j=0;j< Koncept->getRelatedConceptsList(BroaderRelation).size();j++){
+        QListWidgetItem *pom = new QListWidgetItem(ui->szerszeQlista);
+        pom->setText(Koncept->getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
+    }
+    QString definicja;
+    for(int j=0;j<Koncept->getDefinitions().size();j++){
+        definicja+=Koncept->getDefinitions().value(j).literal().toString();
+        definicja+=QChar(QChar::LineSeparator);
+    }
+    ui->definicjaText->setPlainText(definicja);
+
+  /*
+
+    for(int j=0;j<Koncept.getDefinitions().size();j++){
+      edyt.definicja+=Koncept.getDefinitions().value(j).literal().toString();
+      edyt.definicja+=QChar(QChar::LineSeparator);
+    }
 
     ui->definicjaText->setPlainText(this->definicja);
     ui->przykladyText->setPlainText(this->przyklady);
@@ -103,6 +155,7 @@ void edytor::przeladuj(){
         pom->setText(this->skojarzone.takeAt(i));
         pom->setFlags (pom->flags () | Qt::ItemIsEditable);
     }
+    */
 
     connect(ui->alternatywneQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_atlernatywne(QListWidgetItem*)));
     connect(ui->ukryteQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_ukryte(QListWidgetItem*)));

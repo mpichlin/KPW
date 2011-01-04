@@ -24,7 +24,6 @@ przegladarka::przegladarka(QWidget *parent) :
 
     Model=SkosModel();
 
-
     }
 
 przegladarka::~przegladarka()
@@ -35,33 +34,10 @@ void przegladarka::edytuj()
 {
 
     QString slowo = ui->znajdzLineEdit->text();
+
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
         edytor edyt(0,&Model,&Koncept);
-        //QList<SkosConcept>::iterator iter;
-       // iter=Model.findConcept(Koncept);
-        for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
-          edyt.alternatywne.push_back(Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString());
-        }
-        for(int j=0;j<Koncept.getLabelList(HiddenLabelType).size();j++){
-          edyt.ukryte.push_back(Koncept.getLabelList(HiddenLabelType).value(j).literal().toString());
-        }
-        for(int j=0;j<Koncept.getLabelList(PrefferedLabelType).size();j++){
-          edyt.preferowany=Koncept.getLabelList(PrefferedLabelType).value(j).literal().toString();
-        }
-        for(int j=0;j< Koncept.getRelatedConceptsList(RelatedRelation).size();j++){
-          edyt.skojarzone.push_back(Koncept.getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
-        }
-        for(int j=0;j< Koncept.getRelatedConceptsList(NarrowerRelation).size();j++){
-          edyt.wezsze.push_back(Koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
-        }
-        for(int j=0;j< Koncept.getRelatedConceptsList(BroaderRelation).size();j++){
-          edyt.szersze.push_back(Koncept.getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
-        }
-        for(int j=0;j<Koncept.getDefinitions().size();j++){
-          edyt.definicja+=Koncept.getDefinitions().value(j).literal().toString();
-          edyt.definicja+=QChar(QChar::LineSeparator);
-        }
 
         edyt.przeladuj();
         edyt.show();
@@ -161,7 +137,8 @@ bool przegladarka::znajdz(QString slowo, SkosConcept& Koncept)
 void przegladarka::pokaz()
 //Poszukuje słowa pobranego z linii, wśród wszystkich zawartych w tezaurusie słowach i pokazuje odpodiedni koncept i jego pokrewne zgodnie z określonymi wlaściwościami.
 //W przeciwnym razie zwraca informacje o braku słowa w bazie
-{    QString slowo = ui->znajdzLineEdit->text();
+{
+    QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept))
         wyswietl(Koncept);
@@ -190,20 +167,6 @@ void przegladarka::wyswietl(SkosConcept Koncept)
          definicja+=QChar(QChar::LineSeparator);
      }
      ui->definicjaTextBrowser->setText(definicja);
-/*
-     QString powiazane;
-     if (ui->skojarzoneBox->isChecked()){
-     for(int j=0;j< Koncept.getRelatedConceptsList(RelatedRelation).size();j++){
-         for(int k=0; k<Koncept.getRelatedConceptsList(RelatedRelation).value(j)->getLabelList(PrefferedLabelType).size;k++)
-            powiazane+=Koncept.getRelatedConceptsList(RelatedRelation).value(j)->getLabelList(PrefferedLabelType).value(k).literal().toString();
-            powiazane+=' ';
-     }
-
-
-
-     ui->powiazaneTextBrowser->setText(powiazane);
-     */
-
 }
 
 
