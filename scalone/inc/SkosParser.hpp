@@ -31,7 +31,7 @@
 class SkosParser
 {
 public:
-  /*! Konstruktor z określonym modelem
+  /*! \brief Konstruktor z określonym modelem
    *
    * Konstruktor w którym podawany jest wskaźnik na model, który będzie
    * uzupełniony na podstawie parsowanego pliku
