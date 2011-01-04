@@ -5,17 +5,21 @@
  *  \brief Zawiera definicję klasy SkosConcept
  *
  * Plik zawiera definicję klasy SkosConcept.
+ *
+ * \author Michał Pichliński
+ * \date 2010.12.01
+ * \version 1.00.00
  */
 
 #include "ESchemeRelation.hpp"
-
 #include "SkosClass.hpp"
 #include "SkosConceptScheme.hpp"
 #include "ERelationType.hpp"
 
 class SkosConceptScheme;
 
-/*! \brief Klasa modelująca SKOSową klasę Concept
+/*! \class SkosClass
+ * \brief Klasa modelująca SKOSową klasę Concept
  *
  * Klasa modelująca SKOSową klasę Concept
  */
