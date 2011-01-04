@@ -426,3 +426,40 @@ void SkosModel::removeDefinition(const Soprano::Node &p_definition,
     l_skosClassPtr->removeDefinition(p_definition);
   }
 }
+
+void SkosModel::removeConceptRelation(const SkosConcept &p_baseConcept,
+                                      const SkosConcept &p_relatedConcept,
+                                      const ERelationType &p_relationType)
+{
+  QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_baseConcept);
+  QList<SkosConcept>::iterator l_relatedConceptIter = 
+    findConcept(p_relatedConcept);
+  if ((l_baseConceptIter != m_concepts.end()) && 
+      (l_relatedConceptIter != m_concepts.end()))
+  {
+    l_baseConceptIter->removeConceptFromRelation(p_relatedConcept,
+                                                 p_relationType);
+    switch (p_relationType)
+    {
+      case RelatedRelation:
+      {
+        l_relatedConceptIter->removeConceptFromRelation(p_baseConcept,
+                                                        RelatedRelation);
+        break;
+      }
+      case BroaderRelation:
+      {
+        l_relatedConceptIter->removeConceptFromRelation(p_baseConcept,
+                                                        NarrowerRelation);
+        break;
+      }
+      case NarrowerRelation:
+      {
+        l_relatedConceptIter->removeConceptFromRelation(p_baseConcept,
+                                                        BroaderRelation);
+        break;
+      }
+    }    
+  }
+}
+
