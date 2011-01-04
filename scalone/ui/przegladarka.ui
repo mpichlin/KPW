@@ -124,7 +124,7 @@
           <item row="2" column="1">
            <widget class="QSpinBox" name="skumulowane_spinBox"/>
           </item>
-          <item row="0" column="2">
+          <item row="0" column="3">
            <widget class="QCheckBox" name="definicjaBox">
             <property name="text">
              <string>Definicja</string>
@@ -134,17 +134,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QCheckBox" name="przykladyBox">
-            <property name="text">
-             <string>Przykłady</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
+          <item row="1" column="3">
            <widget class="QCheckBox" name="skumulowaneBox">
             <property name="text">
              <string>Skumulowane</string>
@@ -152,6 +142,25 @@
             <property name="checked">
              <bool>true</bool>
             </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>Polski (pl)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>English (en)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>INNY</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -193,28 +202,10 @@
          </layout>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Przykłady</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTextBrowser" name="przykladyTextBrowser"/>
-          </item>
-         </layout>
+         <layout class="QVBoxLayout" name="verticalLayout_4"/>
         </item>
        </layout>
       </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
      </layout>
     </item>
     <item>
@@ -337,22 +328,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>przykladyBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>przykladyTextBrowser</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>676</x>
-     <y>125</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>558</x>
-     <y>415</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>definicjaBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>definicjaTextBrowser</receiver>
@@ -365,22 +340,6 @@
     <hint type="destinationlabel">
      <x>558</x>
      <y>266</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>przykladyBox</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label_3</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>676</x>
-     <y>125</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>558</x>
-     <y>342</y>
     </hint>
    </hints>
   </connection>

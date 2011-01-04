@@ -15,12 +15,9 @@ dodaj::dodaj(QWidget *parent, SkosModel *model, SkosConcept *bazowy, ERelationTy
     ui->znajdzLineEdit->setText("");
     //dla wszystkich konceptów:
     for(int i=0;i<Model->getConcepts().size();i++){
-        //dla wszystkich labelek preferowanych
+        //dla wszystkich etykiet preferowanych:
         for(int j=0;j<Model->getConcepts().value(i).getLabelList(PrefferedLabelType).size();j++)
             ui->pojeciaListWidget->addItem(Model->getConcepts().value(i).getLabelList(PrefferedLabelType).value(j).literal().toString());
-        //dla wszystkich labelek alternatywnych
-        //for(int j=0;j<Model->getConcepts().value(i).getLabelList(AlternativeLabelType).size();j++)
-        //    ui->pojeciaListWidget->addItem(Model->getConcepts().value(i).getLabelList(AlternativeLabelType).value(j).literal().toString());
     }
     ui->pojeciaListWidget->sortItems();
     ui->pojeciaListWidget->setCurrentRow(0);

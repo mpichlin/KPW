@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Tue Jan 4 15:28:36 2011
+** Created: Wed Jan 5 00:10:44 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -31,12 +32,14 @@ QT_BEGIN_NAMESPACE
 class Ui_edytor
 {
 public:
-    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label;
+    QLineEdit *preferowanyQline;
+    QComboBox *comboBox;
     QVBoxLayout *Layout;
     QHBoxLayout *pojecieLayout;
     QVBoxLayout *terminyLayout;
-    QLabel *label;
-    QLineEdit *preferowanyQline;
     QGridLayout *gridLayout;
     QListWidget *ukryteQlista;
     QListWidget *alternatywneQlista;
@@ -45,10 +48,6 @@ public:
     QVBoxLayout *pojeciaLayout;
     QLabel *label_7;
     QTextEdit *definicjaText;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *label_8;
-    QTextEdit *przykladyText;
-    QPushButton *zob_uwagiButton;
     QHBoxLayout *relacjeLayout;
     QVBoxLayout *szerszeLayout;
     QLabel *label_4;
@@ -67,8 +66,8 @@ public:
     QHBoxLayout *horizontalLayout;
     QPushButton *dodaj_skojarzoneButton;
     QPushButton *usun_skojarzoneButton;
-    QPushButton *zatwierdzButton;
     QPushButton *usunButton;
+    QPushButton *zatwierdzButton;
 
     void setupUi(QWidget *edytor)
     {
@@ -81,10 +80,31 @@ public:
         sizePolicy.setHeightForWidth(edytor->sizePolicy().hasHeightForWidth());
         edytor->setSizePolicy(sizePolicy);
         edytor->setMinimumSize(QSize(600, 400));
-        gridLayout_3 = new QGridLayout(edytor);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        verticalLayout = new QVBoxLayout(edytor);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label = new QLabel(edytor);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        horizontalLayout_2->addWidget(label);
+
+        preferowanyQline = new QLineEdit(edytor);
+        preferowanyQline->setObjectName(QString::fromUtf8("preferowanyQline"));
+
+        horizontalLayout_2->addWidget(preferowanyQline);
+
+        comboBox = new QComboBox(edytor);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        horizontalLayout_2->addWidget(comboBox);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
+
         Layout = new QVBoxLayout();
         Layout->setSpacing(6);
         Layout->setObjectName(QString::fromUtf8("Layout"));
@@ -94,16 +114,6 @@ public:
         terminyLayout = new QVBoxLayout();
         terminyLayout->setSpacing(6);
         terminyLayout->setObjectName(QString::fromUtf8("terminyLayout"));
-        label = new QLabel(edytor);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        terminyLayout->addWidget(label);
-
-        preferowanyQline = new QLineEdit(edytor);
-        preferowanyQline->setObjectName(QString::fromUtf8("preferowanyQline"));
-
-        terminyLayout->addWidget(preferowanyQline);
-
         gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -155,27 +165,6 @@ public:
         definicjaText->setObjectName(QString::fromUtf8("definicjaText"));
 
         pojeciaLayout->addWidget(definicjaText);
-
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        label_8 = new QLabel(edytor);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
-
-        verticalLayout_2->addWidget(label_8);
-
-        przykladyText = new QTextEdit(edytor);
-        przykladyText->setObjectName(QString::fromUtf8("przykladyText"));
-
-        verticalLayout_2->addWidget(przykladyText);
-
-        zob_uwagiButton = new QPushButton(edytor);
-        zob_uwagiButton->setObjectName(QString::fromUtf8("zob_uwagiButton"));
-
-        verticalLayout_2->addWidget(zob_uwagiButton);
-
-
-        pojeciaLayout->addLayout(verticalLayout_2);
 
 
         pojecieLayout->addLayout(pojeciaLayout);
@@ -283,19 +272,18 @@ public:
 
         Layout->addLayout(relacjeLayout);
 
-        Layout->setStretch(0, 1);
 
-        gridLayout_3->addLayout(Layout, 0, 0, 1, 1);
-
-        zatwierdzButton = new QPushButton(edytor);
-        zatwierdzButton->setObjectName(QString::fromUtf8("zatwierdzButton"));
-
-        gridLayout_3->addWidget(zatwierdzButton, 2, 0, 1, 1);
+        verticalLayout->addLayout(Layout);
 
         usunButton = new QPushButton(edytor);
         usunButton->setObjectName(QString::fromUtf8("usunButton"));
 
-        gridLayout_3->addWidget(usunButton, 1, 0, 1, 1);
+        verticalLayout->addWidget(usunButton);
+
+        zatwierdzButton = new QPushButton(edytor);
+        zatwierdzButton->setObjectName(QString::fromUtf8("zatwierdzButton"));
+
+        verticalLayout->addWidget(zatwierdzButton);
 
 
         retranslateUi(edytor);
@@ -311,11 +299,15 @@ public:
     {
         edytor->setWindowTitle(QApplication::translate("edytor", "Edytor poj\304\231\304\207", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("edytor", "termin preferowany:", 0, QApplication::UnicodeUTF8));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("edytor", "Polski (pl)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("edytor", "English (en)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("edytor", "INNY", 0, QApplication::UnicodeUTF8)
+        );
         label_3->setText(QApplication::translate("edytor", "terminy ukryte:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("edytor", "terminy alternatywne:", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("edytor", "definicja poj\304\231cia:", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("edytor", "przyk\305\202ady u\305\274ycia", 0, QApplication::UnicodeUTF8));
-        zob_uwagiButton->setText(QApplication::translate("edytor", "zobacz uwagi edytorskie", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("edytor", "Poj\304\231cie szersze", 0, QApplication::UnicodeUTF8));
         zmienButton->setText(QApplication::translate("edytor", "zmie\305\204", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("edytor", "Poj\304\231cia w\304\231\305\274sze", 0, QApplication::UnicodeUTF8));
@@ -324,8 +316,8 @@ public:
         label_6->setText(QApplication::translate("edytor", "Poj\304\231cia skojarzone", 0, QApplication::UnicodeUTF8));
         dodaj_skojarzoneButton->setText(QApplication::translate("edytor", "dodaj", 0, QApplication::UnicodeUTF8));
         usun_skojarzoneButton->setText(QApplication::translate("edytor", "usu\305\204", 0, QApplication::UnicodeUTF8));
-        zatwierdzButton->setText(QApplication::translate("edytor", "ZATWIERD\305\271 ZMIANY", 0, QApplication::UnicodeUTF8));
         usunButton->setText(QApplication::translate("edytor", "USU\305\203", 0, QApplication::UnicodeUTF8));
+        zatwierdzButton->setText(QApplication::translate("edytor", "ZATWIERD\305\271 ZMIANY", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

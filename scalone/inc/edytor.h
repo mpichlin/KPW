@@ -10,31 +10,24 @@
 namespace Ui {
     class edytor;
 }
+enum TrybType
+{
+  Edycja   = 0,
+  Dodawanie = 1,
+};
 
 class edytor : public QDialog {
     Q_OBJECT
 public:
-    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0);
+    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0, TrybType Tryb=Edycja);
     ~edytor();
-
-    //QString id;
-
-    QString preferowany;
-    QString definicja;
-    QString przyklady;
-
-    QList<QString> alternatywne;
-    QList<QString> ukryte;
-    QList<QString> wezsze;
-    QList<QString> szersze;
-    QList<QString> skojarzone;
-    void przeladuj();
-
-
 private:
     Ui::edytor *ui;
     SkosModel *Model;
     SkosConcept *Koncept;
+    TrybType Tryb;
+    void przeladuj();
+
 public slots:
     void zmien_szersze();
     void dodaj_skojarzone();

@@ -25,23 +25,46 @@
   <property name="windowTitle">
    <string>Edytor pojęć</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="Layout" stretch="1,0">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>termin preferowany:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="preferowanyQline"/>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>Polski (pl)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>English (en)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>INNY</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="Layout" stretch="0,0">
      <item>
       <layout class="QHBoxLayout" name="pojecieLayout" stretch="1,1">
        <item>
         <layout class="QVBoxLayout" name="terminyLayout">
-         <item>
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>termin preferowany:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="preferowanyQline"/>
-         </item>
          <item>
           <layout class="QGridLayout" name="gridLayout">
            <item row="1" column="1">
@@ -117,27 +140,6 @@
          </item>
          <item>
           <widget class="QTextEdit" name="definicjaText"/>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>przykłady użycia</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QTextEdit" name="przykladyText"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="zob_uwagiButton">
-             <property name="text">
-              <string>zobacz uwagi edytorskie</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </item>
         </layout>
        </item>
@@ -262,17 +264,17 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="QPushButton" name="zatwierdzButton">
-     <property name="text">
-      <string>ZATWIERDŹ ZMIANY</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
+   <item>
     <widget class="QPushButton" name="usunButton">
      <property name="text">
       <string>USUŃ</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="zatwierdzButton">
+     <property name="text">
+      <string>ZATWIERDŹ ZMIANY</string>
      </property>
     </widget>
    </item>

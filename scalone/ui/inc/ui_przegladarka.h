@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Tue Jan 4 15:28:36 2011
+** Created: Wed Jan 5 00:16:01 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,7 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCheckBox>
-#include <QtGui/QFormLayout>
+#include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
@@ -62,8 +62,8 @@ public:
     QSpinBox *szersze_spinBox;
     QSpinBox *skumulowane_spinBox;
     QCheckBox *definicjaBox;
-    QCheckBox *przykladyBox;
     QCheckBox *skumulowaneBox;
+    QComboBox *comboBox;
     QHBoxLayout *horizontalLayout_3;
     QVBoxLayout *verticalLayout_5;
     QLabel *label_2;
@@ -73,9 +73,6 @@ public:
     QLabel *label_4;
     QTextBrowser *definicjaTextBrowser;
     QVBoxLayout *verticalLayout_4;
-    QLabel *label_3;
-    QTextBrowser *przykladyTextBrowser;
-    QFormLayout *formLayout;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_5;
@@ -204,19 +201,18 @@ public:
         definicjaBox->setObjectName(QString::fromUtf8("definicjaBox"));
         definicjaBox->setChecked(true);
 
-        gridLayout->addWidget(definicjaBox, 0, 2, 1, 1);
-
-        przykladyBox = new QCheckBox(centralwidget);
-        przykladyBox->setObjectName(QString::fromUtf8("przykladyBox"));
-        przykladyBox->setChecked(true);
-
-        gridLayout->addWidget(przykladyBox, 1, 2, 1, 1);
+        gridLayout->addWidget(definicjaBox, 0, 3, 1, 1);
 
         skumulowaneBox = new QCheckBox(centralwidget);
         skumulowaneBox->setObjectName(QString::fromUtf8("skumulowaneBox"));
         skumulowaneBox->setChecked(true);
 
-        gridLayout->addWidget(skumulowaneBox, 2, 2, 1, 1);
+        gridLayout->addWidget(skumulowaneBox, 1, 3, 1, 1);
+
+        comboBox = new QComboBox(centralwidget);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+
+        gridLayout->addWidget(comboBox, 2, 3, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout);
@@ -263,16 +259,6 @@ public:
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        label_3 = new QLabel(centralwidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout_4->addWidget(label_3);
-
-        przykladyTextBrowser = new QTextBrowser(centralwidget);
-        przykladyTextBrowser->setObjectName(QString::fromUtf8("przykladyTextBrowser"));
-
-        verticalLayout_4->addWidget(przykladyTextBrowser);
-
 
         verticalLayout_9->addLayout(verticalLayout_4);
 
@@ -281,12 +267,6 @@ public:
 
 
         verticalLayout_10->addLayout(horizontalLayout_3);
-
-        formLayout = new QFormLayout();
-        formLayout->setObjectName(QString::fromUtf8("formLayout"));
-        formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
-
-        verticalLayout_10->addLayout(formLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -358,9 +338,7 @@ public:
 
         retranslateUi(przegladarka);
         QObject::connect(actionKoniec, SIGNAL(activated()), przegladarka, SLOT(close()));
-        QObject::connect(przykladyBox, SIGNAL(toggled(bool)), przykladyTextBrowser, SLOT(setVisible(bool)));
         QObject::connect(definicjaBox, SIGNAL(toggled(bool)), definicjaTextBrowser, SLOT(setVisible(bool)));
-        QObject::connect(przykladyBox, SIGNAL(toggled(bool)), label_3, SLOT(setVisible(bool)));
         QObject::connect(definicjaBox, SIGNAL(toggled(bool)), label_4, SLOT(setVisible(bool)));
         QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), skumulowaneTextBrowser, SLOT(setVisible(bool)));
         QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), label_7, SLOT(setVisible(bool)));
@@ -384,11 +362,15 @@ public:
         szerszeBox->setText(QApplication::translate("przegladarka", "poj\304\231cia szersze", 0, QApplication::UnicodeUTF8));
         skojarzoneBox->setText(QApplication::translate("przegladarka", "poj\304\231cia skojarzone", 0, QApplication::UnicodeUTF8));
         definicjaBox->setText(QApplication::translate("przegladarka", "Definicja", 0, QApplication::UnicodeUTF8));
-        przykladyBox->setText(QApplication::translate("przegladarka", "Przyk\305\202ady", 0, QApplication::UnicodeUTF8));
         skumulowaneBox->setText(QApplication::translate("przegladarka", "Skumulowane", 0, QApplication::UnicodeUTF8));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("przegladarka", "Polski (pl)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("przegladarka", "English (en)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("przegladarka", "INNY", 0, QApplication::UnicodeUTF8)
+        );
         label_2->setText(QApplication::translate("przegladarka", "Synonimy", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("przegladarka", "Definicja", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("przegladarka", "Przyk\305\202ady", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("przegladarka", "Powi\304\205zane", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("przegladarka", "Synonimy powi\304\205zanych", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("przegladarka", "Skumulowane", 0, QApplication::UnicodeUTF8));

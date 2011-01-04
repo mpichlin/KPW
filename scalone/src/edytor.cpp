@@ -3,7 +3,7 @@
 #include "dodaj.h"
 #include<QMessageBox>
 
-edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept) :
+edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept, TrybType tryb) :
     QDialog(parent),
     ui(new Ui::edytor)
 {
@@ -23,8 +23,17 @@ edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept) :
                                    SLOT(zatwierdz()));
     connect(ui->usunButton, SIGNAL(clicked()), this,
                                    SLOT(usun()));
+
+    connect(ui->alternatywneQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_atlernatywne(QListWidgetItem*)));
+    connect(ui->ukryteQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_ukryte(QListWidgetItem*)));
+    this->Tryb=tryb;
     this->Model=model;
     this->Koncept=koncept;
+    if (tryb==Dodawanie){
+        ui->usunButton->hide();
+        ui->zatwierdzButton->setText("DODAJ");
+    }
+    przeladuj();
 }
 edytor::~edytor()
 {
@@ -57,9 +66,10 @@ void edytor::dodaj_ukryte(QListWidgetItem* zmieniona)
 void edytor::przeladuj(){
     //zaladuj etykiety alternatywne:
     for(int j=0;j<Koncept->getLabelList(AlternativeLabelType).size();j++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->alternatywneQlista);
-        pom->setText(Koncept->getLabelList(AlternativeLabelType).value(j).literal().toString());
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
+       QListWidgetItem *pom = new QListWidgetItem();
+       pom->setText(Koncept->getLabelList(AlternativeLabelType).value(j).literal().toString());
+       pom->setFlags (pom->flags () | Qt::ItemIsEditable);
+       ui->alternatywneQlista->insertItem(0,pom);
     }
     ui->alternatywneQlista->sortItems(Qt::AscendingOrder);
     QListWidgetItem *dodaj = new QListWidgetItem();
@@ -69,15 +79,17 @@ void edytor::przeladuj(){
 
     //zaladuj etykiety ukryte:
     for(int j=0;j<Koncept->getLabelList(HiddenLabelType).size();j++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->ukryteQlista);
+        QListWidgetItem *pom = new QListWidgetItem();
         pom->setText(Koncept->getLabelList(HiddenLabelType).value(j).literal().toString());
         pom->setFlags (pom->flags () | Qt::ItemIsEditable);
+        ui->ukryteQlista->insertItem(0,pom);
     }
     ui->ukryteQlista->sortItems(Qt::AscendingOrder);
     QListWidgetItem *dodaj1 = new QListWidgetItem();
     dodaj1->setText("DODAJ");
     dodaj1->setFlags (dodaj1->flags () | Qt::ItemIsEditable);
     ui->ukryteQlista->insertItem(ui->ukryteQlista->count(),dodaj1);
+
     //zaladuj preferowany:
     ui->preferowanyQline->setText(Koncept->getLabelList(PrefferedLabelType).value(0).literal().toString());
     //zaladuj skojarzone:
@@ -101,64 +113,6 @@ void edytor::przeladuj(){
         definicja+=QChar(QChar::LineSeparator);
     }
     ui->definicjaText->setPlainText(definicja);
-
-  /*
-
-    for(int j=0;j<Koncept.getDefinitions().size();j++){
-      edyt.definicja+=Koncept.getDefinitions().value(j).literal().toString();
-      edyt.definicja+=QChar(QChar::LineSeparator);
-    }
-
-    ui->definicjaText->setPlainText(this->definicja);
-    ui->przykladyText->setPlainText(this->przyklady);
-    ui->preferowanyQline->setText(this->preferowany);
-    for(int i=0;i<alternatywne.size();i++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->alternatywneQlista);
-        pom->setText(this->alternatywne.value(i));
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-    }
-    ui->alternatywneQlista->sortItems(Qt::AscendingOrder);
-
-    QListWidgetItem *pom = new QListWidgetItem();
-    pom->setText("DODAJ");
-    pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-    ui->alternatywneQlista->insertItem(ui->alternatywneQlista->count(),pom);
-
-
-
-    for(int i=0;i<ukryte.size();i++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->ukryteQlista);
-        pom->setText(this->ukryte.takeAt(i));
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-    }
-    ui->ukryteQlista->sortItems(Qt::AscendingOrder);
-    QListWidgetItem *pom1 = new QListWidgetItem();
-    pom1->setText("DODAJ");
-    pom1->setFlags (pom1->flags () | Qt::ItemIsEditable);
-    ui->ukryteQlista->insertItem(ui->ukryteQlista->count(),pom1);
-
-    for(int i=0;i<wezsze.size();i++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
-        pom->setText(this->wezsze.takeAt(i));
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-    }
-    ui->wezszeQlista->insertItem(ui->ukryteQlista->count(),pom1);
-
-    for(int i=0;i<szersze.size();i++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->szerszeQlista);
-        pom->setText(this->szersze.takeAt(i));
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-
-    }
-    for(int i=0;i<skojarzone.size();i++){
-        QListWidgetItem *pom = new QListWidgetItem(ui->skojarzoneQlista);
-        pom->setText(this->skojarzone.takeAt(i));
-        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
-    }
-    */
-
-    connect(ui->alternatywneQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_atlernatywne(QListWidgetItem*)));
-    connect(ui->ukryteQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_ukryte(QListWidgetItem*)));
 }
 void edytor::zmien_szersze()
 {
@@ -174,22 +128,8 @@ void edytor::dodaj_wezsze()
 void edytor::usun_wezsze()
 {
     if (ui->wezszeQlista->isItemSelected(ui->wezszeQlista->currentItem())) {
-        SkosConcept usuwany; bool znaleziony=false;
-        QString slowo = ui->wezszeQlista->currentItem()->text();
-        QList<SkosConcept> wszystkie;
-        wszystkie=Model->getConcepts();
-        int i=0;
-        int j=0;
-        while (!znaleziony && i<wszystkie.size()) {
-            j=0;
-            while(!znaleziony && j<wszystkie.value(i).getLabelList(PrefferedLabelType).size()){
-                if (wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).literal().toString()==slowo)
-                    znaleziony=true;
-                j++;
-                }
-            i++;
-        }
-    //Model->removeConceptRelation(*Koncept,wszystkie.value(i),NarrowerRelation);
+        int nr=ui->wezszeQlista->currentRow();
+        Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
     }
 }
 void edytor::dodaj_skojarzone()
@@ -200,7 +140,10 @@ void edytor::dodaj_skojarzone()
 }
 void edytor::usun_skojarzone()
 {
-
+    if (ui->skojarzoneQlista->isItemSelected(ui->skojarzoneQlista->currentItem())) {
+        int nr=ui->skojarzoneQlista->currentRow();
+        Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
+    }
 }
 void edytor::usun()
 {
@@ -219,17 +162,29 @@ void edytor::usun()
     }
 }
 void edytor::zatwierdz()
-{//przepisanie zawartości pól edycyjnych:
-    this->preferowany=ui->preferowanyQline->text();
-    this->definicja=ui->definicjaText->toPlainText();
-    this->przyklady=ui->przykladyText->toPlainText();
-    this->alternatywne.clear();
-    for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
-        this->alternatywne.push_back(ui->alternatywneQlista->item(i)->text());
-    }
-    this->ukryte.clear();
-    for(int i=0;i<ui->ukryteQlista->count()-1;i++){
-        this->ukryte.push_back(ui->ukryteQlista->item(i)->text());
+{
+    if(Tryb==Dodawanie)
+    {
+        if(ui->preferowanyQline->text()==""){
+            return;
+        }
+        Koncept->setUrl(QUrl(ui->preferowanyQline->text()));
+
+        Soprano::Node def= Soprano::Node(Soprano::LiteralValue(ui->definicjaText->toPlainText()));
+        Koncept->addDefinition(def);
+
+        Soprano::Node lab= Soprano::Node(Soprano::LiteralValue(ui->preferowanyQline->text()));
+        Koncept->addLabel(lab,PrefferedLabelType);
+
+        for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
+            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(ui->alternatywneQlista->item(i)->text()));
+            Koncept->addLabel(lab,AlternativeLabelType);
+        }
+        for(int i=0;i<ui->ukryteQlista->count()-1;i++){
+            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(ui->ukryteQlista->item(i)->text()));
+            Koncept->addLabel(lab,HiddenLabelType);
+        }
+        Model->addConcept(*Koncept);
     }
     this->accept();
 }
