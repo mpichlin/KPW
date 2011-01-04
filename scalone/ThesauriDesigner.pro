@@ -49,7 +49,8 @@ HEADERS += inc/ELabelType.hpp \
     inc/UrlSkosPropertyMap.hpp \
     inc/przegladarka.h \
     inc/edytor.h \
-    inc/dodaj.h
+    inc/dodaj.h \
+    inc/ERelationType.hpp
 SOURCES += src/SkosClass.cpp \
     src/SkosCollection.cpp \
     src/SkosConcept.cpp \
