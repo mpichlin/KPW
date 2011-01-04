@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Sat Jan 1 17:41:06 2011
+** Created: Tue Jan 4 15:28:36 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -68,7 +68,7 @@ public:
     QPushButton *dodaj_skojarzoneButton;
     QPushButton *usun_skojarzoneButton;
     QPushButton *zatwierdzButton;
-    QPushButton *pushButton;
+    QPushButton *usunButton;
 
     void setupUi(QWidget *edytor)
     {
@@ -292,10 +292,10 @@ public:
 
         gridLayout_3->addWidget(zatwierdzButton, 2, 0, 1, 1);
 
-        pushButton = new QPushButton(edytor);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        usunButton = new QPushButton(edytor);
+        usunButton->setObjectName(QString::fromUtf8("usunButton"));
 
-        gridLayout_3->addWidget(pushButton, 1, 0, 1, 1);
+        gridLayout_3->addWidget(usunButton, 1, 0, 1, 1);
 
 
         retranslateUi(edytor);
@@ -325,7 +325,7 @@ public:
         dodaj_skojarzoneButton->setText(QApplication::translate("edytor", "dodaj", 0, QApplication::UnicodeUTF8));
         usun_skojarzoneButton->setText(QApplication::translate("edytor", "usu\305\204", 0, QApplication::UnicodeUTF8));
         zatwierdzButton->setText(QApplication::translate("edytor", "ZATWIERD\305\271 ZMIANY", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("edytor", "USU\305\203", 0, QApplication::UnicodeUTF8));
+        usunButton->setText(QApplication::translate("edytor", "USU\305\203", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

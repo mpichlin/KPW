@@ -6,6 +6,7 @@
 #include <QList>
 #include <QListWidgetItem>
 #include "SkosConcept.hpp"
+#include "SkosModel.hpp"
 namespace Ui {
     class edytor;
 }
@@ -13,10 +14,11 @@ namespace Ui {
 class edytor : public QDialog {
     Q_OBJECT
 public:
-    edytor(QWidget *parent = 0);
+    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0);
     ~edytor();
 
     //QString id;
+
     QString preferowany;
     QString definicja;
     QString przyklady;
@@ -31,6 +33,8 @@ public:
 
 private:
     Ui::edytor *ui;
+    SkosModel *Model;
+    SkosConcept *Koncept;
 public slots:
     void zmien_szersze();
     void dodaj_skojarzone();
@@ -40,7 +44,7 @@ public slots:
     void zatwierdz();
     void dodaj_atlernatywne(QListWidgetItem*);
     void dodaj_ukryte(QListWidgetItem*);
-
+    void usun();
 };
 
 #endif // EDYTOR_H

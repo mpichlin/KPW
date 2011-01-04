@@ -33,12 +33,13 @@ przegladarka::~przegladarka()
 }
 void przegladarka::edytuj()
 {
-    edytor edyt;
+
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        QList<SkosConcept>::iterator iter;
-        iter=Model.findConcept(Koncept);
+        edytor edyt(0,&Model,&Koncept);
+        //QList<SkosConcept>::iterator iter;
+       // iter=Model.findConcept(Koncept);
         for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
           edyt.alternatywne.push_back(Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString());
         }
@@ -61,13 +62,31 @@ void przegladarka::edytuj()
           edyt.definicja+=Koncept.getDefinitions().value(j).literal().toString();
           edyt.definicja+=QChar(QChar::LineSeparator);
         }
+
         edyt.przeladuj();
         edyt.show();
-        if (edyt.exec() == QDialog::Accepted) {   ;
+        if (edyt.exec() == QDialog::Accepted) {
+            Koncept.clearLabels();
 
-           //zapelnij_liste();
+            Soprano::Node def= Soprano::Node(Soprano::LiteralValue(edyt.definicja));
+            Koncept.addDefinition(def);
+
+            Soprano::Node lab= Soprano::Node(Soprano::LiteralValue(edyt.preferowany));
+            Koncept.addLabel(lab,PrefferedLabelType);
+
+             for(int i=0;i<edyt.alternatywne.size();i++){
+                 Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(edyt.alternatywne.value(i)));
+                 Koncept.addLabel(lab,AlternativeLabelType);
+             }
+             for(int i=0;i<edyt.ukryte.size();i++){
+                 Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(edyt.ukryte.value(i)));
+                 Koncept.addLabel(lab,HiddenLabelType);
+             }
+             zapelnij_liste();
         }
     }
+
+
     else{
             QMessageBox::information(this, tr("Nie znaleziono"),
               tr("Niestety nie ma wyrazu \"%1\" w bazie").arg(slowo));
@@ -101,8 +120,9 @@ void przegladarka::dodaj()
         Model.addConcept(Koncept);
         zapelnij_liste();
     }
-
 }
+
+
 bool przegladarka::znajdz(QString slowo, SkosConcept& Koncept)
 {
     bool znaleziony=false;
@@ -202,8 +222,11 @@ void przegladarka::zapisz()
            Serializer.serialize(fileName, Soprano::SerializationTurtle);
        }
    }
-void przegladarka::zapelnij_liste()
-{   //dla wszystkich konceptów:
+void przegladarka::zapelnij_liste()       
+{
+    ui->pojeciaListWidget->clear();
+    ui->znajdzLineEdit->setText("");
+    //dla wszystkich konceptów:
     for(int i=0;i<Model.getConcepts().size();i++){
         //dla wszystkich labelek preferowanych
         for(int j=0;j<Model.getConcepts().value(i).getLabelList(PrefferedLabelType).size();j++)
