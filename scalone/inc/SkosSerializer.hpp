@@ -1,14 +1,52 @@
 #ifndef SKOS_SERIALIZER_HPP
 #define SKOS_SERIALIZER_HPP
 
+/*! \file SkosSerializer.hpp
+ *  \brief Zawiera definicję klasy SkosSerializer
+ *
+ * Plik zawiera definicję klasy SkosSerializer.
+ *
+ * \author Michał Pichliński
+ * \date 2010.12.11
+ * \version 1.00.00
+ */
+
 #include "SkosModel.hpp"
 #include <Soprano/Serializer>
 #include <Soprano/Soprano>
 
+/*! \class SkosSerializer
+ * \brief Klasa odpowiadająca za tworzenie  plików zawierających dane zapisane
+ * w języku SKOS
+ *
+ * Klasa odpowiadająca za tworzenie plików zawierających dane zapisane
+ * w języku SKOS na podstawie modelu. Jest to nakładka na serializer dostarczony
+ * przez bibliotekę Soprano RDF Framework, z modyfikacją pozwalającą na
+ * interpretację języka SKOS.
+ */
 class SkosSerializer
 {
-public:
+public
+  /*! \brief Konstruktor z określonym modelem
+   *
+   * Konstruktor w którym podawany jest wskaźnik na model, na podstawie, którego
+   * będzie tworzny plik
+   * \param p_model - wskaźnik na model na podstawie, którego ma zostać 
+   * zapełniony danymi plik wyjściowy
+   * \post Stworzony obiekt serializera, który  wypełni plik danymi z modelu na,
+   * który wskazuje p_model
+   */
   SkosSerializer(SkosModel *p_model):m_model(p_model){};
+
+  /*! \brief Tworzy plik danego typu o danej nazwie
+   *
+   * Tworzy plik danego typu o danej nazwie na podstawie modelu zawartego w
+   * obiekcie serializera
+   * \param p_fileName - nazwa pliku, do którego zostanie zapisany model
+   * \param p_fileType - typ pliku, który zostanie utworzony
+   * \post Powstaje plik o nazwie p_fileName, typu p_fileType, zawierający
+   * model podstawiony w konstruktorze obiektu serializera
+   */
   void serialize(const QString &p_fileName,
                  const Soprano::RdfSerialization &p_fileType)
     {

@@ -1,6 +1,16 @@
 #ifndef SKOS_PARSER_HPP
 #define SKOS_PARSER_HPP
 
+/*! \file SkosParser.hpp
+ *  \brief Zawiera definicję klasy SkosParser
+ *
+ * Plik zawiera definicję klasy SkosParser.
+ *
+ * \author Michał Pichliński
+ * \date 2010.11.30
+ * \version 1.00.00
+ */
+
 #include <QList>
 #include <Soprano/Statement>
 #include <Soprano/Soprano>
@@ -9,10 +19,40 @@
 #include "UrlSkosPropertyMap.hpp"
 #include "UrlObjectMap.hpp"
 
+/*! \class SkosParser
+ * \brief Klasa odpowiadająca za parsowanie plików zawierających dane zapisane
+ * w języku SKOS
+ *
+ * Klasa odpowiadająca za parsowanie plików zawierających dane zapisane
+ * w języku SKOS. Jest to nakładka na parser dostarczony przez bibliotekę
+ * Soprano RDF Framework, z modyfikacją pozwalającą na interpretację
+ * języka SKOS.
+ */
 class SkosParser
 {
 public:
+  /*! \brief Konstruktor z określonym modelem
+   *
+   * Konstruktor w którym podawany jest wskaźnik na model, który będzie
+   * uzupełniony na podstawie parsowanego pliku
+   * \param p_model - wskaźnik na model który ma zostać zapełniony danymi z
+   * parsowanego pliku
+   * \post Stworzony obiekt parsera, który przy parsowaniu wypełni model na
+   * który wskazuje p_model
+   */
   SkosParser(SkosModel *p_model):m_model(p_model){};
+
+  /*! \brief Parsuje plik danego typu o danej nazwie
+   *
+   * Parsuje plik danego typu o danej nazwie. W trakcie parsowania uzupełniany
+   * jest model na który wskazuje obiekt parsera.
+   * \param p_fileName - nazwa parsowanego pliku
+   * \param p_fileType - typ parsowanego pliku
+   * \pre Parsowany plik musi istnieć, być poprawny oraz jego typ musi być
+   * właściwie określony
+   * \post Model na który wskazuje obiekt parsera zostaje uzupełniony danymi
+   * z pliku p_fileName
+   */
   void parseFile(const QString &p_fileName, 
                  const Soprano::RdfSerialization &p_fileType)
   {
