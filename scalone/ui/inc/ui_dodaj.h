@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dodaj.ui'
 **
-** Created: Sat Jan 1 16:26:16 2011
+** Created: Tue Jan 4 15:28:36 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,11 +15,11 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
+#include <QtGui/QPushButton>
 #include <QtGui/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
@@ -27,45 +27,48 @@ QT_BEGIN_NAMESPACE
 class Ui_dodaj
 {
 public:
-    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
-    QLineEdit *lineEdit;
-    QListWidget *listWidget;
-    QDialogButtonBox *buttonBox;
+    QLineEdit *znajdzLineEdit;
+    QListWidget *pojeciaListWidget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *okButton;
+    QPushButton *anulujButton_2;
 
     void setupUi(QDialog *dodaj)
     {
         if (dodaj->objectName().isEmpty())
             dodaj->setObjectName(QString::fromUtf8("dodaj"));
         dodaj->resize(400, 300);
-        horizontalLayout = new QHBoxLayout(dodaj);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        verticalLayout = new QVBoxLayout();
+        verticalLayout = new QVBoxLayout(dodaj);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        lineEdit = new QLineEdit(dodaj);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        znajdzLineEdit = new QLineEdit(dodaj);
+        znajdzLineEdit->setObjectName(QString::fromUtf8("znajdzLineEdit"));
 
-        verticalLayout->addWidget(lineEdit);
+        verticalLayout->addWidget(znajdzLineEdit);
 
-        listWidget = new QListWidget(dodaj);
-        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        pojeciaListWidget = new QListWidget(dodaj);
+        pojeciaListWidget->setObjectName(QString::fromUtf8("pojeciaListWidget"));
 
-        verticalLayout->addWidget(listWidget);
+        verticalLayout->addWidget(pojeciaListWidget);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        okButton = new QPushButton(dodaj);
+        okButton->setObjectName(QString::fromUtf8("okButton"));
+
+        horizontalLayout->addWidget(okButton);
+
+        anulujButton_2 = new QPushButton(dodaj);
+        anulujButton_2->setObjectName(QString::fromUtf8("anulujButton_2"));
+
+        horizontalLayout->addWidget(anulujButton_2);
 
 
-        horizontalLayout->addLayout(verticalLayout);
-
-        buttonBox = new QDialogButtonBox(dodaj);
-        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setOrientation(Qt::Vertical);
-        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-
-        horizontalLayout->addWidget(buttonBox);
+        verticalLayout->addLayout(horizontalLayout);
 
 
         retranslateUi(dodaj);
-        QObject::connect(buttonBox, SIGNAL(accepted()), dodaj, SLOT(accept()));
-        QObject::connect(buttonBox, SIGNAL(rejected()), dodaj, SLOT(reject()));
+        QObject::connect(anulujButton_2, SIGNAL(clicked()), dodaj, SLOT(reject()));
 
         QMetaObject::connectSlotsByName(dodaj);
     } // setupUi
@@ -73,6 +76,8 @@ public:
     void retranslateUi(QDialog *dodaj)
     {
         dodaj->setWindowTitle(QApplication::translate("dodaj", "Dialog", 0, QApplication::UnicodeUTF8));
+        okButton->setText(QApplication::translate("dodaj", "OK", 0, QApplication::UnicodeUTF8));
+        anulujButton_2->setText(QApplication::translate("dodaj", "Anuluj", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
