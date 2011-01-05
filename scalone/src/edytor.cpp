@@ -29,6 +29,7 @@ edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept) :
     connect(ui->ukryteQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_ukryte(QListWidgetItem*)));
     this->Model=model;
     this->Koncept=koncept;
+    this->Jezyk="pl";
     przeladuj();
 }
 edytor::~edytor()
@@ -194,7 +195,7 @@ void edytor::zatwierdz()
     //dodanie nowych:
     for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
         if(ui->alternatywneQlista->item(i)->text()!=""){
-            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(ui->alternatywneQlista->item(i)->text()));
+            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->alternatywneQlista->item(i)->text(),Jezyk));
             Model->addLabel(lab,AlternativeLabelType,Koncept->getUrl());
         }
     }
@@ -206,7 +207,7 @@ void edytor::zatwierdz()
     //dodanie nowych:
     for(int i=0;i<ui->ukryteQlista->count()-1;i++){
         if(ui->ukryteQlista->item(i)->text()!=""){
-            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue(ui->ukryteQlista->item(i)->text()));
+            Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->ukryteQlista->item(i)->text(),Jezyk));
             Model->addLabel(lab,HiddenLabelType,Koncept->getUrl());
         }
     }

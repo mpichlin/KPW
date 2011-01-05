@@ -146,9 +146,17 @@
           </item>
           <item row="2" column="3">
            <widget class="QComboBox" name="comboBox">
+            <property name="toolTip">
+             <string>Wybiera język. Domyślnie wyświetlane są etykiety we wszystkich językach.</string>
+            </property>
             <item>
              <property name="text">
-              <string>Polski (pl)</string>
+              <string>wszystkie</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Polskie (pl)</string>
              </property>
             </item>
             <item>

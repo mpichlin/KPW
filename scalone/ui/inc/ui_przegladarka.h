@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Wed Jan 5 00:16:01 2011
+** Created: Wed Jan 5 16:10:48 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -365,10 +365,14 @@ public:
         skumulowaneBox->setText(QApplication::translate("przegladarka", "Skumulowane", 0, QApplication::UnicodeUTF8));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("przegladarka", "Polski (pl)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("przegladarka", "wszystkie", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("przegladarka", "Polskie (pl)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("przegladarka", "English (en)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("przegladarka", "INNY", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_TOOLTIP
+        comboBox->setToolTip(QApplication::translate("przegladarka", "Wybiera j\304\231zyk. Domy\305\233lnie wy\305\233wietlane s\304\205 etykiety we wszystkich j\304\231zykach.", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         label_2->setText(QApplication::translate("przegladarka", "Synonimy", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("przegladarka", "Definicja", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("przegladarka", "Powi\304\205zane", 0, QApplication::UnicodeUTF8));

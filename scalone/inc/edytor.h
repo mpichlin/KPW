@@ -19,10 +19,12 @@ private:
     Ui::edytor *ui;
     SkosModel *Model;
     SkosConcept *Koncept;
+    Soprano::LanguageTag Jezyk;
     void przeladuj();
     void odswiez_wezsze();
     void odswiez_szersze();
     void odswiez_skojarzone();
+
 
 public slots:
     void zmien_szersze();

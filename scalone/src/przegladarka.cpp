@@ -21,9 +21,13 @@ przegladarka::przegladarka(QWidget *parent) :
     connect(ui->actionWczytaj, SIGNAL(triggered()), this,SLOT (wczytaj()));
     connect(ui->znajdzLineEdit, SIGNAL(textEdited(QString)), this,SLOT(odswiez()));
     connect(ui->pojeciaListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(wstaw_z_listy()));
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this, SLOT(zmien_jezyk(int)));
 
     Model=SkosModel();
-
+    Jezyk=Soprano::LanguageTag("pl");
+    this->WszystkieJezyki=true;
+    inicjalizuj_jezyki();
+    zaladuj_comboBox();
     }
 
 przegladarka::~przegladarka()
@@ -147,17 +151,24 @@ void przegladarka::zapelnij_liste()
 {
     ui->pojeciaListWidget->clear();
     ui->znajdzLineEdit->setText("");
+    QList<SkosConcept> wszystkie;
+    wszystkie=Model.getConcepts();
     //dla wszystkich konceptów:
-    for(int i=0;i<Model.getConcepts().size();i++){
+    for(int i=0;i<wszystkie.size();i++){
         //dla wszystkich labelek preferowanych
-        for(int j=0;j<Model.getConcepts().value(i).getLabelList(PrefferedLabelType).size();j++)
-            ui->pojeciaListWidget->addItem(Model.getConcepts().value(i).getLabelList(PrefferedLabelType).value(j).literal().toString());
+        for(int j=0;j<wszystkie.value(i).getLabelList(PrefferedLabelType).size();j++){
+            if((wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).language()==Jezyk)||(this->WszystkieJezyki)){
+                ui->pojeciaListWidget->addItem(wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).literal().toString());
+            }
+        }
         //dla wszystkich labelek alternatywnych
-        for(int j=0;j<Model.getConcepts().value(i).getLabelList(AlternativeLabelType).size();j++)
-            ui->pojeciaListWidget->addItem(Model.getConcepts().value(i).getLabelList(AlternativeLabelType).value(j).literal().toString());
+        for(int j=0;j<wszystkie.value(i).getLabelList(AlternativeLabelType).size();j++){
+            if((wszystkie.value(i).getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||(this->WszystkieJezyki)){
+                ui->pojeciaListWidget->addItem(wszystkie.value(i).getLabelList(AlternativeLabelType).value(j).literal().toString());
+            }
+        }
     }
     ui->pojeciaListWidget->sortItems(Qt::AscendingOrder);
-
 }
 void przegladarka::wczytaj()
   {
@@ -186,4 +197,33 @@ void przegladarka::odswiez()
         else
             ui->pojeciaListWidget->item(i)->setHidden(1);
     }
+}
+void przegladarka::inicjalizuj_jezyki(){
+    this->ListaJezykow.push_back(Soprano::LanguageTag("pl"));
+    this->ListaJezykow.push_back(Soprano::LanguageTag("en"));
+}
+void przegladarka::zaladuj_comboBox(){
+    ui->comboBox->clear();
+    ui->comboBox->addItem("wszystkie");
+    for(int i=0;i<ListaJezykow.size();i++){
+        ui->comboBox->addItem(ListaJezykow.value(i));
+    }
+    ui->comboBox->addItem("inny");
+}
+
+void przegladarka::zmien_jezyk(int numer)
+{
+    if(numer==0){
+        WszystkieJezyki=true;
+    }
+    else{
+        if(numer==ui->comboBox->count()){
+            WszystkieJezyki=false;
+        }
+        else{
+            WszystkieJezyki=false;
+            Jezyk=ListaJezykow.value(numer-1);
+        }
+    }
+    zapelnij_liste();
 }

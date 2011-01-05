@@ -8,7 +8,7 @@
 #include "SkosConcept.hpp"
 #include "edytor.h"
 #include "ui_edytor.h"
-
+#include <QList>
 namespace Ui {
     class przegladarka;
 }
@@ -21,10 +21,15 @@ public:
 private:
     Ui::przegladarka *ui;
     SkosModel Model;
+    Soprano::LanguageTag Jezyk;
+    bool WszystkieJezyki;
     void zapelnij_liste();
     bool znajdz(QString, SkosConcept&);
     void wyswietl(SkosConcept);
     SkosConcept stworz_koncept(edytor edyt);
+    QList<Soprano::LanguageTag> ListaJezykow;
+    void inicjalizuj_jezyki();
+    void zaladuj_comboBox();
 public slots:
     void edytuj();
     void dodaj();
@@ -33,8 +38,6 @@ public slots:
     void wczytaj();
     void odswiez();
     void wstaw_z_listy();
-signals:
-    QList<SkosConcept> lista_konceptow();
-
+    void zmien_jezyk(int);
 };
 #endif // PRZEGLADARKA_H
