@@ -274,7 +274,7 @@
    <item>
     <widget class="QPushButton" name="zatwierdzButton">
      <property name="text">
-      <string>ZATWIERDŹ ZMIANY</string>
+      <string>ZATWIERDŹ</string>
      </property>
     </widget>
    </item>

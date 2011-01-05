@@ -10,23 +10,19 @@
 namespace Ui {
     class edytor;
 }
-enum TrybType
-{
-  Edycja   = 0,
-  Dodawanie = 1,
-};
-
 class edytor : public QDialog {
     Q_OBJECT
 public:
-    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0, TrybType Tryb=Edycja);
+    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0);
     ~edytor();
 private:
     Ui::edytor *ui;
     SkosModel *Model;
     SkosConcept *Koncept;
-    TrybType Tryb;
     void przeladuj();
+    void odswiez_wezsze();
+    void odswiez_szersze();
+    void odswiez_skojarzone();
 
 public slots:
     void zmien_szersze();

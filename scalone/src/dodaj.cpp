@@ -49,5 +49,6 @@ void dodaj::zakoncz()
 {
     SkosConcept dodawany=Model->getConcepts().value(ui->pojeciaListWidget->currentRow());
     Model->addConceptRelation(*Bazowy,dodawany,TypRelacji);
+    Bazowy->addConceptRelation(&dodawany,TypRelacji);
     this->accept();
 }

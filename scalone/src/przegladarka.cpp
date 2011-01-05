@@ -36,7 +36,7 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        edytor edyt(0,&Model,&Koncept,Edycja);
+        edytor edyt(0,&Model,&Koncept);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
              zapelnij_liste();
@@ -47,11 +47,11 @@ void przegladarka::edytuj()
               tr("Niestety nie ma wyrazu \"%1\" w bazie").arg(slowo));
     }
 }
-
 void przegladarka::dodaj()
 {
-    SkosConcept Koncept;
-    edytor edyt(0,&Model,&Koncept,Dodawanie);
+    SkosConcept Koncept=SkosConcept(QUrl("tmp"));
+    Model.addConcept(QUrl("tmp"));
+    edytor edyt(0,&Model,&Koncept);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
         zapelnij_liste();

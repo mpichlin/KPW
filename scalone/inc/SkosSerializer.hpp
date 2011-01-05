@@ -26,7 +26,7 @@
  */
 class SkosSerializer
 {
-public
+public:
   /*! \brief Konstruktor z określonym modelem
    *
    * Konstruktor w którym podawany jest wskaźnik na model, na podstawie, którego
