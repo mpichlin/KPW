@@ -23,7 +23,7 @@ void myMessageHandler(QtMsgType type, const char *msg)
 		abort();
 	}
 	QFile outFile("log");
-	outFile.open(QIODevice::WriteOnly);
+	outFile.open(QIODevice::WriteOnly| QIODevice::Append);
 	QTextStream ts(&outFile);
 	ts << txt << endl;
     }
@@ -34,6 +34,9 @@ int main(int argc, char *argv[])
     przegladarka p;
     p.show();
 
+    QFile outFile("log");
+    outFile.open(QIODevice::WriteOnly);
+    outFile.close();
 
     qInstallMsgHandler(myMessageHandler);
 

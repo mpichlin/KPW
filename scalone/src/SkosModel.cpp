@@ -431,6 +431,10 @@ void SkosModel::removeConceptRelation(const SkosConcept &p_baseConcept,
                                       const SkosConcept &p_relatedConcept,
                                       const ERelationType &p_relationType)
 {
+  qDebug() << "SkosModel::removeConceptRelation(p_baseConcept ="
+           << p_baseConcept.getUrl() << ", p_relatedConcept"
+           << p_relatedConcept.getUrl() << ", p_relationType"
+           << p_relationType << ")";
   QList<SkosConcept>::iterator l_baseConceptIter = findConcept(p_baseConcept);
   QList<SkosConcept>::iterator l_relatedConceptIter = 
     findConcept(p_relatedConcept);
