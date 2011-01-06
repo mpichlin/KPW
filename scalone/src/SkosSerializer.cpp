@@ -1,5 +1,6 @@
 #include "SkosSerializer.hpp"
 #include <QFile>
+#include <QDebug>
 
 void SkosSerializer::createStatementsFromModel()
 {
