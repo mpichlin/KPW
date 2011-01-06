@@ -63,7 +63,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="Layout" stretch="0,0">
+    <layout class="QVBoxLayout" name="Layout" stretch="0,0,0">
      <item>
       <layout class="QHBoxLayout" name="pojecieLayout" stretch="1,1">
        <item>
@@ -145,6 +145,30 @@
           <widget class="QTextEdit" name="definicjaText"/>
          </item>
         </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QCheckBox" name="zmienBox">
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>domyślne Url</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="UrlLineEdit">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -285,5 +309,22 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>zmienBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>UrlLineEdit</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>88</x>
+     <y>61</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>62</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

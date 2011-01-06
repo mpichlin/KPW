@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Thu Jan 6 01:22:19 2011
+** Created: Thu Jan 6 18:41:36 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QComboBox>
 #include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
@@ -48,6 +49,9 @@ public:
     QVBoxLayout *pojeciaLayout;
     QLabel *label_7;
     QTextEdit *definicjaText;
+    QHBoxLayout *horizontalLayout_5;
+    QCheckBox *zmienBox;
+    QLineEdit *UrlLineEdit;
     QHBoxLayout *relacjeLayout;
     QVBoxLayout *szerszeLayout;
     QLabel *label_4;
@@ -174,6 +178,25 @@ public:
 
         Layout->addLayout(pojecieLayout);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        zmienBox = new QCheckBox(edytor);
+        zmienBox->setObjectName(QString::fromUtf8("zmienBox"));
+        zmienBox->setAutoFillBackground(false);
+        zmienBox->setChecked(true);
+
+        horizontalLayout_5->addWidget(zmienBox);
+
+        UrlLineEdit = new QLineEdit(edytor);
+        UrlLineEdit->setObjectName(QString::fromUtf8("UrlLineEdit"));
+        UrlLineEdit->setEnabled(true);
+
+        horizontalLayout_5->addWidget(UrlLineEdit);
+
+
+        Layout->addLayout(horizontalLayout_5);
+
         relacjeLayout = new QHBoxLayout();
         relacjeLayout->setSpacing(6);
         relacjeLayout->setObjectName(QString::fromUtf8("relacjeLayout"));
@@ -287,6 +310,7 @@ public:
 
 
         retranslateUi(edytor);
+        QObject::connect(zmienBox, SIGNAL(clicked(bool)), UrlLineEdit, SLOT(setHidden(bool)));
 
         ukryteQlista->setCurrentRow(-1);
         alternatywneQlista->setCurrentRow(-1);
@@ -311,6 +335,7 @@ public:
         label_3->setText(QApplication::translate("edytor", "terminy ukryte:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("edytor", "terminy alternatywne:", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("edytor", "definicja poj\304\231cia:", 0, QApplication::UnicodeUTF8));
+        zmienBox->setText(QApplication::translate("edytor", "domy\305\233lne Url", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("edytor", "Poj\304\231cie szersze", 0, QApplication::UnicodeUTF8));
         zmienButton->setText(QApplication::translate("edytor", "zmie\305\204", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("edytor", "Poj\304\231cia w\304\231\305\274sze", 0, QApplication::UnicodeUTF8));

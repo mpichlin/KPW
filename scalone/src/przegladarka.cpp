@@ -53,8 +53,8 @@ void przegladarka::edytuj()
 }
 void przegladarka::dodaj()
 {
-    SkosConcept Koncept=SkosConcept(QUrl("tmp"));
-    Model.addConcept(QUrl("tmp"));
+    SkosConcept Koncept=SkosConcept(QUrl(QString(Model.getConcepts().size())));
+    Model.addConcept(QUrl(QString(Model.getConcepts().size())));
     edytor edyt(0,&Model,&Koncept,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
@@ -118,15 +118,27 @@ void przegladarka::wyswietl(SkosConcept Koncept)
 {
     QString synonimy;
     for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
-        synonimy+=Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString();
-        synonimy+=' ';
+         if((Koncept.getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
+            synonimy+=Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString();
+            synonimy+=' ';
+        }
     }
+
+    for(int j=0;j<Koncept.getLabelList(PrefferedLabelType).size();j++){
+         if((Koncept.getLabelList(PrefferedLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
+            synonimy+=Koncept.getLabelList(PrefferedLabelType).value(j).literal().toString();
+            synonimy+=' ';
+        }
+    }
+
      ui->synonimyTextBrowser->setText(synonimy);
 
      QString definicja;
      for(int j=0;j<Koncept.getDefinitions().size();j++){
-         definicja+=Koncept.getDefinitions().value(j).literal().toString();
-         definicja+=QChar(QChar::LineSeparator);
+         if((Koncept.getDefinitions().value(j).language()==Jezyk)||WszystkieJezyki){
+            definicja+=Koncept.getDefinitions().value(j).literal().toString();
+            definicja+=QChar(QChar::LineSeparator);
+        }
      }
      ui->definicjaTextBrowser->setText(definicja);
 }
@@ -142,7 +154,6 @@ void przegladarka::zapisz()
        if (fileName.isEmpty())
            return;
        else{
-           fileName+=".tur";
            SkosSerializer Serializer(&Model);
            Serializer.serialize(fileName, Soprano::SerializationTurtle);
        }
@@ -155,13 +166,13 @@ void przegladarka::zapelnij_liste()
     wszystkie=Model.getConcepts();
     //dla wszystkich konceptów:
     for(int i=0;i<wszystkie.size();i++){
-        //dla wszystkich labelek preferowanych
+        //dla wszystkich etykiet preferowanych
         for(int j=0;j<wszystkie.value(i).getLabelList(PrefferedLabelType).size();j++){
             if((wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).language()==Jezyk)||(this->WszystkieJezyki)){
                 ui->pojeciaListWidget->addItem(wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).literal().toString());
             }
         }
-        //dla wszystkich labelek alternatywnych
+        //dla wszystkich etykiet alternatywnych
         for(int j=0;j<wszystkie.value(i).getLabelList(AlternativeLabelType).size();j++){
             if((wszystkie.value(i).getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||(this->WszystkieJezyki)){
                 ui->pojeciaListWidget->addItem(wszystkie.value(i).getLabelList(AlternativeLabelType).value(j).literal().toString());
@@ -222,6 +233,7 @@ void przegladarka::zmien_jezyk(int numer)
             dod.show();
             if (dod.exec() == QDialog::Accepted) {
                 ListaJezykow.push_back(Soprano::LanguageTag(dod.skrot));
+                Jezyk=ListaJezykow.value(numer-1);
                 ui->comboBox->setItemText(numer,ListaJezykow.value(numer-1).toString());
                 ui->comboBox->addItem("inny");
                 WszystkieJezyki=false;
