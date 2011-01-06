@@ -210,6 +210,16 @@ public:
    * bądź definicji zostają usunięte
    */
   void clearEmptyClasses();
+
+  /*! \brief Zmienia URL obiektu SKOSowej klasy
+   *
+   * Zmienia URL obiektu SKOSowej klasy
+   * \param p_classUrl - URL obiektu, który ma zostać zmieniony
+   * \param p_newUrl - nowa wartość URL dla obiektu
+   * \pre Obiekt określony p_classUrl musi istnieć w modelu
+   * \post Obiekt p_classUrl ma teraz URL p_newUrl
+   */
+  void changeUrl(const QUrl &p_classUrl, const QUrl &p_newUrl);
 private:
   bool isConsistencyOk(const QUrl &p_classUrl);
   SkosClass * findSkosClass(const QUrl &p_classUrl);

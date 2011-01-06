@@ -463,3 +463,11 @@ void SkosModel::removeConceptRelation(const SkosConcept &p_baseConcept,
   }
 }
 
+void SkosModel::changeUrl(const QUrl &p_classUrl, const QUrl &p_newUrl)
+{
+  SkosClass *l_skosClassPtr = findSkosClass(p_classUrl);
+  if (l_skosClassPtr != NULL)
+  {
+    l_skosClassPtr->setUrl(p_newUrl);
+  }
+}
