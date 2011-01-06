@@ -3,7 +3,7 @@
 #include "dodaj.h"
 #include<QMessageBox>
 
-edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept) :
+edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept, QList<Soprano::LanguageTag>* listaJ) :
     QDialog(parent),
     ui(new Ui::edytor)
 {
@@ -24,13 +24,17 @@ edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept) :
                                    SLOT(zatwierdz()));
     connect(ui->usunButton, SIGNAL(clicked()), this,
                                    SLOT(usun()));
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this, SLOT(zmien_jezyk(int)));
 
     connect(ui->alternatywneQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_atlernatywne(QListWidgetItem*)));
     connect(ui->ukryteQlista, SIGNAL(itemChanged(QListWidgetItem*)),this,SLOT(dodaj_ukryte(QListWidgetItem*)));
+
     this->Model=model;
     this->Koncept=koncept;
+    this->ListaJezykow=listaJ;
     this->Jezyk="pl";
     przeladuj();
+    zaladuj_comboBox();
 }
 edytor::~edytor()
 {
@@ -62,11 +66,18 @@ void edytor::dodaj_ukryte(QListWidgetItem* zmieniona)
 
 void edytor::przeladuj(){
     //zaladuj etykiety alternatywne:
+    ui->alternatywneQlista->clear();
     for(int j=0;j<Koncept->getLabelList(AlternativeLabelType).size();j++){
        QListWidgetItem *pom = new QListWidgetItem();
        pom->setText(Koncept->getLabelList(AlternativeLabelType).value(j).literal().toString());
        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
        ui->alternatywneQlista->insertItem(0,pom);
+       if(Koncept->getLabelList(AlternativeLabelType).value(j).language()==Jezyk){
+           ui->alternatywneQlista->item(0)->setHidden(false);
+       }
+       else{
+           ui->alternatywneQlista->item(0)->setHidden(true);
+       }
     }
     ui->alternatywneQlista->sortItems(Qt::AscendingOrder);
     QListWidgetItem *dodaj = new QListWidgetItem();
@@ -75,11 +86,18 @@ void edytor::przeladuj(){
     ui->alternatywneQlista->insertItem(ui->alternatywneQlista->count(),dodaj);
 
     //zaladuj etykiety ukryte:
+    ui->ukryteQlista->clear();
     for(int j=0;j<Koncept->getLabelList(HiddenLabelType).size();j++){
         QListWidgetItem *pom = new QListWidgetItem();
         pom->setText(Koncept->getLabelList(HiddenLabelType).value(j).literal().toString());
         pom->setFlags (pom->flags () | Qt::ItemIsEditable);
         ui->ukryteQlista->insertItem(0,pom);
+        if(Koncept->getLabelList(HiddenLabelType).value(j).language()==Jezyk){
+            ui->ukryteQlista->item(0)->setHidden(false);
+        }
+        else{
+            ui->ukryteQlista->item(0)->setHidden(true);
+        }
     }
     ui->ukryteQlista->sortItems(Qt::AscendingOrder);
     QListWidgetItem *dodaj1 = new QListWidgetItem();
@@ -186,11 +204,13 @@ void edytor::usun()
 }
 void edytor::zatwierdz()
 {
-    //usuniecie starych etykiet alternatywnych:
+    //usuniecie starych etykiet alternatywnych w danym jezyku:
     QList<Soprano::Node> stare;
     stare=Koncept->getLabelList(AlternativeLabelType);
     for(int i=0;i<stare.size();i++){
-        Model->removeLabel(stare.value(i),AlternativeLabelType,Koncept->getUrl());
+        if (stare.value(i).language()==Jezyk){
+            Model->removeLabel(stare.value(i),AlternativeLabelType,Koncept->getUrl());
+        }
     }
     //dodanie nowych:
     for(int i=0;i<ui->alternatywneQlista->count()-1;i++){
@@ -199,11 +219,16 @@ void edytor::zatwierdz()
             Model->addLabel(lab,AlternativeLabelType,Koncept->getUrl());
         }
     }
-    //usuniecie starych etykiet ukrytych:
+
+
+    //usuniecie starych etykiet ukrytych w danym jezyku:
     stare=Koncept->getLabelList(HiddenLabelType);
     for(int i=0;i<stare.size();i++){
-        Model->removeLabel(stare.value(i),HiddenLabelType,Koncept->getUrl());
+        if (stare.value(i).language()==Jezyk){
+           Model->removeLabel(stare.value(i),HiddenLabelType,Koncept->getUrl());
+        }
     }
+
     //dodanie nowych:
     for(int i=0;i<ui->ukryteQlista->count()-1;i++){
         if(ui->ukryteQlista->item(i)->text()!=""){
@@ -212,8 +237,34 @@ void edytor::zatwierdz()
         }
     }
 
+    //zmiana terminu preferowanego w danym jezyku:
 
+    if(ui->preferowanyQline->text()!=""){
 
+        stare=Koncept->getLabelList(PrefferedLabelType);
+        for(int i=0;i<stare.size();i++){
+            if (stare.value(i).language()==Jezyk){
+               Model->removeLabel(stare.value(i),PrefferedLabelType,Koncept->getUrl());
+            }
+        }
+        Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->preferowanyQline->text(),Jezyk));
+        Model->addLabel(lab,PrefferedLabelType,Koncept->getUrl());
+    }
 
     this->accept();
 }
+void edytor::zaladuj_comboBox()
+{
+    ui->comboBox->clear();
+    for(int i=0;i<ListaJezykow->size();i++){
+        ui->comboBox->addItem(ListaJezykow->value(i));
+    }
+}
+
+void edytor::zmien_jezyk(int numer)
+{
+    Jezyk=ListaJezykow->value(numer);
+    przeladuj();
+}
+
+

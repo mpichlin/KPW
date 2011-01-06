@@ -50,7 +50,8 @@ HEADERS += inc/ELabelType.hpp \
     inc/przegladarka.h \
     inc/edytor.h \
     inc/dodaj.h \
-    inc/ERelationType.hpp
+    inc/ERelationType.hpp \
+    inc/jezyk.h
 SOURCES += src/SkosClass.cpp \
     src/SkosCollection.cpp \
     src/SkosConcept.cpp \
@@ -63,7 +64,9 @@ SOURCES += src/SkosClass.cpp \
     src/main.cpp \
     src/przegladarka.cpp \
     src/edytor.cpp \
-    src/dodaj.cpp
+    src/dodaj.cpp \
+    src/jezyk.cpp
 FORMS += ui/przegladarka.ui \
     ui/edytor.ui \
-    ui/dodaj.ui
+    ui/dodaj.ui \
+    ui/jezyk.ui

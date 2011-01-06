@@ -2,6 +2,7 @@
 #include "ui_przegladarka.h"
 #include "edytor.h"
 #include "ui_edytor.h"
+#include "jezyk.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -13,6 +14,11 @@ przegladarka::przegladarka(QWidget *parent) :
     ui(new Ui::przegladarka)
 {
     ui->setupUi(this);
+    Model=SkosModel();
+    Jezyk=Soprano::LanguageTag("pl");
+    this->WszystkieJezyki=true;
+    inicjalizuj_jezyki();
+    zaladuj_comboBox();
 
     connect(ui->edytujButton, SIGNAL(clicked()), this,SLOT(edytuj()));
     connect(ui->dodajButton, SIGNAL(clicked()), this,SLOT(dodaj()));
@@ -22,12 +28,6 @@ przegladarka::przegladarka(QWidget *parent) :
     connect(ui->znajdzLineEdit, SIGNAL(textEdited(QString)), this,SLOT(odswiez()));
     connect(ui->pojeciaListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(wstaw_z_listy()));
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this, SLOT(zmien_jezyk(int)));
-
-    Model=SkosModel();
-    Jezyk=Soprano::LanguageTag("pl");
-    this->WszystkieJezyki=true;
-    inicjalizuj_jezyki();
-    zaladuj_comboBox();
     }
 
 przegladarka::~przegladarka()
@@ -40,7 +40,7 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        edytor edyt(0,&Model,&Koncept);
+        edytor edyt(0,&Model,&Koncept,&ListaJezykow);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
              zapelnij_liste();
@@ -55,7 +55,7 @@ void przegladarka::dodaj()
 {
     SkosConcept Koncept=SkosConcept(QUrl("tmp"));
     Model.addConcept(QUrl("tmp"));
-    edytor edyt(0,&Model,&Koncept);
+    edytor edyt(0,&Model,&Koncept,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
         zapelnij_liste();
@@ -217,8 +217,17 @@ void przegladarka::zmien_jezyk(int numer)
         WszystkieJezyki=true;
     }
     else{
-        if(numer==ui->comboBox->count()){
-            WszystkieJezyki=false;
+        if(numer==ui->comboBox->count()-1){
+            jezyk dod;
+            dod.show();
+            if (dod.exec() == QDialog::Accepted) {
+                ListaJezykow.push_back(Soprano::LanguageTag(dod.skrot));
+                ui->comboBox->setItemText(numer,ListaJezykow.value(numer-1).toString());
+                ui->comboBox->addItem("inny");
+                WszystkieJezyki=false;
+            }
+            else
+                ui->comboBox->setCurrentIndex(0);
         }
         else{
             WszystkieJezyki=false;

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Wed Jan 5 16:10:48 2011
+** Created: Thu Jan 6 01:22:19 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -305,6 +305,9 @@ public:
          << QApplication::translate("edytor", "English (en)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("edytor", "INNY", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_TOOLTIP
+        comboBox->setToolTip(QApplication::translate("edytor", "Okresla j\304\231zyk w kt\303\263rym dokonywane b\304\231d\304\205 zmiany.  ", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
         label_3->setText(QApplication::translate("edytor", "terminy ukryte:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("edytor", "terminy alternatywne:", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("edytor", "definicja poj\304\231cia:", 0, QApplication::UnicodeUTF8));
