@@ -60,6 +60,7 @@ void SkosModel::addConceptRelation(const SkosConcept &p_baseConcept,
   {
     qDebug() << "SkosModel::addConceptRelation()"
              << "- one of concepts does not exists";
+    return;
   }
   if (!isRelationConsistencyOk(p_baseConcept, p_relatedConcept, p_relationType))
   {
