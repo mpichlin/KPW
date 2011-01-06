@@ -18,7 +18,7 @@
 
 class SkosConceptScheme;
 
-/*! \class SkosClass
+/*! \class SkosConcept
  * \brief Klasa modelująca SKOSową klasę Concept
  *
  * Klasa modelująca SKOSową klasę Concept
