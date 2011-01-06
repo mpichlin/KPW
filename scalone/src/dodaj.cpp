@@ -47,7 +47,23 @@ void dodaj::odswiez()
 }
 void dodaj::zakoncz()
 {
-    SkosConcept dodawany=Model->getConcepts().value(ui->pojeciaListWidget->currentRow());
+    QString slowo=ui->pojeciaListWidget->currentItem()->text();
+    bool znaleziony=false;
+    QList<SkosConcept> wszystkie;
+    wszystkie=Model->getConcepts();
+    int i=0;
+    int j=0;
+    while (!znaleziony && i<wszystkie.size()) {
+        j=0;
+        while(!znaleziony && j<wszystkie.value(i).getLabelList(PrefferedLabelType).size()){
+            if (wszystkie.value(i).getLabelList(PrefferedLabelType).value(j).literal().toString()==slowo)
+                znaleziony=true;
+            j++;
+            }
+        i++;
+    }
+    SkosConcept dodawany=wszystkie.value(i-1);
+
     Model->addConceptRelation(*Bazowy,dodawany,TypRelacji);
     Bazowy->addConceptRelation(&dodawany,TypRelacji);
     this->accept();
