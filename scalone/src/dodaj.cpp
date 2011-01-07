@@ -66,6 +66,6 @@ void dodaj::zakoncz()
     SkosConcept* ptrNaDodawany = &(*(Model->findConcept(dodawany)));
     SkosConcept* ptrNaBazowy = &(*(Model->findConcept(*Bazowy)));
     Model->addConceptRelation(*ptrNaBazowy,*ptrNaDodawany,TypRelacji);
-    //Bazowy->addConceptRelation(&dodawany,TypRelacji);
+    Bazowy = &(*(Model->findConcept(*Bazowy)));
     this->accept();
 }

@@ -40,9 +40,9 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        //SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
-        //edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
-        edytor edyt(0,&Model,&Koncept,&ListaJezykow);
+        SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
+        edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
+        //edytor edyt(0,&Model,&Koncept,&ListaJezykow);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
              zapelnij_liste();
@@ -55,10 +55,11 @@ void przegladarka::edytuj()
 }
 void przegladarka::dodaj()
 {
-    QUrl tmp=QString(Model.getConcepts().size());
-    SkosConcept Koncept=SkosConcept(tmp);
-    Model.addConcept(tmp);
-    SkosConcept* ptrNaDodawany = &(*(Model.findConcept(tmp)));
+    QString tmp;
+    tmp.setNum(Model.getConcepts().size());
+    SkosConcept Koncept=SkosConcept(QUrl(tmp));
+    Model.addConcept(QUrl(tmp));
+    SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
     edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      

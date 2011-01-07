@@ -14,11 +14,12 @@ class dodaj : public QDialog {
 public:
     dodaj(QWidget *parent = 0,SkosModel *model=0, SkosConcept* bazowy=0, ERelationType typ=RelatedRelation);
     ~dodaj();
+    SkosConcept *Bazowy;
 
 private:
     Ui::dodaj *ui;
     SkosModel *Model;
-    SkosConcept *Bazowy;
+
     ERelationType TypRelacji;
 public slots:
     void odswiez();

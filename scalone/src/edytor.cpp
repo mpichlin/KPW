@@ -129,18 +129,7 @@ void edytor::przeladuj(){
     odswiez_skojarzone();
 
 }
-void edytor::zmien_szersze()
-{
-    if(Koncept->getRelatedConceptsList(BroaderRelation).size()!=0){
-        Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(BroaderRelation).value(0),BroaderRelation);
-        Koncept->removeConceptFromRelation(*Koncept->getRelatedConceptsList(BroaderRelation).value(0),BroaderRelation);
-    }
 
-    dodaj dod(0,Model,Koncept,BroaderRelation);
-    if (dod.exec() == QDialog::Accepted) {
-    }
-    this->odswiez_szersze();
-}
 void edytor::odswiez_wezsze()
 {
     ui->wezszeQlista->clear();
@@ -167,39 +156,55 @@ void edytor::odswiez_skojarzone()
 
 }
 
+void edytor::zmien_szersze()
+{
+    Koncept = &(*(Model->findConcept(*Koncept)));
+    dodaj dod(0,Model,Koncept,BroaderRelation);
+    if (dod.exec() == QDialog::Accepted) {
+        if(Koncept->getRelatedConceptsList(BroaderRelation).size()!=0){
+            Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(BroaderRelation).value(0),BroaderRelation);
+        }
+        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        this->odswiez_szersze();
+    }
+
+}
+
 void edytor::dodaj_wezsze()
 {
     dodaj dod(0,Model,Koncept,NarrowerRelation);
     if (dod.exec() == QDialog::Accepted) {
+
+        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        this->odswiez_wezsze();
     }
-    this->odswiez_wezsze();
+
 }
 void edytor::usun_wezsze()
 {
     if (ui->wezszeQlista->isItemSelected(ui->wezszeQlista->currentItem())) {
         int nr=ui->wezszeQlista->currentRow();
         Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
-        Koncept->removeConceptFromRelation(*Koncept->getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
-    }
-    this->odswiez_wezsze();
+        Koncept = &(*(Model->findConcept(*Koncept)));
+        this->odswiez_wezsze();
+    }    
 }
 void edytor::dodaj_skojarzone()
 {
-    SkosConcept l_koncept(*Koncept);
     dodaj dod(0,Model,Koncept,RelatedRelation);
     if (dod.exec() == QDialog::Accepted) {
+        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        this->odswiez_skojarzone();
     }
-    Koncept = &(*(Model->findConcept(l_koncept)));
-    this->odswiez_skojarzone();
 }
 void edytor::usun_skojarzone()
 {
     if (ui->skojarzoneQlista->isItemSelected(ui->skojarzoneQlista->currentItem())) {
         int nr=ui->skojarzoneQlista->currentRow();
         Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
-        Koncept->removeConceptFromRelation(*Koncept->getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
+        Koncept = &(*(Model->findConcept(*Koncept)));
+        this->odswiez_skojarzone();
     }
-    this->odswiez_skojarzone();
 }
 void edytor::usun()
 {
