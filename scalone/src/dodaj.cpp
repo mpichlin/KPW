@@ -63,8 +63,9 @@ void dodaj::zakoncz()
         i++;
     }
     SkosConcept dodawany=wszystkie.value(i-1);
-
-    Model->addConceptRelation(*Bazowy,dodawany,TypRelacji);
-    Bazowy->addConceptRelation(&dodawany,TypRelacji);
+    SkosConcept* ptrNaDodawany = &(*(Model->findConcept(dodawany)));
+    SkosConcept* ptrNaBazowy = &(*(Model->findConcept(*Bazowy)));
+    Model->addConceptRelation(*ptrNaBazowy,*ptrNaDodawany,TypRelacji);
+    //Bazowy->addConceptRelation(&dodawany,TypRelacji);
     this->accept();
 }

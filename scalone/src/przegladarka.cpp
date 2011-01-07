@@ -40,6 +40,8 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
+        //SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
+        //edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
         edytor edyt(0,&Model,&Koncept,&ListaJezykow);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
@@ -53,9 +55,11 @@ void przegladarka::edytuj()
 }
 void przegladarka::dodaj()
 {
-    SkosConcept Koncept=SkosConcept(QUrl(QString(Model.getConcepts().size())));
-    Model.addConcept(QUrl(QString(Model.getConcepts().size())));
-    edytor edyt(0,&Model,&Koncept,&ListaJezykow);
+    QUrl tmp=QString(Model.getConcepts().size());
+    SkosConcept Koncept=SkosConcept(tmp);
+    Model.addConcept(tmp);
+    SkosConcept* ptrNaDodawany = &(*(Model.findConcept(tmp)));
+    edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
         zapelnij_liste();
@@ -102,8 +106,42 @@ void przegladarka::pokaz()
 {
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
-    if (znajdz(slowo,Koncept))
+    if (znajdz(slowo,Koncept)){
         wyswietl(Koncept);
+        SkosConcept* ptrNaKoncept = &(*(Model.findConcept(Koncept)));
+        QList<SkosConcept*>lista;
+        QList<SkosConcept*>*ptrNaListe;
+        ptrNaListe=&lista;
+        ptrNaListe->clear();
+        QString powiazane;
+        QString syn_powiazanych;
+        znajdz_szersze(ptrNaListe,ptrNaKoncept,ui->szersze_spinBox->value());
+        znajdz_wezsze(ptrNaListe,ptrNaKoncept,ui->wezsze_spinBox->value());
+        znajdz_skojarzone(ptrNaListe,ptrNaKoncept,ui->skojarzone_spinBox->value());
+
+
+        for (int i=1;i<lista.size();i++){
+            for(int j=0;j<lista.value(i)->getLabelList(PrefferedLabelType).size();j++){
+                if((lista.value(i)->getLabelList(PrefferedLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
+                   powiazane+=lista.value(i)->getLabelList(PrefferedLabelType).value(j).literal().toString();
+                   powiazane+=';';
+               }
+            }
+            for(int j=0;j<lista.value(i)->getLabelList(AlternativeLabelType).size();j++){
+                if((lista.value(i)->getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
+                   syn_powiazanych+=lista.value(i)->getLabelList(AlternativeLabelType).value(j).literal().toString();
+                   syn_powiazanych+=';';
+               }
+            }
+        }
+
+
+        ui->powiazaneTextBrowser->setText(powiazane);
+        ui->syn_powTextBrowser->setText(syn_powiazanych);
+
+
+
+    }
     else{
        QMessageBox::information(this, tr("Nie znaleziono"),
          tr("Niestety nie ma wyrazu \"%1\" w bazie").arg(slowo));
@@ -247,4 +285,41 @@ void przegladarka::zmien_jezyk(int numer)
         }
     }
     zapelnij_liste();
+}
+void przegladarka::znajdz_szersze(QList<SkosConcept*>* lista,SkosConcept *pojecie, int glebokosc)
+{
+    if (!lista->contains(pojecie)){
+        lista->push_back(pojecie);
+    }
+    if(glebokosc>0){
+        for(int i=0;i<pojecie->getRelatedConceptsList(BroaderRelation).size();i++){
+            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(BroaderRelation).value(i))));
+            znajdz_szersze(lista,ptr,glebokosc-1);
+        }
+    }
+}
+
+void przegladarka::znajdz_wezsze(QList<SkosConcept*>* lista,SkosConcept *pojecie, int glebokosc)
+{
+    if (!lista->contains(pojecie)){
+        lista->push_back(pojecie);
+    }
+    if(glebokosc>0){
+        for(int i=0;i<pojecie->getRelatedConceptsList(NarrowerRelation).size();i++){
+            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(NarrowerRelation).value(i))));
+            znajdz_szersze(lista,ptr,glebokosc-1);
+        }
+    }
+}
+void przegladarka::znajdz_skojarzone(QList<SkosConcept*>* lista,SkosConcept *pojecie, int glebokosc)
+{
+    if (!lista->contains(pojecie)){
+        lista->push_back(pojecie);
+    }
+    if(glebokosc>0){
+        for(int i=0;i<pojecie->getRelatedConceptsList(RelatedRelation).size();i++){
+            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(RelatedRelation).value(i))));
+            znajdz_szersze(lista,ptr,glebokosc-1);
+        }
+    }
 }

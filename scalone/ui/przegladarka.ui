@@ -122,7 +122,7 @@
            <widget class="QSpinBox" name="szersze_spinBox"/>
           </item>
           <item row="2" column="1">
-           <widget class="QSpinBox" name="skumulowane_spinBox"/>
+           <widget class="QSpinBox" name="skojarzone_spinBox"/>
           </item>
           <item row="0" column="3">
            <widget class="QCheckBox" name="definicjaBox">

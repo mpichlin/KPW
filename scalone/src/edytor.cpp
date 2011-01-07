@@ -185,9 +185,11 @@ void edytor::usun_wezsze()
 }
 void edytor::dodaj_skojarzone()
 {
+    SkosConcept l_koncept(*Koncept);
     dodaj dod(0,Model,Koncept,RelatedRelation);
     if (dod.exec() == QDialog::Accepted) {
     }
+    Koncept = &(*(Model->findConcept(l_koncept)));
     this->odswiez_skojarzone();
 }
 void edytor::usun_skojarzone()
@@ -217,6 +219,13 @@ void edytor::usun()
 }
 void edytor::zatwierdz()
 {
+    //zmiana url:
+    if (ui->domyslneUrlBox->isChecked()){
+        Model->changeUrl(Koncept->getUrl(),QUrl(Koncept->getLabelList(PrefferedLabelType).value(0).literal().toString()));
+    }
+    else{
+        Model->changeUrl(Koncept->getUrl(),QUrl(ui->UrlLineEdit->text()));
+    }
     //usuniecie starych etykiet alternatywnych w danym jezyku:
     QList<Soprano::Node> stare;
     stare=Koncept->getLabelList(AlternativeLabelType);

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Thu Jan 6 18:41:36 2011
+** Created: Fri Jan 7 12:10:49 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -50,7 +50,7 @@ public:
     QLabel *label_7;
     QTextEdit *definicjaText;
     QHBoxLayout *horizontalLayout_5;
-    QCheckBox *zmienBox;
+    QCheckBox *domyslneUrlBox;
     QLineEdit *UrlLineEdit;
     QHBoxLayout *relacjeLayout;
     QVBoxLayout *szerszeLayout;
@@ -181,12 +181,12 @@ public:
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        zmienBox = new QCheckBox(edytor);
-        zmienBox->setObjectName(QString::fromUtf8("zmienBox"));
-        zmienBox->setAutoFillBackground(false);
-        zmienBox->setChecked(true);
+        domyslneUrlBox = new QCheckBox(edytor);
+        domyslneUrlBox->setObjectName(QString::fromUtf8("domyslneUrlBox"));
+        domyslneUrlBox->setAutoFillBackground(false);
+        domyslneUrlBox->setChecked(true);
 
-        horizontalLayout_5->addWidget(zmienBox);
+        horizontalLayout_5->addWidget(domyslneUrlBox);
 
         UrlLineEdit = new QLineEdit(edytor);
         UrlLineEdit->setObjectName(QString::fromUtf8("UrlLineEdit"));
@@ -210,7 +210,8 @@ public:
 
         szerszeQlista = new QListWidget(edytor);
         szerszeQlista->setObjectName(QString::fromUtf8("szerszeQlista"));
-        szerszeQlista->setMaximumSize(QSize(16777215, 30));
+        szerszeQlista->setMinimumSize(QSize(0, 20));
+        szerszeQlista->setMaximumSize(QSize(16777215, 50));
 
         szerszeLayout->addWidget(szerszeQlista);
 
@@ -310,7 +311,7 @@ public:
 
 
         retranslateUi(edytor);
-        QObject::connect(zmienBox, SIGNAL(clicked(bool)), UrlLineEdit, SLOT(setHidden(bool)));
+        QObject::connect(domyslneUrlBox, SIGNAL(clicked(bool)), UrlLineEdit, SLOT(setHidden(bool)));
 
         ukryteQlista->setCurrentRow(-1);
         alternatywneQlista->setCurrentRow(-1);
@@ -335,7 +336,7 @@ public:
         label_3->setText(QApplication::translate("edytor", "terminy ukryte:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("edytor", "terminy alternatywne:", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("edytor", "definicja poj\304\231cia:", 0, QApplication::UnicodeUTF8));
-        zmienBox->setText(QApplication::translate("edytor", "domy\305\233lne Url", 0, QApplication::UnicodeUTF8));
+        domyslneUrlBox->setText(QApplication::translate("edytor", "domy\305\233lne Url", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("edytor", "Poj\304\231cie szersze", 0, QApplication::UnicodeUTF8));
         zmienButton->setText(QApplication::translate("edytor", "zmie\305\204", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("edytor", "Poj\304\231cia w\304\231\305\274sze", 0, QApplication::UnicodeUTF8));

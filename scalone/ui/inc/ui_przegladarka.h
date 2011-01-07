@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Thu Jan 6 18:41:36 2011
+** Created: Fri Jan 7 11:38:09 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -60,7 +60,7 @@ public:
     QCheckBox *skojarzoneBox;
     QSpinBox *wezsze_spinBox;
     QSpinBox *szersze_spinBox;
-    QSpinBox *skumulowane_spinBox;
+    QSpinBox *skojarzone_spinBox;
     QCheckBox *definicjaBox;
     QCheckBox *skumulowaneBox;
     QComboBox *comboBox;
@@ -192,10 +192,10 @@ public:
 
         gridLayout->addWidget(szersze_spinBox, 1, 1, 1, 1);
 
-        skumulowane_spinBox = new QSpinBox(centralwidget);
-        skumulowane_spinBox->setObjectName(QString::fromUtf8("skumulowane_spinBox"));
+        skojarzone_spinBox = new QSpinBox(centralwidget);
+        skojarzone_spinBox->setObjectName(QString::fromUtf8("skojarzone_spinBox"));
 
-        gridLayout->addWidget(skumulowane_spinBox, 2, 1, 1, 1);
+        gridLayout->addWidget(skojarzone_spinBox, 2, 1, 1, 1);
 
         definicjaBox = new QCheckBox(centralwidget);
         definicjaBox->setObjectName(QString::fromUtf8("definicjaBox"));

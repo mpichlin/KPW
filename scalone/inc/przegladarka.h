@@ -28,6 +28,9 @@ private:
     void wyswietl(SkosConcept);
     SkosConcept stworz_koncept(edytor edyt);
     QList<Soprano::LanguageTag> ListaJezykow;
+    void znajdz_szersze(QList<SkosConcept*>* lista,SkosConcept* pojecie, int glebokosc);
+    void znajdz_wezsze(QList<SkosConcept*>* lista,SkosConcept* pojecie, int glebokosc);
+    void znajdz_skojarzone(QList<SkosConcept*>* lista,SkosConcept* pojecie, int glebokosc);
     void inicjalizuj_jezyki();
     void zaladuj_comboBox();
 public slots:

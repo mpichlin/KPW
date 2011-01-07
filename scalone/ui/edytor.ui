@@ -151,7 +151,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QCheckBox" name="zmienBox">
+        <widget class="QCheckBox" name="domyslneUrlBox">
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
@@ -185,10 +185,16 @@
          </item>
          <item>
           <widget class="QListWidget" name="szerszeQlista">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>30</height>
+             <height>50</height>
             </size>
            </property>
           </widget>
@@ -311,7 +317,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>zmienBox</sender>
+   <sender>domyslneUrlBox</sender>
    <signal>clicked(bool)</signal>
    <receiver>UrlLineEdit</receiver>
    <slot>setHidden(bool)</slot>
