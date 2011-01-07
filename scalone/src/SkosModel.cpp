@@ -326,9 +326,10 @@ void SkosModel::clearEmptyClasses()
 bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
                                         const SkosConcept &p_relatedConcept,
                                         const ERelationType &p_relationType) 
-  const
 {
-  if (p_baseConcept.getUrl() != p_relatedConcept.getUrl())
+  if (p_baseConcept.getUrl() != p_relatedConcept.getUrl() &&
+      !findConcept(p_baseConcept)->isConceptRelated(p_relatedConcept, 
+                                                    p_relationType))
   {
     switch (p_relationType)
     {
@@ -365,20 +366,14 @@ bool SkosModel::isRelationConsistencyOk(
   const QList<QUrl> &p_baseRelationListType1,
   const QList<QUrl> &p_baseRelationListType2,
   const QList<QUrl> &p_relatedRelationListType1,
-  const QList<QUrl> &p_relatedRelationListType2) const
+  const QList<QUrl> &p_relatedRelationListType2)
 {
   return (!((isTwoListsHaveAtLeastOneCommonElement(
-               p_relatedRelationListType1,
-               p_baseRelationListType1)) ||
-            (isTwoListsHaveAtLeastOneCommonElement(
               p_relatedRelationListType1,
               p_baseRelationListType2)) ||
             (isTwoListsHaveAtLeastOneCommonElement(
               p_relatedRelationListType2,
-              p_baseRelationListType1)) ||
-            (isTwoListsHaveAtLeastOneCommonElement(
-              p_relatedRelationListType2,
-              p_baseRelationListType2))));
+              p_baseRelationListType1))));
 }
 
 bool SkosModel::isTwoListsHaveAtLeastOneCommonElement(

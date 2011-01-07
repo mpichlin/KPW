@@ -225,12 +225,12 @@ private:
   SkosClass * findSkosClass(const QUrl &p_classUrl);
   bool isRelationConsistencyOk(const SkosConcept &p_baseConcept,
                                const SkosConcept &p_relatedConcept,
-                               const ERelationType &p_relationType) const;
+                               const ERelationType &p_relationType);
   bool isRelationConsistencyOk(
     const QList<QUrl> &p_baseRelationListType1,
     const QList<QUrl> &p_baseRelationListType2,
     const QList<QUrl> &p_relatedRelationListType1,
-    const QList<QUrl> &p_relatedRelationListType2) const;
+    const QList<QUrl> &p_relatedRelationListType2);
   bool isTwoListsHaveAtLeastOneCommonElement(
     const QList<QUrl> &l_firstList,
     const QList<QUrl> &l_secondList) const;
