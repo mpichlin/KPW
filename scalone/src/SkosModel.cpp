@@ -328,31 +328,34 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
                                         const ERelationType &p_relationType) 
   const
 {
-  switch (p_relationType)
+  if (p_baseConcept.getUrl() != p_relatedConcept.getUrl())
   {
-    case RelatedRelation:
+    switch (p_relationType)
     {
-      return isRelationConsistencyOk(
-        p_baseConcept.getRelatedConceptsList(NarrowerRelation),
-        p_baseConcept.getRelatedConceptsList(BroaderRelation),
-        p_relatedConcept.getRelatedConceptsList(NarrowerRelation),
-        p_relatedConcept.getRelatedConceptsList(BroaderRelation));
-    }
-    case BroaderRelation:
-    {
-      return isRelationConsistencyOk(
-        p_baseConcept.getRelatedConceptsList(RelatedRelation),
-        p_baseConcept.getRelatedConceptsList(NarrowerRelation),
-        p_relatedConcept.getRelatedConceptsList(RelatedRelation),
-        p_relatedConcept.getRelatedConceptsList(NarrowerRelation));
-    }
-    case NarrowerRelation:
-    {
-      return isRelationConsistencyOk(
-        p_baseConcept.getRelatedConceptsList(RelatedRelation),
-        p_baseConcept.getRelatedConceptsList(BroaderRelation),
-        p_relatedConcept.getRelatedConceptsList(RelatedRelation),
-        p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+      case RelatedRelation:
+      {
+        return isRelationConsistencyOk(
+          p_baseConcept.getRelatedConceptsList(NarrowerRelation),
+          p_baseConcept.getRelatedConceptsList(BroaderRelation),
+          p_relatedConcept.getRelatedConceptsList(NarrowerRelation),
+          p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+      }
+      case BroaderRelation:
+      {
+        return isRelationConsistencyOk(
+          p_baseConcept.getRelatedConceptsList(RelatedRelation),
+          p_baseConcept.getRelatedConceptsList(NarrowerRelation),
+          p_relatedConcept.getRelatedConceptsList(RelatedRelation),
+          p_relatedConcept.getRelatedConceptsList(NarrowerRelation));
+      }
+      case NarrowerRelation:
+      {
+        return isRelationConsistencyOk(
+          p_baseConcept.getRelatedConceptsList(RelatedRelation),
+          p_baseConcept.getRelatedConceptsList(BroaderRelation),
+          p_relatedConcept.getRelatedConceptsList(RelatedRelation),
+          p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+      }
     }
   }
   return false;
