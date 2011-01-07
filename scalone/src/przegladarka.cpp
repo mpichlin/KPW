@@ -41,7 +41,7 @@ void przegladarka::edytuj()
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
         SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
-        edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
+        edytor edyt(0,&Model,*ptrNaDodawany,&ListaJezykow);
         //edytor edyt(0,&Model,&Koncept,&ListaJezykow);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
@@ -60,7 +60,7 @@ void przegladarka::dodaj()
     SkosConcept Koncept=SkosConcept(QUrl(tmp));
     Model.addConcept(QUrl(tmp));
     SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
-    edytor edyt(0,&Model,ptrNaDodawany,&ListaJezykow);
+    edytor edyt(0,&Model,*ptrNaDodawany,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
         zapelnij_liste();

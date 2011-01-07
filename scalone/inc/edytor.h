@@ -13,12 +13,12 @@ namespace Ui {
 class edytor : public QDialog {
     Q_OBJECT
 public:
-    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept* Koncept=0,QList<Soprano::LanguageTag>* ListaJezykow=0);
+    edytor(QWidget *parent = 0, SkosModel* Model=0, SkosConcept p_koncept=SkosConcept(QUrl("empty")),QList<Soprano::LanguageTag>* ListaJezykow=0);
     ~edytor();
 private:
     Ui::edytor *ui;
     SkosModel *Model;
-    SkosConcept *Koncept;
+    SkosConcept m_koncept;
     Soprano::LanguageTag Jezyk;
     QList<Soprano::LanguageTag>* ListaJezykow;
     void przeladuj();

@@ -12,12 +12,12 @@ namespace Ui {
 class dodaj : public QDialog {
     Q_OBJECT
 public:
-    dodaj(QWidget *parent = 0,SkosModel *model=0, SkosConcept* bazowy=0, ERelationType typ=RelatedRelation);
+    dodaj(QWidget *parent = 0,SkosModel *model=0, SkosConcept p_bazowyKoncept = SkosConcept(QUrl("empty")), ERelationType typ=RelatedRelation);
     ~dodaj();
-    SkosConcept *Bazowy;
 
 private:
     Ui::dodaj *ui;
+    SkosConcept m_bazowyKoncept;
     SkosModel *Model;
 
     ERelationType TypRelacji;

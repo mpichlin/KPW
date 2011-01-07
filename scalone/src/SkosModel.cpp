@@ -156,6 +156,8 @@ void SkosModel::removeLabel(const Soprano::Node &p_label,
 QList<SkosConcept>::iterator SkosModel::findConcept(
   const SkosConcept &p_concept)
 {
+  qDebug() << "SkosModel::findConcept(p_concept ="
+           << p_concept.getUrl() << ")";
   for (QList<SkosConcept>::iterator l_iter = m_concepts.begin();
        l_iter != m_concepts.end(); ++l_iter)
   {
@@ -470,6 +472,8 @@ void SkosModel::removeConceptRelation(const SkosConcept &p_baseConcept,
 
 void SkosModel::changeUrl(const QUrl &p_classUrl, const QUrl &p_newUrl)
 {
+  qDebug() << "SkosModel::changeUrl(p_classUrl =" << p_classUrl
+           << ", p_newUrl=" << p_newUrl << ")";
   SkosClass *l_skosClassPtr = findSkosClass(p_classUrl);
   if (l_skosClassPtr != NULL)
   {

@@ -3,9 +3,10 @@
 #include "dodaj.h"
 #include<QMessageBox>
 
-edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept, QList<Soprano::LanguageTag>* listaJ) :
+edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept p_koncept, QList<Soprano::LanguageTag>* listaJ) :
     QDialog(parent),
-    ui(new Ui::edytor)
+    ui(new Ui::edytor),
+    m_koncept(p_koncept)
 {
      ui->setupUi(this);
 
@@ -31,7 +32,6 @@ edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept *koncept, QList<So
 
     ui->UrlLineEdit->hide();
     this->Model=model;
-    this->Koncept=koncept;
     this->ListaJezykow=listaJ;
     this->Jezyk="pl";
     przeladuj();
@@ -68,12 +68,12 @@ void edytor::dodaj_ukryte(QListWidgetItem* zmieniona)
 void edytor::przeladuj(){
     //zaladuj etykiety alternatywne:
     ui->alternatywneQlista->clear();
-    for(int j=0;j<Koncept->getLabelList(AlternativeLabelType).size();j++){
+    for(int j=0;j<m_koncept.getLabelList(AlternativeLabelType).size();j++){
        QListWidgetItem *pom = new QListWidgetItem();
-       pom->setText(Koncept->getLabelList(AlternativeLabelType).value(j).literal().toString());
+       pom->setText(m_koncept.getLabelList(AlternativeLabelType).value(j).literal().toString());
        pom->setFlags (pom->flags () | Qt::ItemIsEditable);
        ui->alternatywneQlista->insertItem(0,pom);
-       if(Koncept->getLabelList(AlternativeLabelType).value(j).language()==Jezyk){
+       if(m_koncept.getLabelList(AlternativeLabelType).value(j).language()==Jezyk){
            ui->alternatywneQlista->item(0)->setHidden(false);
        }
        else{
@@ -89,12 +89,12 @@ void edytor::przeladuj(){
 
     //zaladuj etykiety ukryte:
     ui->ukryteQlista->clear();
-    for(int j=0;j<Koncept->getLabelList(HiddenLabelType).size();j++){
+    for(int j=0;j<m_koncept.getLabelList(HiddenLabelType).size();j++){
         QListWidgetItem *pom = new QListWidgetItem();
-        pom->setText(Koncept->getLabelList(HiddenLabelType).value(j).literal().toString());
+        pom->setText(m_koncept.getLabelList(HiddenLabelType).value(j).literal().toString());
         pom->setFlags (pom->flags () | Qt::ItemIsEditable);
         ui->ukryteQlista->insertItem(0,pom);
-        if(Koncept->getLabelList(HiddenLabelType).value(j).language()==Jezyk){
+        if(m_koncept.getLabelList(HiddenLabelType).value(j).language()==Jezyk){
             ui->ukryteQlista->item(0)->setHidden(false);
         }
         else{
@@ -110,17 +110,17 @@ void edytor::przeladuj(){
 
     //zaladuj preferowany:
     ui->preferowanyQline->clear();
-    for(int j=0;j<Koncept->getLabelList(PrefferedLabelType).size();j++){
-        if(Koncept->getLabelList(PrefferedLabelType).value(j).language()==Jezyk){
-            ui->preferowanyQline->setText(Koncept->getLabelList(PrefferedLabelType).value(j).literal().toString());
+    for(int j=0;j<m_koncept.getLabelList(PrefferedLabelType).size();j++){
+        if(m_koncept.getLabelList(PrefferedLabelType).value(j).language()==Jezyk){
+            ui->preferowanyQline->setText(m_koncept.getLabelList(PrefferedLabelType).value(j).literal().toString());
         }
     }
 
     //zaladuj definicję:
     ui->definicjaText->clear();
-    for(int j=0;j<Koncept->getDefinitions().size();j++){
-        if(Koncept->getDefinitions().value(j).language()==Jezyk){
-        ui->definicjaText->setPlainText(Koncept->getDefinitions().value(j).literal().toString());
+    for(int j=0;j<m_koncept.getDefinitions().size();j++){
+        if(m_koncept.getDefinitions().value(j).language()==Jezyk){
+        ui->definicjaText->setPlainText(m_koncept.getDefinitions().value(j).literal().toString());
         }
     }
 
@@ -133,38 +133,34 @@ void edytor::przeladuj(){
 void edytor::odswiez_wezsze()
 {
     ui->wezszeQlista->clear();
-    for(int j=0;j< Koncept->getRelatedConceptsList(NarrowerRelation).size();j++){
+    for(int j=0;j< m_koncept.getRelatedConceptsList(NarrowerRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
-        pom->setText(Koncept->getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
     }
 }
 void edytor::odswiez_szersze()
 {
     ui->szerszeQlista->clear();
-    for(int j=0;j< Koncept->getRelatedConceptsList(BroaderRelation).size();j++){
+    for(int j=0;j< m_koncept.getRelatedConceptsList(BroaderRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->szerszeQlista);
-        pom->setText(Koncept->getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
     }
 }
 void edytor::odswiez_skojarzone()
 {
     ui->skojarzoneQlista->clear();
-    for(int j=0;j< Koncept->getRelatedConceptsList(RelatedRelation).size();j++){
+    for(int j=0;j< m_koncept.getRelatedConceptsList(RelatedRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->skojarzoneQlista);
-        pom->setText(Koncept->getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
     }
 
 }
 
 void edytor::zmien_szersze()
 {
-    Koncept = &(*(Model->findConcept(*Koncept)));
-    dodaj dod(0,Model,Koncept,BroaderRelation);
+    dodaj dod(0,Model,m_koncept,BroaderRelation);
     if (dod.exec() == QDialog::Accepted) {
-        if(Koncept->getRelatedConceptsList(BroaderRelation).size()!=0){
-            Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(BroaderRelation).value(0),BroaderRelation);
-        }
-        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_szersze();
     }
 
@@ -172,10 +168,9 @@ void edytor::zmien_szersze()
 
 void edytor::dodaj_wezsze()
 {
-    dodaj dod(0,Model,Koncept,NarrowerRelation);
+    dodaj dod(0,Model,m_koncept,NarrowerRelation);
     if (dod.exec() == QDialog::Accepted) {
-
-        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_wezsze();
     }
 
@@ -184,16 +179,16 @@ void edytor::usun_wezsze()
 {
     if (ui->wezszeQlista->isItemSelected(ui->wezszeQlista->currentItem())) {
         int nr=ui->wezszeQlista->currentRow();
-        Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
-        Koncept = &(*(Model->findConcept(*Koncept)));
+        Model->removeConceptRelation(m_koncept, *m_koncept.getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_wezsze();
     }    
 }
 void edytor::dodaj_skojarzone()
 {
-    dodaj dod(0,Model,Koncept,RelatedRelation);
+    dodaj dod(0,Model, m_koncept,RelatedRelation);
     if (dod.exec() == QDialog::Accepted) {
-        Koncept = &(*(Model->findConcept(*dod.Bazowy)));
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_skojarzone();
     }
 }
@@ -201,8 +196,8 @@ void edytor::usun_skojarzone()
 {
     if (ui->skojarzoneQlista->isItemSelected(ui->skojarzoneQlista->currentItem())) {
         int nr=ui->skojarzoneQlista->currentRow();
-        Model->removeConceptRelation(*Koncept,*Koncept->getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
-        Koncept = &(*(Model->findConcept(*Koncept)));
+        Model->removeConceptRelation(m_koncept, *m_koncept.getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_skojarzone();
     }
 }
@@ -215,7 +210,7 @@ void edytor::usun()
     int ret=potw.exec();
     switch (ret) {
       case QMessageBox::Ok:
-          Model->removeConcept(*Koncept);
+          Model->removeConcept(m_koncept);
           this->accept();
           break;
       case QMessageBox::Cancel:
@@ -226,17 +221,19 @@ void edytor::zatwierdz()
 {
     //zmiana url:
     if (ui->domyslneUrlBox->isChecked()){
-        Model->changeUrl(Koncept->getUrl(),QUrl(Koncept->getLabelList(PrefferedLabelType).value(0).literal().toString()));
+        Model->changeUrl(m_koncept.getUrl(),QUrl(ui->preferowanyQline->text()));
+        m_koncept.setUrl(QUrl(ui->preferowanyQline->text()));
     }
     else{
-        Model->changeUrl(Koncept->getUrl(),QUrl(ui->UrlLineEdit->text()));
+        Model->changeUrl(m_koncept.getUrl(),QUrl(ui->UrlLineEdit->text()));
+        m_koncept.setUrl(QUrl(ui->UrlLineEdit->text()));
     }
     //usuniecie starych etykiet alternatywnych w danym jezyku:
     QList<Soprano::Node> stare;
-    stare=Koncept->getLabelList(AlternativeLabelType);
+    stare=m_koncept.getLabelList(AlternativeLabelType);
     for(int i=0;i<stare.size();i++){
         if (stare.value(i).language()==Jezyk){
-            Model->removeLabel(stare.value(i),AlternativeLabelType,Koncept->getUrl());
+            Model->removeLabel(stare.value(i),AlternativeLabelType,m_koncept.getUrl());
         }
     }
     //dodanie nowych etykiet alternatywnych w danym jezyku:
@@ -244,16 +241,16 @@ void edytor::zatwierdz()
         if(ui->alternatywneQlista->item(i)->text()!=""){
             if(ui->alternatywneQlista->item(i)->isHidden()==false){
                 Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->alternatywneQlista->item(i)->text(),Jezyk));
-                Model->addLabel(lab,AlternativeLabelType,Koncept->getUrl());
+                Model->addLabel(lab,AlternativeLabelType,m_koncept.getUrl());
             }
         }
     }
 
     //usuniecie starych etykiet ukrytych w danym jezyku:
-    stare=Koncept->getLabelList(HiddenLabelType);
+    stare=m_koncept.getLabelList(HiddenLabelType);
     for(int i=0;i<stare.size();i++){
         if (stare.value(i).language()==Jezyk){
-           Model->removeLabel(stare.value(i),HiddenLabelType,Koncept->getUrl());
+           Model->removeLabel(stare.value(i),HiddenLabelType,m_koncept.getUrl());
         }
     }
 
@@ -262,7 +259,7 @@ void edytor::zatwierdz()
         if(ui->ukryteQlista->item(i)->text()!=""){
             if (ui->ukryteQlista->item(i)->isHidden()==false){
                 Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->ukryteQlista->item(i)->text(),Jezyk));
-                Model->addLabel(lab,HiddenLabelType,Koncept->getUrl());
+                Model->addLabel(lab,HiddenLabelType,m_koncept.getUrl());
             }
         }
     }
@@ -271,26 +268,26 @@ void edytor::zatwierdz()
 
     if(ui->preferowanyQline->text()!=""){
 
-        stare=Koncept->getLabelList(PrefferedLabelType);
+        stare=m_koncept.getLabelList(PrefferedLabelType);
         for(int i=0;i<stare.size();i++){
             if (stare.value(i).language()==Jezyk){
-               Model->removeLabel(stare.value(i),PrefferedLabelType,Koncept->getUrl());
+               Model->removeLabel(stare.value(i),PrefferedLabelType,m_koncept.getUrl());
             }
         }
         Soprano::Node lab = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->preferowanyQline->text(),Jezyk));
-        Model->addLabel(lab,PrefferedLabelType,Koncept->getUrl());
+        Model->addLabel(lab,PrefferedLabelType,m_koncept.getUrl());
     }
 
     //zmiana definicji w danym jezyku:
-    stare=Koncept->getDefinitions();
+    stare=m_koncept.getDefinitions();
     for(int i=0;i<stare.size();i++){
         if (stare.value(i).language()==Jezyk){
-           Model->removeDefinition(stare.value(i),Koncept->getUrl());
+           Model->removeDefinition(stare.value(i),m_koncept.getUrl());
         }
     }
     if (ui->definicjaText->toPlainText()!=""){
         Soprano::Node def = Soprano::Node(Soprano::LiteralValue::createPlainLiteral(ui->definicjaText->toPlainText(),Jezyk));
-        Model->addDefinition(def,Koncept->getUrl());
+        Model->addDefinition(def,m_koncept.getUrl());
     }
     this->accept();
 }

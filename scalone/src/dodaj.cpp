@@ -2,12 +2,12 @@
 #include "ui_dodaj.h"
 #include <QListWidget>
 #include <QListWidgetItem>
-dodaj::dodaj(QWidget *parent, SkosModel *model, SkosConcept *bazowy, ERelationType typ) :
+dodaj::dodaj(QWidget *parent, SkosModel *model, SkosConcept p_bazowyKoncept, ERelationType typ) :
     QDialog(parent),
-    ui(new Ui::dodaj)
+    ui(new Ui::dodaj),
+    m_bazowyKoncept(p_bazowyKoncept)
 {
     this->Model=model;
-    this->Bazowy=bazowy;
     this->TypRelacji=typ;
     ui->setupUi(this);
     //wrzuc wszystkie koncepty na liste:
@@ -64,8 +64,7 @@ void dodaj::zakoncz()
     }
     SkosConcept dodawany=wszystkie.value(i-1);
     SkosConcept* ptrNaDodawany = &(*(Model->findConcept(dodawany)));
-    SkosConcept* ptrNaBazowy = &(*(Model->findConcept(*Bazowy)));
+    SkosConcept* ptrNaBazowy = &(*(Model->findConcept(m_bazowyKoncept)));
     Model->addConceptRelation(*ptrNaBazowy,*ptrNaDodawany,TypRelacji);
-    Bazowy = &(*(Model->findConcept(*Bazowy)));
     this->accept();
 }
