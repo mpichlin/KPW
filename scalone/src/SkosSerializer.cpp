@@ -91,9 +91,9 @@ void SkosSerializer::serializeConceptRelationsList(
   const ERelationType &p_relationType,
   const QUrl &p_relationUrl)
 {
-  QList<SkosConcept*> l_relatedConcepts = 
+  QList<QUrl> l_relatedConcepts = 
     p_baseConceptIter->getRelatedConceptsList(p_relationType);
-  for(QList<SkosConcept*>::const_iterator l_relatedIter = 
+  for(QList<QUrl>::const_iterator l_relatedIter = 
         l_relatedConcepts.begin();
       l_relatedIter != l_relatedConcepts.end();
       ++l_relatedIter)
@@ -101,7 +101,7 @@ void SkosSerializer::serializeConceptRelationsList(
     m_statements.append(Soprano::Statement(
                           Soprano::Node(p_baseConceptIter->getUrl()),
                           Soprano::Node(p_relationUrl),
-                          Soprano::Node((*l_relatedIter)->getUrl())));
+                          Soprano::Node(*l_relatedIter)));
   }
 }
 
@@ -127,9 +127,9 @@ void SkosSerializer::serializeSchemesList(
   const ESchemeRelation &p_schemeRelation,
   const QUrl &p_schemeRelationUrl)
 {
-  QList<SkosConceptScheme*> l_schemes = 
+  QList<QUrl> l_schemes = 
     p_baseConceptIter->getConceptSchemesList(p_schemeRelation);
-  for(QList<SkosConceptScheme*>::const_iterator l_schemesIter = 
+  for(QList<QUrl>::const_iterator l_schemesIter = 
         l_schemes.begin();
       l_schemesIter != l_schemes.end();
       ++l_schemesIter)
@@ -137,7 +137,7 @@ void SkosSerializer::serializeSchemesList(
     m_statements.append(Soprano::Statement(
                           Soprano::Node(p_baseConceptIter->getUrl()),
                           Soprano::Node(p_schemeRelationUrl),
-                          Soprano::Node((*l_schemesIter)->getUrl())));
+                          Soprano::Node(*l_schemesIter)));
   }
 }
 

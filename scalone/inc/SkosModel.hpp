@@ -227,13 +227,13 @@ private:
                                const SkosConcept &p_relatedConcept,
                                const ERelationType &p_relationType) const;
   bool isRelationConsistencyOk(
-    const QList<SkosConcept *> &p_baseRelationListType1,
-    const QList<SkosConcept *> &p_baseRelationListType2,
-    const QList<SkosConcept *> &p_relatedRelationListType1,
-    const QList<SkosConcept *> &p_relatedRelationListType2) const;
+    const QList<QUrl> &p_baseRelationListType1,
+    const QList<QUrl> &p_baseRelationListType2,
+    const QList<QUrl> &p_relatedRelationListType1,
+    const QList<QUrl> &p_relatedRelationListType2) const;
   bool isTwoListsHaveAtLeastOneCommonElement(
-    const QList<SkosConcept *> &l_firstList,
-    const QList<SkosConcept *> &l_secondList) const;
+    const QList<QUrl> &l_firstList,
+    const QList<QUrl> &l_secondList) const;
 
   QList<SkosConcept> m_concepts;
   QList<SkosConceptScheme> m_conceptSchemes;

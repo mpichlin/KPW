@@ -40,7 +40,7 @@ public:
    *
    * Konstruktor tworzący koncept o danym URL
    */
-  SkosConcept(QUrl p_url){setUrl(p_url);};
+  SkosConcept(const QUrl &p_url){setUrl(p_url);};
 
   /*! \brief Dodanie do relacji danego typu z danym konceptem
    *
@@ -51,7 +51,7 @@ public:
    * \post Do obiektu została dodana relacja typu p_relationType z konceptem
    * p_relatedConcept
    */
-  int  addConceptRelation(SkosConcept *p_relatedConcept,
+  int  addConceptRelation(const SkosConcept &p_relatedConcept,
                           const ERelationType &p_relationType);
 
   /*! \brief Dodanie relacji do schematu konceptów
@@ -65,32 +65,30 @@ public:
    * \post Do obiektu została dodana relacja typu p_schemeRelation w stosunku
    * do schematu konceptów określonego przez p_conceptScheme
    */
-  void addToScheme(SkosConceptScheme *p_conceptScheme,
+  void addToScheme(const SkosConceptScheme &p_conceptScheme,
                    const ESchemeRelation &p_schemeRelation);
 
-  /*! \brief Znajduje dany schemat w którym koncept jest w danego typu relacji
+  /*! \brief Określa czy obiekt jest w danym schemacie konceptów w danej relacji
    *
-   * Znajduje dany schemat w którym koncept jest w danego typu relacji
-   * \param p_conceptScheme - schemat konceptów, który ma zostać znaleziony
+   * Określa czy jest w danym schemacie konceptów w danej relacji
+   * \param p_conceptScheme - schemat konceptów, w którym ma być obiekt
    * \param p_schemeRelation - typ relacji obiektu wobec schematu
-   * \return Iterator na schemat określony przez p_conceptScheme, w którym
-   * koncept jest w relacji typu p_schemeRelation.
+   * \return true - jeśli obiekt znajduje się w schemacie p_conceptScheme,
+   * w relacji p_schemeRelation; w przeciwnym wypadku false
    */
-  QList<SkosConceptScheme*>::iterator findInScheme(
-    const SkosConceptScheme &p_conceptScheme,
-    const ESchemeRelation &p_schemeRelation);
+  bool isInScheme(const SkosConceptScheme &p_conceptScheme,
+                  const ESchemeRelation &p_schemeRelation);
 
-  /*! \brief Znajduje dany koncept w którym obiekt jest w danego typu relacji
+  /*! \brief Określa czy obiekt posiada daną relację z danym konceptem
    *
-   * Znajduje dany koncept w którym obiekt jest w danego typu relacji
-   * \param p_concept - koncept, który ma zostać znaleziony
+   * Określa czy obiekt posiada daną relację z danym konceptem
+   * \param p_concept - koncept, który ma być powiązany
    * \param p_relationType - typ relacji konceptu wobec obiektu
-   * \return Iterator na koncept określony przez p_conceptScheme, który jest
-   * w relacji typu p_relationType z obiektem
+   * \return true - jeśli obiekt posiada relację p_relationType względem
+   * konceptu p_concept
    */
-  QList<SkosConcept*>::iterator findConceptInRelation(
-    const SkosConcept &p_concept, 
-    const ERelationType &p_relationType);
+  bool isConceptRelated(const SkosConcept &p_concept, 
+                        const ERelationType &p_relationType);
 
   /*! \brief Usuwa relację danego typu obiektu z danym konceptem
    *
@@ -114,51 +112,44 @@ public:
   void removeConceptFromScheme(const SkosConceptScheme &p_conceptScheme,
                                const ESchemeRelation &p_schemeRelation);
 
-  /*! \brief Zwraca stała referencję na listę wskaźników powiązanych konceptów
+  /*! \brief Zwraca listę URL powiązanych konceptów
    *
-   * Zwraca stałą referencję na listę wskaźników powiązanych konceptów
-   * z obiektem, danym typem relacji
+   * Zwraca listę powiązanych konceptów z obiektem, danym typem relacji
    * \param p_relationType - typ relacji konceptów, których ma zawierać
    * referencja
-   * \return Stała referencja na listę konceptów będących z obiektem w relacji
-   * typu p_relationType
+   * \return Lista URL powiązanych konceptów relacją typu p_relationType
    */
-  const QList<SkosConcept*> &getRelatedConceptsList(
+  const QList<QUrl> &getRelatedConceptsList(
     const ERelationType &p_relationType) const;
 
-  /*! \brief Zwraca stała referencję na listę wskaźników powiązanych schematów
-   * konceptów
+  /*! \brief Zwraca listę URL schematów w którym znaduje się obiekt
    *
-   * Zwraca stałą referencję na listę wskaźników powiązanych schematów konceptów
-   * z obiektem, danym typem relacji
-   * \param p_schemeRelation - typ relacji schematów konceptół, któtre ma
-   * zawierać referencja
-   * \return Stała referencja na listę schematów konceptów będących z obiektem
-   * w relacji typu p_schemeRelation
+   * Zwraca listę powiązanych schematów konceptów z obiektem, danym typem 
+   * relacji
+   * \param p_schemeRelation - typ relacji schematów konceptów
+   * \return Lista URL powiązanych konceptów relacją typu p_schemeRelation
    */
-  const QList<SkosConceptScheme*> &getConceptSchemesList(
+  const QList<QUrl> &getConceptSchemesList(
     const ESchemeRelation &p_schemeRelation) const;
 private:
-  QList<SkosConceptScheme*>::iterator findInScheme(
-    const SkosConceptScheme &p_conceptScheme,
-    QList<SkosConceptScheme*> &p_internalSchemes);
+  bool isInScheme(const SkosConceptScheme &p_conceptScheme,
+                  QList<QUrl> &p_internalSchemes);
   bool isPrefLabelOk(const Soprano::Node &p_prefLabel) const;
   bool isLabelAlreadyExists(const Soprano::Node &p_label) const;
   bool isRelationAlreadyExists(const SkosConcept &p_concept);
-  QList<SkosConcept*>::iterator findConceptInList(
-    const SkosConcept &p_concept, 
-    QList<SkosConcept*> &p_relationList);
+  bool isConceptRelated(const SkosConcept &p_concept, 
+                        QList<QUrl> &p_relationList);
   void removeConceptFromList(const SkosConcept &p_concept, 
-                             QList<SkosConcept*> &p_relationList);
+                             QList<QUrl> &p_relationList);
   void removeSchemeFromList(const SkosConceptScheme &p_conceptScheme, 
-                            QList<SkosConceptScheme*> &p_schemeList);
+                            QList<QUrl> &p_schemeList);
 
-  QList<SkosConcept*> m_broaderConcepts;
-  QList<SkosConcept*> m_narrowerConcepts;
-  QList<SkosConcept*> m_relatedConcepts;
+  QList<QUrl> m_broaderConcepts;
+  QList<QUrl> m_narrowerConcepts;
+  QList<QUrl> m_relatedConcepts;
 
-  QList<SkosConceptScheme*> m_topInSchemes;
-  QList<SkosConceptScheme*> m_inSchemes;
+  QList<QUrl> m_topInSchemes;
+  QList<QUrl> m_inSchemes;
 };
 
 #endif

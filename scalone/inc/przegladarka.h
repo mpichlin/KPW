@@ -16,11 +16,11 @@ namespace Ui {
 class przegladarka : public QMainWindow {
     Q_OBJECT
 public:
-    przegladarka(QWidget *parent = 0);
+    przegladarka(SkosModel *p_model, QWidget *parent = 0);
     ~przegladarka();
 private:
     Ui::przegladarka *ui;
-    SkosModel Model;
+    SkosModel* Model;
     Soprano::LanguageTag Jezyk;
     bool WszystkieJezyki;
     void zapelnij_liste();

@@ -30,8 +30,9 @@ void myMessageHandler(QtMsgType type, const char *msg)
 
 int main(int argc, char *argv[])
 {
+    SkosModel g_model;
     QApplication a(argc, argv);
-    przegladarka p;
+    przegladarka p(&g_model);
     p.show();
 
     QFile outFile("log");

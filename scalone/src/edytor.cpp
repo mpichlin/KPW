@@ -2,6 +2,7 @@
 #include "ui_edytor.h"
 #include "dodaj.h"
 #include<QMessageBox>
+#include <QDebug>
 
 edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept p_koncept, QList<Soprano::LanguageTag>* listaJ) :
     QDialog(parent),
@@ -133,17 +134,32 @@ void edytor::przeladuj(){
 void edytor::odswiez_wezsze()
 {
     ui->wezszeQlista->clear();
+    m_koncept = *Model->findConcept(m_koncept);
+    qDebug() << "Zbieranie listy";
+    QList<QUrl> l_listaWezszych =
+        m_koncept.getRelatedConceptsList(NarrowerRelation);
+    qDebug() << "Pozbierana";
+    for(QList<QUrl>::iterator l_iter = l_listaWezszych.begin();
+        l_iter != l_listaWezszych.end();
+        ++l_iter)
+    {
+        QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
+        qDebug() << "Dupa:" << *l_iter;
+        pom->setText(l_iter->toString());
+    }
+    /*
     for(int j=0;j< m_koncept.getRelatedConceptsList(NarrowerRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
         pom->setText(m_koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
     }
+    */
 }
 void edytor::odswiez_szersze()
 {
     ui->szerszeQlista->clear();
     for(int j=0;j< m_koncept.getRelatedConceptsList(BroaderRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->szerszeQlista);
-        pom->setText(m_koncept.getRelatedConceptsList(BroaderRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(BroaderRelation).value(j).toString());
     }
 }
 void edytor::odswiez_skojarzone()
@@ -151,7 +167,7 @@ void edytor::odswiez_skojarzone()
     ui->skojarzoneQlista->clear();
     for(int j=0;j< m_koncept.getRelatedConceptsList(RelatedRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->skojarzoneQlista);
-        pom->setText(m_koncept.getRelatedConceptsList(RelatedRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(RelatedRelation).value(j).toString());
     }
 
 }
@@ -170,7 +186,6 @@ void edytor::dodaj_wezsze()
 {
     dodaj dod(0,Model,m_koncept,NarrowerRelation);
     if (dod.exec() == QDialog::Accepted) {
-        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_wezsze();
     }
 
@@ -179,7 +194,7 @@ void edytor::usun_wezsze()
 {
     if (ui->wezszeQlista->isItemSelected(ui->wezszeQlista->currentItem())) {
         int nr=ui->wezszeQlista->currentRow();
-        Model->removeConceptRelation(m_koncept, *m_koncept.getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
+        Model->removeConceptRelation(m_koncept, m_koncept.getRelatedConceptsList(NarrowerRelation).value(nr),NarrowerRelation);
         m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_wezsze();
     }    
@@ -196,7 +211,7 @@ void edytor::usun_skojarzone()
 {
     if (ui->skojarzoneQlista->isItemSelected(ui->skojarzoneQlista->currentItem())) {
         int nr=ui->skojarzoneQlista->currentRow();
-        Model->removeConceptRelation(m_koncept, *m_koncept.getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
+        Model->removeConceptRelation(m_koncept, m_koncept.getRelatedConceptsList(RelatedRelation).value(nr),RelatedRelation);
         m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_skojarzone();
     }

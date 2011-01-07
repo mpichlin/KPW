@@ -72,30 +72,30 @@ void SkosModel::addConceptRelation(const SkosConcept &p_baseConcept,
     {
       case BroaderRelation:
       {
-        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter,
+        if((l_baseConceptIter->addConceptRelation(*l_relatedConceptIter,
                                                   BroaderRelation) == 0))
         {
-          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+          l_relatedConceptIter->addConceptRelation(*l_baseConceptIter,
                                                    NarrowerRelation);
         }
         break;
       }
       case NarrowerRelation:
       {
-        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter, 
+        if((l_baseConceptIter->addConceptRelation(*l_relatedConceptIter, 
                                                   NarrowerRelation)) == 0)
         {
-          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+          l_relatedConceptIter->addConceptRelation(*l_baseConceptIter,
                                                    BroaderRelation);
         }
         break;
       }
       case RelatedRelation:
       {
-        if((l_baseConceptIter->addConceptRelation(&*l_relatedConceptIter, 
+        if((l_baseConceptIter->addConceptRelation(*l_relatedConceptIter, 
                                                   RelatedRelation)) == 0)
         {
-          l_relatedConceptIter->addConceptRelation(&*l_baseConceptIter,
+          l_relatedConceptIter->addConceptRelation(*l_baseConceptIter,
                                                    RelatedRelation);
         }
         break;
@@ -224,7 +224,7 @@ void SkosModel::addConceptToScheme(const SkosConcept &p_concept,
   else
   {
     l_conceptSchemesIter->addConcept(&*l_conceptsIter, p_schemeRelation);
-    l_conceptsIter->addToScheme(&*l_conceptSchemesIter, p_schemeRelation);
+    l_conceptsIter->addToScheme(*l_conceptSchemesIter, p_schemeRelation);
   }
 }
 
@@ -359,10 +359,10 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
 }
 
 bool SkosModel::isRelationConsistencyOk(
-  const QList<SkosConcept *> &p_baseRelationListType1,
-  const QList<SkosConcept *> &p_baseRelationListType2,
-  const QList<SkosConcept *> &p_relatedRelationListType1,
-  const QList<SkosConcept *> &p_relatedRelationListType2) const
+  const QList<QUrl> &p_baseRelationListType1,
+  const QList<QUrl> &p_baseRelationListType2,
+  const QList<QUrl> &p_relatedRelationListType1,
+  const QList<QUrl> &p_relatedRelationListType2) const
 {
   return (!((isTwoListsHaveAtLeastOneCommonElement(
                p_relatedRelationListType1,
@@ -379,21 +379,20 @@ bool SkosModel::isRelationConsistencyOk(
 }
 
 bool SkosModel::isTwoListsHaveAtLeastOneCommonElement(
-  const QList<SkosConcept *> &l_firstList,
-  const QList<SkosConcept *> &l_secondList) const
+  const QList<QUrl> &l_firstList,
+  const QList<QUrl> &l_secondList) const
 {
-  for (QList<SkosConcept *>::const_iterator l_firstListIter = 
+  for (QList<QUrl>::const_iterator l_firstListIter = 
          l_firstList.begin();
        l_firstListIter != l_firstList.end();
        ++l_firstListIter)
   {
-    for(QList<SkosConcept *>::const_iterator l_secondListIter =
+    for(QList<QUrl>::const_iterator l_secondListIter =
           l_secondList.begin();
         l_secondListIter != l_secondList.end();
         ++l_secondListIter)
     {
-      if ((*l_firstListIter)->getUrl() == 
-          (*l_secondListIter)->getUrl())
+      if (*l_firstListIter == *l_secondListIter)
       {
         return true;
       }

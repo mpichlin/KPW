@@ -9,12 +9,12 @@
 #include <QFile>
 #include <QTextStream>
 
-przegladarka::przegladarka(QWidget *parent) :
+przegladarka::przegladarka(SkosModel* p_model, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::przegladarka)
 {
     ui->setupUi(this);
-    Model=SkosModel();
+    Model=p_model;
     Jezyk=Soprano::LanguageTag("pl");
     this->WszystkieJezyki=true;
     inicjalizuj_jezyki();
@@ -40,8 +40,8 @@ void przegladarka::edytuj()
     QString slowo = ui->znajdzLineEdit->text();
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
-        SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
-        edytor edyt(0,&Model,*ptrNaDodawany,&ListaJezykow);
+        SkosConcept* ptrNaDodawany = &(*(Model->findConcept(Koncept)));
+        edytor edyt(0,Model,*ptrNaDodawany,&ListaJezykow);
         //edytor edyt(0,&Model,&Koncept,&ListaJezykow);
         edyt.show();
         if (edyt.exec() == QDialog::Accepted) {
@@ -56,11 +56,11 @@ void przegladarka::edytuj()
 void przegladarka::dodaj()
 {
     QString tmp;
-    tmp.setNum(Model.getConcepts().size());
+    tmp.setNum(Model->getConcepts().size());
     SkosConcept Koncept=SkosConcept(QUrl(tmp));
-    Model.addConcept(QUrl(tmp));
-    SkosConcept* ptrNaDodawany = &(*(Model.findConcept(Koncept)));
-    edytor edyt(0,&Model,*ptrNaDodawany,&ListaJezykow);
+    Model->addConcept(QUrl(tmp));
+    SkosConcept* ptrNaDodawany = &(*(Model->findConcept(Koncept)));
+    edytor edyt(0,Model,*ptrNaDodawany,&ListaJezykow);
     edyt.show();
     if (edyt.exec() == QDialog::Accepted) {      
         zapelnij_liste();
@@ -70,7 +70,7 @@ bool przegladarka::znajdz(QString slowo, SkosConcept& Koncept)
 {
     bool znaleziony=false;
     QList<SkosConcept> wszystkie;
-    wszystkie=Model.getConcepts();
+    wszystkie=Model->getConcepts();
     int i=0;
     int j=0;
     while (!znaleziony && i<wszystkie.size()) {
@@ -95,7 +95,7 @@ bool przegladarka::znajdz(QString slowo, SkosConcept& Koncept)
     i++;
     }
     if (znaleziony){
-        Koncept=Model.getConcepts().value(i-1);
+        Koncept=Model->getConcepts().value(i-1);
         return true;
     }
     else
@@ -109,7 +109,7 @@ void przegladarka::pokaz()
     SkosConcept Koncept;
     if (znajdz(slowo,Koncept)){
         wyswietl(Koncept);
-        SkosConcept* ptrNaKoncept = &(*(Model.findConcept(Koncept)));
+        SkosConcept* ptrNaKoncept = &(*(Model->findConcept(Koncept)));
         QList<SkosConcept*>lista;
         QList<SkosConcept*>*ptrNaListe;
         ptrNaListe=&lista;
@@ -193,7 +193,7 @@ void przegladarka::zapisz()
        if (fileName.isEmpty())
            return;
        else{
-           SkosSerializer Serializer(&Model);
+           SkosSerializer Serializer(Model);
            Serializer.serialize(fileName, Soprano::SerializationTurtle);
        }
    }
@@ -202,7 +202,7 @@ void przegladarka::zapelnij_liste()
     ui->pojeciaListWidget->clear();
     ui->znajdzLineEdit->setText("");
     QList<SkosConcept> wszystkie;
-    wszystkie=Model.getConcepts();
+    wszystkie=Model->getConcepts();
     //dla wszystkich konceptów:
     for(int i=0;i<wszystkie.size();i++){
         //dla wszystkich etykiet preferowanych
@@ -229,7 +229,7 @@ void przegladarka::wczytaj()
       if (fileName.isEmpty())
           return;
       else {
-          SkosParser Parser(&Model);
+          SkosParser Parser(Model);
           Parser.parseFile(fileName, Soprano::SerializationTurtle);
       }
       zapelnij_liste();
@@ -294,7 +294,7 @@ void przegladarka::znajdz_szersze(QList<SkosConcept*>* lista,SkosConcept *pojeci
     }
     if(glebokosc>0){
         for(int i=0;i<pojecie->getRelatedConceptsList(BroaderRelation).size();i++){
-            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(BroaderRelation).value(i))));
+            SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(BroaderRelation).value(i))));
             znajdz_szersze(lista,ptr,glebokosc-1);
         }
     }
@@ -307,7 +307,7 @@ void przegladarka::znajdz_wezsze(QList<SkosConcept*>* lista,SkosConcept *pojecie
     }
     if(glebokosc>0){
         for(int i=0;i<pojecie->getRelatedConceptsList(NarrowerRelation).size();i++){
-            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(NarrowerRelation).value(i))));
+            SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(NarrowerRelation).value(i))));
             znajdz_szersze(lista,ptr,glebokosc-1);
         }
     }
@@ -319,7 +319,7 @@ void przegladarka::znajdz_skojarzone(QList<SkosConcept*>* lista,SkosConcept *poj
     }
     if(glebokosc>0){
         for(int i=0;i<pojecie->getRelatedConceptsList(RelatedRelation).size();i++){
-            SkosConcept* ptr = &(*(Model.findConcept(*pojecie->getRelatedConceptsList(RelatedRelation).value(i))));
+            SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(RelatedRelation).value(i))));
             znajdz_szersze(lista,ptr,glebokosc-1);
         }
     }
