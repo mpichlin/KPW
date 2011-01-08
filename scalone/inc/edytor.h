@@ -30,7 +30,8 @@ private:
 
 
 public slots:
-    void zmien_szersze();
+    void dodaj_szersze();
+    void usun_szersze();
     void dodaj_skojarzone();
     void dodaj_wezsze();
     void usun_skojarzone();
