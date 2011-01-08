@@ -223,7 +223,7 @@ void SkosModel::addConceptToScheme(const SkosConcept &p_concept,
   }
   else
   {
-    l_conceptSchemesIter->addConcept(&*l_conceptsIter, p_schemeRelation);
+    l_conceptSchemesIter->addConcept(*l_conceptsIter, p_schemeRelation);
     l_conceptsIter->addToScheme(*l_conceptSchemesIter, p_schemeRelation);
   }
 }

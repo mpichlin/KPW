@@ -147,8 +147,8 @@ void SkosSerializer::serializeTopConceptsFromSchemes(
   for (QList<SkosConceptScheme>::const_iterator l_iter = p_schemesList.begin();
        l_iter != p_schemesList.end(); ++l_iter)
   {
-    QList<SkosConcept*> l_concepts = l_iter->getConcepts(Top);
-    for(QList<SkosConcept*>::const_iterator l_conceptsIter = 
+    QList<QUrl> l_concepts = l_iter->getConcepts(Top);
+    for(QList<QUrl>::const_iterator l_conceptsIter = 
           l_concepts.begin();
         l_conceptsIter != l_concepts.end();
       ++l_conceptsIter)
@@ -158,7 +158,7 @@ void SkosSerializer::serializeTopConceptsFromSchemes(
           Soprano::Node(l_iter->getUrl()),
           Soprano::Node(
             QUrl("http://www.w3.org/2004/02/skos/core#hasTopConcept")),
-          Soprano::Node((*l_conceptsIter)->getUrl())));
+          Soprano::Node((*l_conceptsIter))));
     }
   }  
 }
