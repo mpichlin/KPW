@@ -234,7 +234,19 @@ private:
   bool isTwoListsHaveAtLeastOneCommonElement(
     const QList<QUrl> &l_firstList,
     const QList<QUrl> &l_secondList) const;
-
+  void changeUrl(const QList<SkosConcept>::iterator &p_concept,
+                 const SkosConcept &p_old,
+                 const SkosConcept &p_new,
+                 const ERelationType &p_relationType);
+  void changeUrl(const QList<SkosConcept>::iterator &p_concept,
+                 const SkosConceptScheme &p_old,
+                 const SkosConceptScheme &p_new,
+                 const ESchemeRelation &p_schemeRelation);
+  void changeUrl(const QList<SkosConceptScheme>::iterator &p_scheme,
+                 const SkosConcept &p_old,
+                 const SkosConcept &p_new,
+                 const ESchemeRelation &p_schemeRelation);
+  
   QList<SkosConcept> m_concepts;
   QList<SkosConceptScheme> m_conceptSchemes;
 };

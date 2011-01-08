@@ -91,6 +91,7 @@ private:
                   QList<QUrl> &p_internalConcepts);
   void removeConcept(const SkosConcept &p_conceptToRemove,
                      QList<QUrl> &p_internalConcepts);
+ 
   QList<QUrl> m_topConcepts;
   QList<QUrl> m_inSchemeConcepts;
 };

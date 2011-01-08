@@ -471,9 +471,65 @@ void SkosModel::changeUrl(const QUrl &p_classUrl, const QUrl &p_newUrl)
 {
   qDebug() << "SkosModel::changeUrl(p_classUrl =" << p_classUrl
            << ", p_newUrl=" << p_newUrl << ")";
+  SkosConcept l_oldConcept(p_classUrl);
+  SkosConcept l_newConcept(p_newUrl);
+  SkosConceptScheme l_oldScheme(p_classUrl);
+  SkosConceptScheme l_newScheme(p_newUrl);
+  for(QList<SkosConcept>::iterator l_conceptsIter = m_concepts.begin();
+      l_conceptsIter !=  m_concepts.end(); ++l_conceptsIter)
+  {
+    changeUrl(l_conceptsIter, l_oldConcept, l_newConcept, RelatedRelation);
+    changeUrl(l_conceptsIter, l_oldConcept, l_newConcept, BroaderRelation);
+    changeUrl(l_conceptsIter, l_oldConcept, l_newConcept, NarrowerRelation);
+    changeUrl(l_conceptsIter, l_oldScheme, l_newScheme, Top);
+    changeUrl(l_conceptsIter, l_oldScheme, l_newScheme, InScheme);
+  }
+  for(QList<SkosConceptScheme>::iterator l_schemesIter = 
+        m_conceptSchemes.begin();
+      l_schemesIter !=  m_conceptSchemes.end(); ++l_schemesIter)
+  {
+    changeUrl(l_schemesIter, l_oldConcept, l_newConcept, Top);
+    changeUrl(l_schemesIter, l_oldConcept, l_newConcept, InScheme);
+  }
   SkosClass *l_skosClassPtr = findSkosClass(p_classUrl);
   if (l_skosClassPtr != NULL)
   {
     l_skosClassPtr->setUrl(p_newUrl);
+  }
+}
+
+void SkosModel::changeUrl(const QList<SkosConcept>::iterator &p_concept,
+                          const SkosConcept &p_old,
+                          const SkosConcept &p_new,
+                          const ERelationType &p_relationType)
+{
+  if(p_concept->isConceptRelated(p_old, p_relationType))
+  {
+    p_concept->removeConceptFromRelation(p_old, p_relationType);
+    p_concept->addConceptRelation(p_new, p_relationType);
+  }
+}
+
+void SkosModel::changeUrl(const QList<SkosConcept>::iterator &p_concept,
+                          const SkosConceptScheme &p_old,
+                          const SkosConceptScheme &p_new,
+                          const ESchemeRelation &p_schemeRelation)
+{
+  if(p_concept->isInScheme(p_old, p_schemeRelation))
+  {
+    p_concept->removeConceptFromScheme(p_old, p_schemeRelation);
+    p_concept->addToScheme(p_new, p_schemeRelation);
+  }
+}
+
+void SkosModel::changeUrl(const QList<SkosConceptScheme>::iterator &p_scheme,
+                          const SkosConcept &p_old,
+                          const SkosConcept &p_new,
+                          const ESchemeRelation &p_schemeRelation)
+{
+  if(p_scheme->hasConcept(p_old, p_schemeRelation))
+  {
+    p_scheme->removeConcept(p_old, p_schemeRelation);
+    p_scheme->addConcept(p_new, p_schemeRelation);
   }
 }
