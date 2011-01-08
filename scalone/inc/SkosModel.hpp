@@ -226,14 +226,6 @@ private:
   bool isRelationConsistencyOk(const SkosConcept &p_baseConcept,
                                const SkosConcept &p_relatedConcept,
                                const ERelationType &p_relationType);
-  bool isRelationConsistencyOk(
-    const QList<QUrl> &p_baseRelationListType1,
-    const QList<QUrl> &p_baseRelationListType2,
-    const QList<QUrl> &p_relatedRelationListType1,
-    const QList<QUrl> &p_relatedRelationListType2);
-  bool isTwoListsHaveAtLeastOneCommonElement(
-    const QList<QUrl> &l_firstList,
-    const QList<QUrl> &l_secondList) const;
   void changeUrl(const QList<SkosConcept>::iterator &p_concept,
                  const SkosConcept &p_old,
                  const SkosConcept &p_new,
@@ -252,6 +244,10 @@ private:
                                 bool &p_answer);
   void checkBroaderConsistency(const SkosConcept &p_base,
                                const SkosConcept &p_broader,
+                               QList<QUrl> &p_visitedConcepts,
+                               bool &p_answer);
+  void checkRelatedConsistency(const SkosConcept &p_base,
+                               const SkosConcept &p_related,
                                QList<QUrl> &p_visitedConcepts,
                                bool &p_answer);
 
