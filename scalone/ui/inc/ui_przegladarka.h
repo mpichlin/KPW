@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Fri Jan 7 11:38:09 2011
+** Created: Sat Jan 8 15:49:37 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -342,6 +342,7 @@ public:
         QObject::connect(definicjaBox, SIGNAL(toggled(bool)), label_4, SLOT(setVisible(bool)));
         QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), skumulowaneTextBrowser, SLOT(setVisible(bool)));
         QObject::connect(skumulowaneBox, SIGNAL(toggled(bool)), label_7, SLOT(setVisible(bool)));
+        QObject::connect(pojeciaListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), pokazButton, SLOT(click()));
 
         QMetaObject::connectSlotsByName(przegladarka);
     } // setupUi

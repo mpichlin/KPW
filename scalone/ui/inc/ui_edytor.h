@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Sat Jan 8 10:05:00 2011
+** Created: Sat Jan 8 15:47:07 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

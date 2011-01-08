@@ -207,7 +207,6 @@ void przegladarka::zapisz()
 void przegladarka::zapelnij_liste()       
 {
     ui->pojeciaListWidget->clear();
-    ui->znajdzLineEdit->setText("");
     QList<SkosConcept> wszystkie;
     wszystkie=Model->getConcepts();
     //dla wszystkich konceptów:
@@ -292,7 +291,9 @@ void przegladarka::zmien_jezyk(int numer)
             Jezyk=ListaJezykow.value(numer-1);
         }
     }
+    pokaz();
     zapelnij_liste();
+
 }
 void przegladarka::znajdz_szersze(QList<SkosConcept*>* lista,SkosConcept *pojecie, int glebokosc)
 {

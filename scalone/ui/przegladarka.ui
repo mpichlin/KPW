@@ -399,5 +399,21 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pojeciaListWidget</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>pokazButton</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>199</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>73</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
 </ui>
