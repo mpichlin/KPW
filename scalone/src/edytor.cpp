@@ -147,12 +147,12 @@ void edytor::odswiez_wezsze()
     {
         QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
         qDebug() << "Dupa:" << *l_iter;
-        pom->setText(l_iter->toString());
+        pom->setText(l_iter->toString().remove("http://"));
     }
     /*
     for(int j=0;j< m_koncept.getRelatedConceptsList(NarrowerRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->wezszeQlista);
-        pom->setText(m_koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString());
+        pom->setText(m_koncept.getRelatedConceptsList(NarrowerRelation).value(j)->getUrl().toString().remove("http://"));
     }
     */
 }
@@ -161,7 +161,7 @@ void edytor::odswiez_szersze()
     ui->szerszeQlista->clear();
     for(int j=0;j< m_koncept.getRelatedConceptsList(BroaderRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->szerszeQlista);
-        pom->setText(m_koncept.getRelatedConceptsList(BroaderRelation).value(j).toString());
+        pom->setText(m_koncept.getRelatedConceptsList(BroaderRelation).value(j).toString().remove("http://"));
     }
 }
 void edytor::odswiez_skojarzone()
@@ -169,7 +169,7 @@ void edytor::odswiez_skojarzone()
     ui->skojarzoneQlista->clear();
     for(int j=0;j< m_koncept.getRelatedConceptsList(RelatedRelation).size();j++){
         QListWidgetItem *pom = new QListWidgetItem(ui->skojarzoneQlista);
-        pom->setText(m_koncept.getRelatedConceptsList(RelatedRelation).value(j).toString());
+        pom->setText(m_koncept.getRelatedConceptsList(RelatedRelation).value(j).toString().remove("http://"));
     }
 
 }
@@ -248,8 +248,10 @@ void edytor::zatwierdz()
 {
     //zmiana url:
     if (ui->domyslneUrlBox->isChecked()){
-      //  Model->changeUrl(m_koncept.getUrl(),QUrl(ui->preferowanyQline->text()));
-      //  m_koncept.setUrl(QUrl(ui->preferowanyQline->text()));
+        QString tmp="http://";
+        tmp.append(ui->preferowanyQline->text());
+        Model->changeUrl(m_koncept.getUrl(),QUrl(tmp));
+        m_koncept.setUrl(QUrl(tmp));
     }
     else{
         Model->changeUrl(m_koncept.getUrl(),QUrl(ui->UrlLineEdit->text()));
