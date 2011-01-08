@@ -39,7 +39,7 @@ public:
    * \pre p_concept musi istnieć
    * \post Obiekt kolekcji zawiera w sobie koncept p_concept
    */
-  void addConcept(SkosConcept *p_concept);
+  void addConcept(const SkosConcept &p_concept);
 
   /*! \brief Usuwa koncept z kolekcji
    *
@@ -56,7 +56,7 @@ public:
    * \pre p_collection musi istnieć
    * \post Obiekt zawiera wskaźnik na kolekcję p_collection
    */
-  void addCollection(SkosCollection *p_collection);
+  void addCollection(const SkosCollection &p_collection);
 
   /*! \brief Usuwa kolekcję z obiektu
    *
@@ -68,24 +68,23 @@ public:
 
   /*! \brief Zwraca listę wszystkich konceptów zawartych w kolekcji
    *
-   * Zwraca listę wszystkich konceptów zawartych w kolekcji
-   * \return Lista wskaźników konceptów znajdujących się w obiekcie
+   * Zwraca listę URL wszystkich konceptów zawartych w kolekcji
+   * \return Lista URL konceptów znajdujących się w obiekcie
    */
-  QList<SkosConcept*> getConcepts();
+  QList<QUrl> getConcepts();
 
-  /*! \brief Zwraca listę wszystkich kkolekcji zawartych w kolekcji
+  /*! \brief Zwraca listę wszystkich kolekcji zawartych w kolekcji
    *
    * Zwraca listę wszystkich kolekcji zawartych w kolekcji
-   * \return Lista wskaźników na kolekcje znajdujących się w obiekcie
+   * \return Lista URL kolekcji znajdujących się w obiekcie
    */
-  QList<SkosCollection*> getCollections();
+  QList<QUrl> getCollections();
 private:
-  QList<SkosConcept*>::iterator findConcept(const SkosConcept &p_concept);
-  QList<SkosCollection*>::iterator findCollection(
-    const SkosCollection &p_collection);
+  bool hasConcept(const SkosConcept &p_concept);
+  bool hasCollection(const SkosCollection &p_collection);
 
-  QList<SkosConcept*>    m_memberConcepts;
-  QList<SkosCollection*> m_memberCollections;
+  QList<QUrl>    m_memberConcepts;
+  QList<QUrl> m_memberCollections;
 };
 
 #endif
