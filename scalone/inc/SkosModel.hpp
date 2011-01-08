@@ -246,6 +246,10 @@ private:
                  const SkosConcept &p_old,
                  const SkosConcept &p_new,
                  const ESchemeRelation &p_schemeRelation);
+  void checkNarrowerConsistency(const SkosConcept &p_base,
+                                const SkosConcept &p_narrower,
+                                const ERelationType &p_relationType,
+                                bool &p_answer);
   
   QList<SkosConcept> m_concepts;
   QList<SkosConceptScheme> m_conceptSchemes;

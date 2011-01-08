@@ -351,11 +351,12 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
       }
       case NarrowerRelation:
       {
-        return isRelationConsistencyOk(
-          p_baseConcept.getRelatedConceptsList(RelatedRelation),
-          p_baseConcept.getRelatedConceptsList(BroaderRelation),
-          p_relatedConcept.getRelatedConceptsList(RelatedRelation),
-          p_relatedConcept.getRelatedConceptsList(BroaderRelation));
+        bool l_answer = true;
+        checkNarrowerConsistency(p_baseConcept, p_relatedConcept,
+                                 BroaderRelation, l_answer);
+        checkNarrowerConsistency(p_baseConcept,p_relatedConcept,
+                                 NarrowerRelation, l_answer);
+        return l_answer;
       }
     }
   }
@@ -531,5 +532,37 @@ void SkosModel::changeUrl(const QList<SkosConceptScheme>::iterator &p_scheme,
   {
     p_scheme->removeConcept(p_old, p_schemeRelation);
     p_scheme->addConcept(p_new, p_schemeRelation);
+  }
+}
+
+void SkosModel::checkNarrowerConsistency(const SkosConcept &p_base,
+                                         const SkosConcept &p_narrower,
+                                         const ERelationType &p_relationType,
+                                         bool &p_answer)
+{
+  QList<SkosConcept>::iterator l_basePtr = findConcept(p_base);
+  QList<SkosConcept>::iterator l_narrowerPtr = findConcept(p_narrower);
+  if ((l_basePtr == m_concepts.end()) || (l_narrowerPtr == m_concepts.end()))
+  {
+    p_answer = false;
+      return;
+  }
+  QList<QUrl> l_broaderOfNarrower = 
+    l_narrowerPtr->getRelatedConceptsList(p_relationType);
+  for (QList<QUrl>::iterator l_iter = l_broaderOfNarrower.begin();
+       l_iter != l_broaderOfNarrower.end(); ++l_iter)
+  {
+    checkNarrowerConsistency(p_base, *l_iter, p_relationType, p_answer);
+  }
+  QList<QUrl> l_broaderOfBase = 
+    l_basePtr->getRelatedConceptsList(BroaderRelation);
+  for (QList<QUrl>::iterator l_iter = l_broaderOfBase.begin();
+       l_iter != l_broaderOfBase.end(); ++l_iter)
+  {
+    if (*l_iter == p_narrower.getUrl())
+    {
+      p_answer =false;
+      return;
+    }
   }
 }
