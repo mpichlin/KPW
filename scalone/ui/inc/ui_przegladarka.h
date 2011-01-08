@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'przegladarka.ui'
 **
-** Created: Sat Jan 8 15:49:37 2011
+** Created: Sat Jan 8 17:06:41 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -166,34 +166,37 @@ public:
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         wezszeBox = new QCheckBox(centralwidget);
         wezszeBox->setObjectName(QString::fromUtf8("wezszeBox"));
-        wezszeBox->setChecked(true);
+        wezszeBox->setChecked(false);
 
         gridLayout->addWidget(wezszeBox, 0, 0, 1, 1);
 
         szerszeBox = new QCheckBox(centralwidget);
         szerszeBox->setObjectName(QString::fromUtf8("szerszeBox"));
-        szerszeBox->setChecked(true);
+        szerszeBox->setChecked(false);
 
         gridLayout->addWidget(szerszeBox, 1, 0, 1, 1);
 
         skojarzoneBox = new QCheckBox(centralwidget);
         skojarzoneBox->setObjectName(QString::fromUtf8("skojarzoneBox"));
-        skojarzoneBox->setChecked(true);
+        skojarzoneBox->setChecked(false);
 
         gridLayout->addWidget(skojarzoneBox, 2, 0, 1, 1);
 
         wezsze_spinBox = new QSpinBox(centralwidget);
         wezsze_spinBox->setObjectName(QString::fromUtf8("wezsze_spinBox"));
+        wezsze_spinBox->setValue(0);
 
         gridLayout->addWidget(wezsze_spinBox, 0, 1, 1, 1);
 
         szersze_spinBox = new QSpinBox(centralwidget);
         szersze_spinBox->setObjectName(QString::fromUtf8("szersze_spinBox"));
+        szersze_spinBox->setValue(0);
 
         gridLayout->addWidget(szersze_spinBox, 1, 1, 1, 1);
 
         skojarzone_spinBox = new QSpinBox(centralwidget);
         skojarzone_spinBox->setObjectName(QString::fromUtf8("skojarzone_spinBox"));
+        skojarzone_spinBox->setValue(0);
 
         gridLayout->addWidget(skojarzone_spinBox, 2, 1, 1, 1);
 

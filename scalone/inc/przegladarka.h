@@ -42,5 +42,11 @@ public slots:
     void odswiez();
     void wstaw_z_listy();
     void zmien_jezyk(int);
+    void czy_szersze(bool);
+    void czy_wezsze(bool);
+    void czy_skojarzone(bool);
+    void szerszeSpinBoxChanged(int);
+    void wezszeSpinBoxChanged(int);
+    void skojarzoneSpinBoxChanged(int);
 };
 #endif // PRZEGLADARKA_H
