@@ -2,11 +2,11 @@
 
 #include <QDebug>
 
-void SkosCollection::addConcept(SkosConcept *p_concept)
+void SkosCollection::addConcept(const SkosConcept &p_concept)
 {
-  if (findConcept(*p_concept) == m_memberConcepts.end())
+  if (!hasConcept(p_concept))
   {
-    m_memberConcepts.append(p_concept);
+    m_memberConcepts.append(p_concept.getUrl());
   }
   else
   {
@@ -16,7 +16,15 @@ void SkosCollection::addConcept(SkosConcept *p_concept)
 
 void SkosCollection::removeConcept(const SkosConcept &p_concept)
 {
-  QList<SkosConcept*>::iterator l_conceptToRemove = findConcept(p_concept);
+  QList<QUrl>::iterator l_conceptToRemove;
+  for (l_conceptToRemove = m_memberConcepts.begin();
+       l_conceptToRemove != m_memberConcepts.end(); ++l_conceptToRemove)
+  {
+    if (*l_conceptToRemove == p_concept.getUrl())
+    {
+      break;
+    }
+  }
   if (l_conceptToRemove != m_memberConcepts.end())
   {
     m_memberConcepts.erase(l_conceptToRemove);
@@ -27,11 +35,11 @@ void SkosCollection::removeConcept(const SkosConcept &p_concept)
   }
 }
 
-void SkosCollection::addCollection(SkosCollection *p_collection)
+void SkosCollection::addCollection(const SkosCollection &p_collection)
 {
-  if (findCollection(*p_collection) == m_memberCollections.end())
+  if (!hasCollection(p_collection))
   {
-    m_memberCollections.append(p_collection);
+    m_memberCollections.append(p_collection.getUrl());
   }
   else
   {
@@ -41,8 +49,16 @@ void SkosCollection::addCollection(SkosCollection *p_collection)
 
 void SkosCollection::removeCollection(const SkosCollection &p_collection)
 {
-  QList<SkosCollection*>::iterator l_collectionToRemove = 
-    findCollection(p_collection);
+  QList<QUrl>::iterator l_collectionToRemove;
+  for (l_collectionToRemove = m_memberCollections.begin();
+       l_collectionToRemove != m_memberCollections.end();
+       ++l_collectionToRemove)
+  {
+    if (*l_collectionToRemove == p_collection.getUrl())
+    {
+      break;
+    }
+  }
   if (l_collectionToRemove != m_memberCollections.end())
   {
     m_memberCollections.erase(l_collectionToRemove);
@@ -53,42 +69,41 @@ void SkosCollection::removeCollection(const SkosCollection &p_collection)
   }
 }
 
-QList<SkosConcept*>::iterator  SkosCollection::findConcept(
-    const SkosConcept &p_concept)
+bool  SkosCollection::hasConcept(const SkosConcept &p_concept)
 {
-  for (QList<SkosConcept*>::iterator l_iter = m_memberConcepts.begin();
+  for (QList<QUrl>::iterator l_iter = m_memberConcepts.begin();
        l_iter != m_memberConcepts.end();
        ++l_iter)
   {
-    if (p_concept.getUrl() == (*l_iter)->getUrl())
+    if (p_concept.getUrl() == *l_iter)
     {
-      return l_iter;
+      return true;
     }
   }
-  return m_memberConcepts.end();
+  return false;
 }
 
-QList<SkosCollection*>::iterator SkosCollection::findCollection(
+bool SkosCollection::hasCollection(
   const SkosCollection &p_collection)
 {
-  for (QList<SkosCollection*>::iterator l_iter = m_memberCollections.begin();
+  for (QList<QUrl>::iterator l_iter = m_memberCollections.begin();
        l_iter != m_memberCollections.end();
        ++l_iter)
   {
-    if (p_collection.getUrl() == (*l_iter)->getUrl())
+    if (p_collection.getUrl() == *l_iter)
     {
-      return l_iter;
+      return true;
     }
   }
-  return m_memberCollections.end();
+  return false;
 }
 
-QList<SkosConcept*> SkosCollection::getConcepts()
+QList<QUrl> SkosCollection::getConcepts()
 {
   return m_memberConcepts;
 }
 
-QList<SkosCollection*> SkosCollection::getCollections()
+QList<QUrl> SkosCollection::getCollections()
 {
   return m_memberCollections;
 }
