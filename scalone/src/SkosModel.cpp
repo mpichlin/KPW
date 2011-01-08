@@ -331,6 +331,8 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
       !findConcept(p_baseConcept)->isConceptRelated(p_relatedConcept, 
                                                     p_relationType))
   {
+    bool l_answer = true;
+    QList<QUrl> l_visitedConcepts;
     switch (p_relationType)
     {
       case RelatedRelation:
@@ -343,16 +345,12 @@ bool SkosModel::isRelationConsistencyOk(const SkosConcept &p_baseConcept,
       }
       case BroaderRelation:
       {
-        return isRelationConsistencyOk(
-          p_baseConcept.getRelatedConceptsList(RelatedRelation),
-          p_baseConcept.getRelatedConceptsList(NarrowerRelation),
-          p_relatedConcept.getRelatedConceptsList(RelatedRelation),
-          p_relatedConcept.getRelatedConceptsList(NarrowerRelation));
+        checkBroaderConsistency(p_baseConcept, p_relatedConcept,
+                                l_visitedConcepts, l_answer);
+        return l_answer;
       }
       case NarrowerRelation:
       {
-        bool l_answer = true;
-        QList<QUrl> l_visitedConcepts;
         checkNarrowerConsistency(p_baseConcept, p_relatedConcept,
                                  l_visitedConcepts, l_answer);
         return l_answer;
@@ -549,29 +547,65 @@ void SkosModel::checkNarrowerConsistency(const SkosConcept &p_base,
     p_answer = false;
       return;
   }
-  QList<QUrl> l_broaderOfNarrower = 
-    l_narrowerPtr->getRelatedConceptsList(BroaderRelation);
-  for (QList<QUrl>::iterator l_iter = l_broaderOfNarrower.begin();
-       l_iter != l_broaderOfNarrower.end(); ++l_iter)
-  {
-    checkNarrowerConsistency(p_base, *l_iter, p_visitedConcepts, p_answer);
-  }
-  QList<QUrl> l_narrowerOfNarrower = 
+  const QList<QUrl> &l_narrowerOfNarrower = 
     l_narrowerPtr->getRelatedConceptsList(NarrowerRelation);
-  for (QList<QUrl>::iterator l_iter = l_narrowerOfNarrower.begin();
+  for (QList<QUrl>::const_iterator l_iter = l_narrowerOfNarrower.begin();
        l_iter != l_narrowerOfNarrower.end(); ++l_iter)
   {
     checkNarrowerConsistency(p_base, *l_iter, p_visitedConcepts, p_answer);
   }
-  QList<QUrl> l_broaderOfBase = 
-    l_basePtr->getRelatedConceptsList(BroaderRelation);
-  for (QList<QUrl>::iterator l_iter = l_broaderOfBase.begin();
-       l_iter != l_broaderOfBase.end(); ++l_iter)
+  const QList<QUrl> &l_relatedOfNarrower = 
+    l_narrowerPtr->getRelatedConceptsList(RelatedRelation);
+  for (QList<QUrl>::const_iterator l_iter = l_relatedOfNarrower.begin();
+       l_iter != l_relatedOfNarrower.end(); ++l_iter)
   {
-    if (*l_iter == p_narrower.getUrl())
-    {
-      p_answer =false;
+    checkNarrowerConsistency(p_base, *l_iter, p_visitedConcepts, p_answer);
+  }
+  if ((l_basePtr->getRelatedConceptsList(
+         BroaderRelation).contains(p_narrower.getUrl())) ||
+       (l_basePtr->getRelatedConceptsList(
+         RelatedRelation).contains(p_narrower.getUrl())))
+  {
+    p_answer =false;
+    return;
+  }
+}
+
+void SkosModel::checkBroaderConsistency(const SkosConcept &p_base,
+                                        const SkosConcept &p_broader,
+                                        QList<QUrl> &p_visitedConcepts,
+                                        bool &p_answer)
+{
+  if (p_visitedConcepts.contains(p_broader.getUrl()))
+    return;
+  p_visitedConcepts.append(p_broader.getUrl());
+  QList<SkosConcept>::iterator l_basePtr = findConcept(p_base);
+  QList<SkosConcept>::iterator l_broaderPtr = findConcept(p_broader);
+  if ((l_basePtr == m_concepts.end()) || (l_broaderPtr == m_concepts.end()))
+  {
+    p_answer = false;
       return;
-    }
+  }
+  const QList<QUrl> &l_broaderOfBroader = 
+    l_broaderPtr->getRelatedConceptsList(BroaderRelation);
+  for (QList<QUrl>::const_iterator l_iter = l_broaderOfBroader.begin();
+       l_iter != l_broaderOfBroader.end(); ++l_iter)
+  {
+    checkBroaderConsistency(p_base, *l_iter, p_visitedConcepts, p_answer);
+  }
+  const QList<QUrl> &l_relatedOfBroader = 
+    l_broaderPtr->getRelatedConceptsList(RelatedRelation);
+  for (QList<QUrl>::const_iterator l_iter = l_relatedOfBroader.begin();
+       l_iter != l_relatedOfBroader.end(); ++l_iter)
+  {
+    checkBroaderConsistency(p_base, *l_iter, p_visitedConcepts, p_answer);
+  }
+  if ((l_basePtr->getRelatedConceptsList(
+         NarrowerRelation).contains(p_broader.getUrl())) ||
+       (l_basePtr->getRelatedConceptsList(
+         RelatedRelation).contains(p_broader.getUrl())))
+  {
+    p_answer =false;
+    return;
   }
 }

@@ -47,6 +47,11 @@ void dodaj::odswiez()
 }
 void dodaj::zakoncz()
 {
+    if (ui->pojeciaListWidget->count() == 0)
+    {
+        this->accept();
+        return;
+    }
     QString slowo=ui->pojeciaListWidget->currentItem()->text();
     bool znaleziony=false;
     QList<SkosConcept> wszystkie;

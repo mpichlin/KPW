@@ -250,7 +250,11 @@ private:
                                 const SkosConcept &p_narrower,
                                 QList<QUrl> &p_visitedConcepts,
                                 bool &p_answer);
-  
+  void checkBroaderConsistency(const SkosConcept &p_base,
+                               const SkosConcept &p_broader,
+                               QList<QUrl> &p_visitedConcepts,
+                               bool &p_answer);
+
   QList<SkosConcept> m_concepts;
   QList<SkosConceptScheme> m_conceptSchemes;
 };
