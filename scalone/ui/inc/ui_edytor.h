@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'edytor.ui'
 **
-** Created: Fri Jan 7 12:10:49 2011
+** Created: Sat Jan 8 10:05:00 2011
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -23,7 +23,6 @@
 #include <QtGui/QLineEdit>
 #include <QtGui/QListWidget>
 #include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
 #include <QtGui/QTextEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -33,7 +32,7 @@ QT_BEGIN_NAMESPACE
 class Ui_edytor
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label;
     QLineEdit *preferowanyQline;
@@ -56,8 +55,9 @@ public:
     QVBoxLayout *szerszeLayout;
     QLabel *label_4;
     QListWidget *szerszeQlista;
-    QPushButton *zmienButton;
-    QSpacerItem *verticalSpacer;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *dodaj_szerszeButton;
+    QPushButton *usun_szerszeButton;
     QVBoxLayout *wezszeLayout;
     QLabel *label_5;
     QListWidget *wezszeQlista;
@@ -84,10 +84,10 @@ public:
         sizePolicy.setHeightForWidth(edytor->sizePolicy().hasHeightForWidth());
         edytor->setSizePolicy(sizePolicy);
         edytor->setMinimumSize(QSize(600, 400));
-        verticalLayout = new QVBoxLayout(edytor);
-        verticalLayout->setSpacing(6);
-        verticalLayout->setContentsMargins(11, 11, 11, 11);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout_3 = new QVBoxLayout(edytor);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -107,7 +107,7 @@ public:
         horizontalLayout_2->addWidget(comboBox);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
         Layout = new QVBoxLayout();
         Layout->setSpacing(6);
@@ -211,18 +211,25 @@ public:
         szerszeQlista = new QListWidget(edytor);
         szerszeQlista->setObjectName(QString::fromUtf8("szerszeQlista"));
         szerszeQlista->setMinimumSize(QSize(0, 20));
-        szerszeQlista->setMaximumSize(QSize(16777215, 50));
+        szerszeQlista->setMaximumSize(QSize(16777215, 16777215));
 
         szerszeLayout->addWidget(szerszeQlista);
 
-        zmienButton = new QPushButton(edytor);
-        zmienButton->setObjectName(QString::fromUtf8("zmienButton"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        dodaj_szerszeButton = new QPushButton(edytor);
+        dodaj_szerszeButton->setObjectName(QString::fromUtf8("dodaj_szerszeButton"));
 
-        szerszeLayout->addWidget(zmienButton);
+        horizontalLayout_6->addWidget(dodaj_szerszeButton);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        usun_szerszeButton = new QPushButton(edytor);
+        usun_szerszeButton->setObjectName(QString::fromUtf8("usun_szerszeButton"));
 
-        szerszeLayout->addItem(verticalSpacer);
+        horizontalLayout_6->addWidget(usun_szerszeButton);
+
+
+        szerszeLayout->addLayout(horizontalLayout_6);
 
 
         relacjeLayout->addLayout(szerszeLayout);
@@ -297,17 +304,17 @@ public:
         Layout->addLayout(relacjeLayout);
 
 
-        verticalLayout->addLayout(Layout);
+        verticalLayout_3->addLayout(Layout);
 
         usunButton = new QPushButton(edytor);
         usunButton->setObjectName(QString::fromUtf8("usunButton"));
 
-        verticalLayout->addWidget(usunButton);
+        verticalLayout_3->addWidget(usunButton);
 
         zatwierdzButton = new QPushButton(edytor);
         zatwierdzButton->setObjectName(QString::fromUtf8("zatwierdzButton"));
 
-        verticalLayout->addWidget(zatwierdzButton);
+        verticalLayout_3->addWidget(zatwierdzButton);
 
 
         retranslateUi(edytor);
@@ -338,7 +345,8 @@ public:
         label_7->setText(QApplication::translate("edytor", "definicja poj\304\231cia:", 0, QApplication::UnicodeUTF8));
         domyslneUrlBox->setText(QApplication::translate("edytor", "domy\305\233lne Url", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("edytor", "Poj\304\231cie szersze", 0, QApplication::UnicodeUTF8));
-        zmienButton->setText(QApplication::translate("edytor", "zmie\305\204", 0, QApplication::UnicodeUTF8));
+        dodaj_szerszeButton->setText(QApplication::translate("edytor", "dodaj", 0, QApplication::UnicodeUTF8));
+        usun_szerszeButton->setText(QApplication::translate("edytor", "usu\305\204", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("edytor", "Poj\304\231cia w\304\231\305\274sze", 0, QApplication::UnicodeUTF8));
         dodaj_wezszeButton->setText(QApplication::translate("edytor", "dodaj", 0, QApplication::UnicodeUTF8));
         usun_wezszeButton->setText(QApplication::translate("edytor", "usu\305\204", 0, QApplication::UnicodeUTF8));

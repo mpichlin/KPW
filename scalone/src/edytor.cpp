@@ -11,8 +11,10 @@ edytor::edytor(QWidget *parent, SkosModel *model, SkosConcept p_koncept, QList<S
 {
      ui->setupUi(this);
 
-    connect(ui->zmienButton, SIGNAL(clicked()), this,
-           SLOT(zmien_szersze()));
+    connect(ui->dodaj_szerszeButton, SIGNAL(clicked()), this,
+           SLOT(dodaj_szersze()));
+    connect(ui->usun_szerszeButton, SIGNAL(clicked()), this,
+           SLOT(usun_szersze()));
     connect(ui->dodaj_wezszeButton, SIGNAL(clicked()), this,
             SLOT(dodaj_wezsze()));
 
@@ -172,24 +174,34 @@ void edytor::odswiez_skojarzone()
 
 }
 
-void edytor::zmien_szersze()
+void edytor::dodaj_szersze()
 {
     dodaj dod(0,Model,m_koncept,BroaderRelation);
     if (dod.exec() == QDialog::Accepted) {
         m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_szersze();
     }
-
+}
+void edytor::usun_szersze()
+{
+    if (ui->szerszeQlista->isItemSelected(ui->szerszeQlista->currentItem())) {
+        int nr=ui->szerszeQlista->currentRow();
+        Model->removeConceptRelation(m_koncept, m_koncept.getRelatedConceptsList(BroaderRelation).value(nr),BroaderRelation);
+        m_koncept = *Model->findConcept(m_koncept);
+        this->odswiez_szersze();
+    }
 }
 
 void edytor::dodaj_wezsze()
 {
     dodaj dod(0,Model,m_koncept,NarrowerRelation);
     if (dod.exec() == QDialog::Accepted) {
+        m_koncept = *Model->findConcept(m_koncept);
         this->odswiez_wezsze();
     }
 
 }
+
 void edytor::usun_wezsze()
 {
     if (ui->wezszeQlista->isItemSelected(ui->wezszeQlista->currentItem())) {
@@ -236,8 +248,8 @@ void edytor::zatwierdz()
 {
     //zmiana url:
     if (ui->domyslneUrlBox->isChecked()){
-        Model->changeUrl(m_koncept.getUrl(),QUrl(ui->preferowanyQline->text()));
-        m_koncept.setUrl(QUrl(ui->preferowanyQline->text()));
+      //  Model->changeUrl(m_koncept.getUrl(),QUrl(ui->preferowanyQline->text()));
+      //  m_koncept.setUrl(QUrl(ui->preferowanyQline->text()));
     }
     else{
         Model->changeUrl(m_koncept.getUrl(),QUrl(ui->UrlLineEdit->text()));

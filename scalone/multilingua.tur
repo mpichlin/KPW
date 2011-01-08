@@ -1,24 +1,24 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-<http://soprano.sourceforge.net/pokoj>
-    a <http://www.w3.org/2004/02/skos/core#Concept> ;
-    <http://www.w3.org/2004/02/skos/core#prefLabel> "pokój"@pl, "room"@en .
-
-<http://soprano.sourceforge.net/dom>
+<http://dom>
     a <http://www.w3.org/2004/02/skos/core#Concept> ;
     <http://www.w3.org/2004/02/skos/core#altLabel> "chata"@pl, "chałupa"@pl, "willa"@pl ;
-    <http://www.w3.org/2004/02/skos/core#broader> <http://soprano.sourceforge.net/miejsce%20zamieszkania> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://miejsce.zamieszkania> ;
     <http://www.w3.org/2004/02/skos/core#definition> "a building where someone lives"@en, "budynek w którym ktoś mieszka"@pl ;
     <http://www.w3.org/2004/02/skos/core#prefLabel> "casa"@it, "dom"@pl, "house"@en .
 
-<http://soprano.sourceforge.net/miejsce%20zamieszkania>
+<http://miejsce.zamieszkania>
     a <http://www.w3.org/2004/02/skos/core#Concept> ;
-    <http://www.w3.org/2004/02/skos/core#narrower> <http://soprano.sourceforge.net/dom>, <http://soprano.sourceforge.net/mieszkanie> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://dom>, <http://mieszkanie> ;
     <http://www.w3.org/2004/02/skos/core#prefLabel> "miejsce zamieszkania"@pl .
 
-<http://soprano.sourceforge.net/mieszkanie>
+<http://mieszkanie>
     a <http://www.w3.org/2004/02/skos/core#Concept> ;
     <http://www.w3.org/2004/02/skos/core#altLabel> "lokal"@pl ;
-    <http://www.w3.org/2004/02/skos/core#broader> <http://soprano.sourceforge.net/miejsce%20zamieszkania> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://miejsce.zamieszkania> ;
     <http://www.w3.org/2004/02/skos/core#prefLabel> "mieszkanie"@pl .
+
+<http://pokoj>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "pokój"@pl, "room"@en .
 
