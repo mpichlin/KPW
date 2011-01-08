@@ -28,6 +28,14 @@ przegladarka::przegladarka(SkosModel* p_model, QWidget *parent) :
     connect(ui->znajdzLineEdit, SIGNAL(textEdited(QString)), this,SLOT(odswiez()));
     connect(ui->pojeciaListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(wstaw_z_listy()));
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),this, SLOT(zmien_jezyk(int)));
+
+    connect(ui->szerszeBox,SIGNAL(clicked(bool)),this, SLOT(czy_szersze(bool)));
+    connect(ui->wezszeBox,SIGNAL(clicked(bool)),this, SLOT(czy_wezsze(bool)));
+    connect(ui->skojarzoneBox,SIGNAL(clicked(bool)),this, SLOT(czy_skojarzone(bool)));
+
+    connect(ui->skojarzone_spinBox,SIGNAL(valueChanged(int)),this, SLOT(skojarzoneSpinBoxChanged(int)));
+    connect(ui->wezsze_spinBox,SIGNAL(valueChanged(int)),this, SLOT(wezszeSpinBoxChanged(int)));
+    connect(ui->szersze_spinBox,SIGNAL(valueChanged(int)),this, SLOT(szerszeSpinBoxChanged(int)));
     }
 
 przegladarka::~przegladarka()
@@ -330,5 +338,72 @@ void przegladarka::znajdz_skojarzone(QList<SkosConcept*>* lista,SkosConcept *poj
             SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(RelatedRelation).value(i))));
             znajdz_szersze(lista,ptr,glebokosc-1);
         }
+    }
+}
+
+void przegladarka::czy_szersze(bool wlacz)
+{
+    if (wlacz){
+       ui->szersze_spinBox->setValue(1);
+    }
+    else{
+        ui->szersze_spinBox->setValue(0);
+    }
+    if(ui->znajdzLineEdit->text()!=""){
+        pokaz();
+    }
+}
+
+void przegladarka::czy_wezsze(bool wlacz)
+{
+    if (wlacz){
+       ui->wezsze_spinBox->setValue(1);
+    }
+    else{
+        ui->wezsze_spinBox->setValue(0);
+    }
+    if(ui->znajdzLineEdit->text()!=""){
+        pokaz();
+    }
+}
+
+void przegladarka::czy_skojarzone(bool wlacz)
+{
+    if (wlacz){
+        ui->skojarzone_spinBox->setValue(1);
+    }
+    else{
+        ui->skojarzone_spinBox->setValue(0);
+    }
+    if(ui->znajdzLineEdit->text()!=""){
+        pokaz();
+    }
+}
+
+void przegladarka::szerszeSpinBoxChanged(int liczba)
+{
+    if(liczba==0){
+        ui->szerszeBox->setChecked(false);
+    }
+    else{
+        ui->szerszeBox->setChecked(true);
+    }
+}
+void przegladarka::wezszeSpinBoxChanged(int liczba)
+{
+    if(liczba==0){
+        ui->wezszeBox->setChecked(false);
+    }
+    else{
+        ui->wezszeBox->setChecked(true);
+    }
+}
+void przegladarka::skojarzoneSpinBoxChanged(int liczba)
+{
+    if(liczba==0){
+        ui->skojarzoneBox->setChecked(false);
+    }
+    else{
+        ui->skojarzoneBox->setChecked(true);
     }
 }
