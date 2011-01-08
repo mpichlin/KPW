@@ -116,6 +116,7 @@ void przegladarka::pokaz()
         ptrNaListe->clear();
         QString powiazane;
         QString syn_powiazanych;
+        QString skumulowane;
         znajdz_szersze(ptrNaListe,ptrNaKoncept,ui->szersze_spinBox->value());
         znajdz_wezsze(ptrNaListe,ptrNaKoncept,ui->wezsze_spinBox->value());
         znajdz_skojarzone(ptrNaListe,ptrNaKoncept,ui->skojarzone_spinBox->value());
@@ -140,6 +141,12 @@ void przegladarka::pokaz()
         ui->powiazaneTextBrowser->setText(powiazane);
         ui->syn_powTextBrowser->setText(syn_powiazanych);
 
+        skumulowane+=ui->synonimyTextBrowser->toPlainText();
+        skumulowane+=powiazane;
+        skumulowane+=syn_powiazanych;
+
+        ui->skumulowaneTextBrowser->setText(skumulowane);
+
 
 
     }
@@ -156,17 +163,17 @@ ui->znajdzLineEdit->setText(ui->pojeciaListWidget->currentItem()->text());
 void przegladarka::wyswietl(SkosConcept Koncept)
 {
     QString synonimy;
-    for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
-         if((Koncept.getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
-            synonimy+=Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString();
-            synonimy+=' ';
-        }
-    }
-
     for(int j=0;j<Koncept.getLabelList(PrefferedLabelType).size();j++){
          if((Koncept.getLabelList(PrefferedLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
             synonimy+=Koncept.getLabelList(PrefferedLabelType).value(j).literal().toString();
-            synonimy+=' ';
+            synonimy+=';';
+        }
+    }
+
+    for(int j=0;j<Koncept.getLabelList(AlternativeLabelType).size();j++){
+         if((Koncept.getLabelList(AlternativeLabelType).value(j).language()==Jezyk)||WszystkieJezyki){
+            synonimy+=Koncept.getLabelList(AlternativeLabelType).value(j).literal().toString();
+            synonimy+=';';
         }
     }
 
