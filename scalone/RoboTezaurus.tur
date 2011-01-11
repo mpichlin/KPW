@@ -1,0 +1,216 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://ai>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "AI"@en ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "artificial inteligence"@en, "sztuczna inteligencja"@pl .
+
+<http://akcelerometr>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "czujnik przyspieszenia"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "akcelerometr"@pl .
+
+<http://automation>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://robotyzacja>, <http://sterowanie> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "zastępowanie sterowania ręcznego, urządzeniami pracującymy bez udziału człowieka"@pl ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "automation"@en, "automatyzacja"@pl .
+
+<http://autonomia>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "self-directed"@en ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "free from external control"@en ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "autonomia"@pl, "autonomy"@en .
+
+<http://chwytak>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "chwytak"@pl .
+
+<http://cybernetics>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "interdisciplinary study of the structure of regulatory systems"@en, "nauka o efektywnej organizacji, mechanizmach kontroli i komunikacji "@pl ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "cybernetics"@en, "cybernetyka"@pl .
+
+<http://czujnik>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "element pomiarowy"@pl, "sensor"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://urzadzeniepomiarowe> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://akcelerometr>, <http://enkoder>, <http://higrometr>, <http://inklinometr>, <http://xn--yroskop-vwb> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "czujnik"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://detektor>, <http://pomiar>, <http://przetwornik> .
+
+<http://detektor>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "detektor"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://czujnik> .
+
+<http://dynamika>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://opismatematyczny> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "dynamika"@pl .
+
+<http://enkoder>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "enkoder"@pl .
+
+<http://grasping>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://manipulacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "chwytanie"@pl, "grasping"@en .
+
+<http://higrometr>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "wilgotnościomierz"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "higrometr"@pl .
+
+<http://inklinometr>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "czujnik przechyłu"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "inklinometr"@pl .
+
+<http://interfejs>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://komunikacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "interfejs"@pl .
+
+<http://kinematyka>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://opismatematyczny> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://kinematykaodwrotna> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "kinematyka"@pl .
+
+<http://kinematykaodwrotna>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://kinematyka> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "kinematyka odwrotna"@pl .
+
+<http://komunikacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://interfejs> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "komunikacja"@pl .
+
+<http://manipulacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "przenoszenie lub zmiana orientacji przedmiotu"@pl ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://grasping>, <http://manipulator>, <http://translacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "manipulacja"@pl .
+
+<http://manipulator>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://manipulacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "manipulator"@pl .
+
+<http://mechanizacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://robotyzacja> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "zastępowanie w procesie produkcyjnym pracy fizycznej pracą maszyn"@pl ;
+    <http://www.w3.org/2004/02/skos/core#hiddenLabel> "mechanisation"@en ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "mechanizacja"@pl, "mechanization"@en .
+
+<http://miejsce.zamieszkania>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "miejsce zamieszkania"@pl .
+
+<http://miernik>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "miernik"@pl .
+
+<http://opismatematyczny>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "model"@pl, "opis formalny"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://dynamika>, <http://kinematyka> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "opis matematyczny"@pl .
+
+<http://orientacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "orientacja"@pl .
+
+<http://percepcja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://urzadzeniepomiarowe> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "percepcja"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://xn--zmys-31a> .
+
+<http://pomiar>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "pomiar"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://czujnik> .
+
+<http://przetwornik>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "przetwornik"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://czujnik> .
+
+<http://roboter>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "\"Wszystko jest robotem\" (prof. dr hab. inż. Krzysztof Tchoń)"@pl ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://autonomia>, <http://komunikacja>, <http://manipulacja>, <http://opismatematyczny>, <http://percepcja>, <http://ruch> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Roboter"@de, "robot"@pl .
+
+<http://robotyzacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "automatyzacja procesów za pomocą robotów i manipulatorów"@pl ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://automation>, <http://mechanizacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "robotyzacja"@pl .
+
+<http://ruch>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://roboter> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "Bewegung"@de, "motion"@en, "ruch"@pl .
+
+<http://siecneuronowa>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "perceptron"@pl ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "neural network"@en, "sieć neuronowa"@pl .
+
+<http://sterowanie>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "regulacja"@pl ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://automation>, <http://sterownik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "sterowanie"@pl .
+
+<http://sterownik>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://sterowanie> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "sterownik"@pl .
+
+<http://teoriasystemow>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#definition> "Całościowe tłumaczenie funkcjonowania organizmów żywych, społeczeństw i urządzeń technicznych. "@pl ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "system theory"@en, "teoria systemów"@pl .
+
+<http://translacja>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#altLabel> "przesunięcie"@pl ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://manipulacja> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "translacja"@pl .
+
+<http://urzadzeniepomiarowe>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://percepcja> ;
+    <http://www.w3.org/2004/02/skos/core#narrower> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "urzadzenie pomiarowe"@pl .
+
+<http://xn--pooenie-ojb73c>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "położenie"@pl .
+
+<http://xn--yroskop-vwb>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#broader> <http://czujnik> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "żyroskop"@pl .
+
+<http://xn--zmys-31a>
+    a <http://www.w3.org/2004/02/skos/core#Concept> ;
+    <http://www.w3.org/2004/02/skos/core#prefLabel> "zmysł"@pl ;
+    <http://www.w3.org/2004/02/skos/core#related> <http://percepcja> .
+

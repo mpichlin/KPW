@@ -324,7 +324,7 @@ void przegladarka::znajdz_wezsze(QList<SkosConcept*>* lista,SkosConcept *pojecie
     if(glebokosc>0){
         for(int i=0;i<pojecie->getRelatedConceptsList(NarrowerRelation).size();i++){
             SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(NarrowerRelation).value(i))));
-            znajdz_szersze(lista,ptr,glebokosc-1);
+            znajdz_wezsze(lista,ptr,glebokosc-1);
         }
     }
 }
@@ -336,7 +336,7 @@ void przegladarka::znajdz_skojarzone(QList<SkosConcept*>* lista,SkosConcept *poj
     if(glebokosc>0){
         for(int i=0;i<pojecie->getRelatedConceptsList(RelatedRelation).size();i++){
             SkosConcept* ptr = &(*(Model->findConcept(pojecie->getRelatedConceptsList(RelatedRelation).value(i))));
-            znajdz_szersze(lista,ptr,glebokosc-1);
+            znajdz_skojarzone(lista,ptr,glebokosc-1);
         }
     }
 }
