@@ -2,10 +2,10 @@
 echo 'Checking Soprano RDF library'
 pkg-config --modversion --libs soprano > sop.txt
 SOP=`cat sop.txt | grep '\.'`
-SV=2.5.3
+SV=2.4.2
 if [ "$SOP" != "$SV" ]
 then
-  echo 'You need to install Soprano RDF library in version 2.5.3'
+  echo 'You need to install Soprano RDF library in version 2.4.2'
   exit 1
 fi
 echo 'Check Soprano RDF library - OK'
@@ -16,7 +16,7 @@ QT=`cat qt.txt | grep '\.'`
 QV=4.6.2
 if [ "$QT" == "$QV" ]
 then
-    echo 'You need to install Qt in version 2.5.3'
+    echo 'You need to install Qt in version 4.6.2'
     exit 1
 fi
 echo 'Check Qt library - OK'

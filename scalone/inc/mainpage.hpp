@@ -5,17 +5,20 @@
  * \section wstep Krótko o programie
  * Program jest przeglądarką i edytorem tezaurusów stworzonych w oparciu o język
  * opisowy SKOS. Został on stworzony w ramach pracy projektowej:
- * "Budowa i profilowanie modeli informacyjnych" z kursu Komputerowe
+ * "Wsparcie programowe procesu budowy tezaurusa" z kursu Komputerowe
  * Przetwarzanie Informacji. Program jest napisany w "C++",  wykorzystuje 
  * biblioteki <A HREF="http://qt.nokia.com">Qt</A> oraz 
  * <A HREF="http://soprano.sourceforge.net/">Soprano RDF Framework</A>.
+ * Aplikacja została stworzona pod system operacyjny Linux.
  *
  * \section inst Instalacja
+ * \subsection sys Wymagany system operacyjny:
+ * Linux
  * \subsection dep Wymagane biblioteki:
  * Żeby zainstalować program potrzebne są następujące biblioteki: \n
  * - <A HREF="http://qt.nokia.com">Qt</A> w wersji 4.6.2
  * - <A HREF="http://soprano.sourceforge.net/">Soprano RDF Framework</A> w
- * wersji 2.5.3
+ * wersji 2.4.2
  * \subsection start Uruchomienie instalatora
  * Należy przejść do katalogu w którym jest instalator (katalog główny programu)
  * następnie uruchomić skrypt instalacyjny: \n
